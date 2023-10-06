@@ -1,0 +1,92 @@
+<section class="vh-100" style="background-color: #1e2125">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-8">
+        <div class="card" style="border-radius: 1rem">
+          <div class="row g-0">
+            <div
+              class="col-md-6 col-lg-5 d-none d-md-block d-flex justify-content-center align-items-center"
+            >
+              <img
+                src="/Portal_app/media/login.svg"
+                alt="login form"
+                class="img-fluid mt-5"
+              />
+            </div>
+
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <div class="d-flex justify-content-center align-items-center mb-3 pb-1">
+                  <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
+                  <span class="h1 fw-bold mb-0">EduSyncity</span>
+                </div>
+
+                <h5 class="d-flex justify-content-center fw-normal mb-3 pb-3" >
+                  Sign into your account
+                </h5>
+
+                <form ng-click="login()">
+                  <div class="form-outline mb-4">
+                    <div class="form-floating">
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control form-control-lg"
+                        ng-model="email"
+                        placeholder="email"
+                        required
+                      />
+                      <label for="email">Email</label>
+                    </div>
+
+                    <div class="text-danger" ng-if="$error.required">
+                      <i class="bi bi-exclamation-circle"></i> &nbsp; Email is required.
+                    </div>
+                    <div class="text-danger" ng-if="$error.email">
+                      Invalid email format.
+                    </div>
+                  </div>
+                
+                  <div class="form-outline mb-4">
+                    <div class="form-floating"> 
+                      <input
+                        type="password"
+                        id="password"
+                        class="form-control form-control-lg"
+                        ng-model="password"
+                        placeholder="password"
+                        required
+                      />
+                      <label for="password">Password</label>
+                    </div>
+
+                    <div class="text-danger" ng-if="$error.required">
+                      Password is required.
+                    </div>
+                    <div class="text-danger" ng-if="$error.invalidpassword">
+                      Invalid email format.
+                    </div>
+                  </div>
+                
+                  <div class="pt-1 mb-4 d-flex justify-content-center">
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">
+                      Login
+                    </button>
+                  </div>
+                </form>
+                
+
+                <div
+                  class="d-flex justify-content-center align-items-center text-center"
+                >
+                  <a href="#!" class="small text-muted">Terms of use.</a> <br /> &nbsp;&nbsp;
+                  <a href="#!" class="small text-muted">Privacy policy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
