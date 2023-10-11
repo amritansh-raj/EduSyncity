@@ -1,6 +1,23 @@
 html, body {
-    height: 100%;
-    width: 100%;
+    min-height: 100%;
+    min-width: 100%;
     margin: 0;
     padding: 0;
   }
+
+/* .custom-btn{
+  background-color: #1e2125;
+  color: white;
+} */
+
+.custom-btn {
+  border-radius: 25px;
+  background-color: #1e2125;
+  color: white;
+}
+
+.custom-btn:hover {
+  background-color: #3d3f42;
+  color: white;
+  transition: background-color 0.5s ease;
+}
