@@ -16,70 +16,89 @@
 
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
-                <div class="d-flex justify-content-center align-items-center mb-3 pb-1">
-                  <!-- <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i> -->
+                <div
+                  class="d-flex justify-content-center align-items-center mb-3 pb-1"
+                >
                   <span class="h1 fw-bold mb-0">EduSyncity</span>
                 </div>
 
-                <h5 class="d-flex justify-content-center fw-normal mb-3 pb-3" >
+                <h5 class="d-flex justify-content-center fw-normal mb-3 pb-3">
                   Sign into your account
                 </h5>
 
-                <form ng-submit="login()">
+                <form name="loginForm" ng-submit="login()">
                   <div class="form-outline mb-4">
                     <div class="form-floating">
                       <input
-                        type="email"
-                        id="email"
+                        type="username"
+                        id="username"
                         class="form-control form-control-lg"
-                        ng-model="email"
-                        placeholder="email"
+                        ng-model="username"
+                        name="username"
+                        placeholder="username"
                         required
                       />
-                      <label for="email">Email</label>
+                      <label for="username">username</label>
                     </div>
 
-                    <div class="text-danger" ng-if="$error.required && !$error.email">
-                      <i class="bi bi-exclamation-circle"></i> &nbsp; Email is required.
-                    </div>
-                    <div class="text-danger" ng-if="$error.email">
-                      Invalid email format.
+                    <div
+                      class="text-danger"
+                      ng-if="loginForm.username.$dirty && loginForm.username.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="loginForm.username.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; username
+                        is required.
+                      </span>
+                      <span ng-if="loginForm.username.$error.username">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        username format.
+                      </span>
                     </div>
                   </div>
-                
+
                   <div class="form-outline mb-4">
-                    <div class="form-floating"> 
+                    <div class="form-floating">
                       <input
                         type="password"
                         id="password"
                         class="form-control form-control-lg"
                         ng-model="password"
+                        name="password"
                         placeholder="password"
                         required
                       />
                       <label for="password">Password</label>
                     </div>
 
-                    <div class="text-danger" ng-if="$error.required">
-                      Password is required.
-                    </div>
-                    <div class="text-danger" ng-if="$error.invalidpassword">
-                      Invalid password format.
+                    <div
+                      class="text-danger"
+                      ng-if="loginForm.password.$dirty && loginForm.password.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="loginForm.password.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Password
+                        is required.
+                      </span>
+                      <span ng-if="loginForm.password.$error.password">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        password format.
+                      </span>
                     </div>
                   </div>
-                
+
                   <div class="pt-1 mb-4 d-flex justify-content-center">
-                    <button class="btn btn-dark btn-lg btn-block" type="submit">
+                    <button type="submit" class="btn btn-dark btn-lg btn-block">
                       Login
                     </button>
                   </div>
                 </form>
-                
 
                 <div
                   class="d-flex justify-content-center align-items-center text-center"
                 >
-                  <a href="#!" class="small text-muted">Terms of use.</a> <br /> &nbsp;&nbsp;
+                  <a href="#!" class="small text-muted">Terms of use.</a> <br />
+                  &nbsp;&nbsp;
                   <a href="#!" class="small text-muted">Privacy policy</a>
                 </div>
               </div>
@@ -90,5 +109,3 @@
     </div>
   </div>
 </section>
-
-

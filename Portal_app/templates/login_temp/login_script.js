@@ -5,44 +5,35 @@ myApp.controller("loginController", [
   "httpService",
   function ($scope, $http, $state, httpService) {
     $scope.login = function () {
-
-      var emptyFields = [];
-      email = $scope.email;
+      showLoader();
+      username = $scope.username;
       pass = $scope.password;
-      console.log(email);
+      console.log(username);
       console.log(pass);
 
-      if (!email) emptyFields.push("Email");
-      if (!pass) emptyFields.push("Password");
-
-      if (emptyFields.length > 0) {
-        var message =
-          "Please fill out the following fields: " + emptyFields.join(", ");
-        alertify.error(message)
+      if (!validatePass(pass)) {
+        $scope.loginForm.password.$setValidity("password", false);
         hideLoader();
-        return;
-      }
-
-      if(!validateEmail(email)){
-
-        hideLoader();
-      }
-
-      if(!validatePass(pass)){
-        
+      } else {
+        $scope.loginForm.password.$setValidity("password", true);
         hideLoader();
       }
 
       postData = {
-        email: email,
+        username: username,
         password: pass,
       };
 
       httpService
-        .post("/endpoint", postData)
+        .post("login_user/", postData)
         .then(function (response) {
           console.log(response);
-          alertify.success('Ok');
+          role = response.data[0].role;
+          console.log(role);
+          if(role === 1){
+            $state.go("dashBoard");
+          }
+          alertify.success("Ok");
         })
         .catch(function (error) {
           console.error(error);
@@ -50,6 +41,19 @@ myApp.controller("loginController", [
         .finally(function () {
           hideLoader();
         });
+
+      // $http({
+      //   method : "POST",
+      //   url : "https://10.21.85.67:8000/demoadmin/login_user/",
+      //   data : postData,
+      //   withCredentials : true
+      // })
+      //   .then(function(response){
+      //     console.log(response)
+      //   })
+      //   .catch(function(error){
+      //     console.log(error)
+      //   })
     };
   },
 ]);
