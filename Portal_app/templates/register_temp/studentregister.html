@@ -212,7 +212,20 @@
                                                     />
                                                     <label for="fathername">Father's Name</label>
                                                   </div>
-                                                  
+                                                  <div
+                                                  class="text-danger"
+                                                  ng-if="registerForm.fathername.$dirty && registerForm.fathername.$invalid"
+                                                  style="font-size: 14px"
+                                                >
+                                                  <span ng-if="registerForm.fathername.$error.required">
+                                                    <i class="bi bi-exclamation-circle"></i> &nbsp; father's name
+                                                    is required.
+                                                  </span>
+                                                  <span ng-if="registerForm.fathername.$error.pattern">
+                                                    <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                                                   father's name format.
+                                                  </span>
+                                                </div>
                                               </div>
                                             </div>
                                             <div class="col-md-6 mb-4">
