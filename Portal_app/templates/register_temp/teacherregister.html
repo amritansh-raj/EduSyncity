@@ -86,7 +86,22 @@
                                               required
                                             />
                                             <label for="username">Username </label>
-                                          </div></div>
+                                          </div>
+                                          <div
+                                          class="text-danger"
+                                          ng-if="registerForm.username.$dirty && registerForm.username.$invalid"
+                                          style="font-size: 14px"
+                                        >
+                                          <span ng-if="registerForm.username.$error.required">
+                                            <i class="bi bi-exclamation-circle"></i> &nbsp; username
+                                            is required.
+                                          </span>
+                                          <span ng-if="registerForm.username.$error.username">
+                                            <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                                            username format.
+                                          </span>
+                                        </div>
+                                        </div>
                                       </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
@@ -102,7 +117,23 @@
                                               required
                                             />
                                             <label for="email">Email</label>
-                                        </div></div></div>
+                                        </div>
+                                        <div
+                                        class="text-danger"
+                                        ng-if="registerForm.email.$dirty && registerForm.email.$invalid"
+                                        style="font-size: 14px"
+                                      >
+                                        <span ng-if="registerForm.email.$error.required">
+                                          <i class="bi bi-exclamation-circle"></i> &nbsp; email
+                                          is required.
+                                        </span>
+                                        <span ng-if="registerForm.email.$error.email">
+                                          <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                                          email format.
+                                        </span>
+                                      </div>
+                                   
+                                          </div></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
@@ -120,6 +151,20 @@
                                                 />
                                                 <label for="age">Age</label>
                                               </div>
+                                              <div
+                                              class="text-danger"
+                                              ng-if="registerForm.age.$dirty && registerForm.age.$invalid"
+                                              style="font-size: 14px"
+                                            >
+                                              <span ng-if="registerForm.age.$error.required">
+                                                <i class="bi bi-exclamation-circle"></i> &nbsp;age
+                                                is required.
+                                              </span>
+                                              <span ng-if="registerForm.age.$error.age">
+                                                <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                                               age format.
+                                              </span>
+                                            </div>
                                           </div>
                                         </div>
                                         <div class="col-md-6 mb-4">
@@ -136,7 +181,22 @@
                                                   required
                                                 />
                                                 <label for="phone">Phone Number</label>
-                                            </div></div></div>
+                                            </div>
+                                            <div
+                                            class="text-danger"
+                                            ng-if="registerForm.phone.$dirty && registerForm.phone.$invalid"
+                                            style="font-size: 14px"
+                                          >
+                                            <span ng-if="registerForm.phone.$error.required">
+                                              <i class="bi bi-exclamation-circle"></i> &nbsp; phone number
+                                              is required.
+                                            </span>
+                                            <span ng-if="registerForm.phone.$error.pattern">
+                                              <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                                             phonenumber format.
+                                            </span>
+                                          </div>
+                                        </div></div>
                                         </div>
                                       
                                         <div class="row">
@@ -213,19 +273,20 @@
                                                               name="password"
                                                               placeholder="Password"
                                                               required
+                                                              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                                                             />
                                                             <label for="password">Password</label>
                                                           </div>
                                                           <div
                                                           class="text-danger"
-                                                          ng-if="loginForm.password.$dirty && loginForm.password.$invalid"
+                                                          ng-if="registerForm.password.$dirty && registerForm.password.$invalid"
                                                           style="font-size: 12px"
                                                         >
-                                                          <span ng-if="loginForm.password.$error.required">
+                                                          <span ng-if="registerForm.password.$error.required">
                                                             <i class="bi bi-exclamation-circle"></i> &nbsp; Password
                                                             is required.
                                                           </span>
-                                                          <span ng-if="loginForm.password.$error.password">
+                                                          <span ng-if="registerForm.password.$error.pattern">
                                                             <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                                                             password format.
                                                           </span>
@@ -237,16 +298,22 @@
                                                         <div class="form-floating">
                                                             <input
                                                               type="password"
-                                                              id="cfpassword"
+                                                              id="confirm"
                                                               class="form-control form-control-lg"
                                                               ng-model="cfpassword"
-                                                              name="cfpassword"
-                                                             
+                                                              name="confirm"
+                                                              ng-pattern="email.Reg"
                                                               placeholder="Confirm Password"
                                                               required
                                                             />
                                                             <label for="cfpassword">Confirm Password</label>
-                                                        </div></div></div>
+                                                        </div>
+                                                        <div class="error form-hint" ng-messages="registerForm.confirm.$error" data-ng-show="registerForm.confirm.$dirty">
+                                                            <p ng-show="registerForm.confirm.$error.required" ng-message="required">{{"You can't leave this empty."}}</p>
+                                                            <p ng-show="!(registerForm.confirm.$error.pattern && registerForm.confirm.$error.required) && registerForm.password.$invalid && !registerForm.confirm.$invalid" ng-message="pattern">{{"Confirm Password with our strong password policy!"}}</p>
+                                                            <p ng-show="registerForm.confirm.$invalid && !registerForm.confirm.$error.required && registerForm.confirm.$error.pattern" ng-message="">{{"These passwords don't match. Try again?"}}</p>
+                                                          </div>
+                                                    </div></div>
                                                     </div>
 
                                                     <div class="row mt-4">

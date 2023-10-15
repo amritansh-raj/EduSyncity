@@ -1,4 +1,4 @@
-myApp.controller("loginController", [
+myApp.controller("teacherregisterController", [
     "$scope",
     "$http",
     "$state",
@@ -12,10 +12,10 @@ myApp.controller("loginController", [
         console.log(pass);
   
         if (!validatePass(pass)) {
-          $scope.loginForm.password.$setValidity("password", false);
+          $scope.registerForm.password.$setValidity("password", false);
           hideLoader();
         } else {
-          $scope.loginForm.password.$setValidity("password", true);
+          $scope.registerForm.password.$setValidity("password", true);
           hideLoader();
         }
   
