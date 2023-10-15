@@ -6,10 +6,10 @@ body {
   padding: 0;
 }
 
-/* .custom-btn{
-  background-color: #1e2125;
-  color: white;
-} */
+:root {
+  --primary-bg-color: #121212;
+  --secondary-bg-color: #1e2125;
+}
 
 .custom-btn {
   border-radius: 25px;
@@ -17,13 +17,71 @@ body {
   color: white;
 }
 
-.custom-btn:hover {
+.custom-btn:hover,
+.list-group-item:hover,
+.accordion-button:hover {
   background-color: #3d3f42;
   color: white;
   transition: background-color 0.5s ease;
 }
 
+.custom-btn:focus {
+  background-color: #3d3f42;
+  color: white;
+  border: none;
+}
+
 #cstBtn.custom-btn:active {
   color: white;
+  border: none;
+}
+
+.accordion-button {
+  background-color: var(--secondary-bg-color);
+  color: aliceblue;
+}
+
+.accordion-button:active {
+  background-color: #1e2125;
+  color: aliceblue;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.accordion-button:not(.collapsed) {
+  color: white;
+  background-color: var(--secondary-bg-color);
+}
+
+.accordion-button:after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.accordion-body {
+  background-color: #1e2125;
+  color: white;
+}
+
+.list-group-item {
+  background-color: var(--secondary-bg-color);
+  border: none;
+  color: white;
+}
+
+.list-group-item:focus {
+  background-color: #3d3f42;
+  color: white;
+}
+/* .list-group-item:hover{
+  background-color: #3d3f42;
+  color: white;
+  transition: background-color 0.5s ease;
+} */
+
+.accordion-item,
+.accordion-header {
   border: none;
 }
