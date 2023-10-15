@@ -29,10 +29,15 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "/Portal_app/templates/dashboard/dashboard.html",
       controller: "dbController",
     })
-    .state("register", {
-      url: "/EduSyncity/register",
-      templateUrl: "/Portal_app/templates/register_temp/register.html",
-      controller: "registerController",
+    .state("studentregister", {
+      url: "/EduSyncity/studentregister",
+      templateUrl: "/Portal_app/templates/register_temp/studentregister.html",
+      controller: "studentregisterController",
+    })
+    .state("teacherregister", {
+      url: "/EduSyncity/teacherregister",
+      templateUrl: "/Portal_app/templates/register_temp/teacherregister.html",
+      controller: "teacherregisterController",
     });
 });
 
