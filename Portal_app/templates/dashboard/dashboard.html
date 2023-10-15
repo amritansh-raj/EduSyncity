@@ -4,7 +4,7 @@
       class="container-fluid d-flex justify-content-center align-items-center"
     >
       <div class="row w-100">
-        <div class="col-2 col-md-1 col-sm-1">
+        <div class="col-2 col-md-1 col-sm-1 ps-0">
           <button
             class="btn custom-btn"
             id="testButton"
@@ -45,10 +45,8 @@
               </div>
             </div>
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <ul class="dropdown-menu dropdown-menu-end" style="background-color: #1e2125;">
+            <li><button class="dropdown-item custom-btn" ng-click="logout()">Logout</button></li>
           </ul>
         </div>
       </div>
@@ -64,8 +62,8 @@
   aria-labelledby="navCanvasLabel"
   style="background-color: #1e2125"
 >
-  <header class="offcanvas-header">
-    <h5 class="offcanvas-title" id="navCanvasLabel" style="color: #22d3ee">
+  <header class="offcanvas-header" style="background-color: #252f3e;">
+    <h3 class="offcanvas-title" id="navCanvasLabel" style="color: #22d3ee">
       EduSyncity
     </h5>
     <button
@@ -78,55 +76,17 @@
     </button>
   </header>
   <div class="offcanvas-body">
-    <div class="col">
+    <!-- <div class="col">
       <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button
               class="accordion-button collapsed"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseOne"
-              aria-expanded="false"
-              aria-controls="flush-collapseOne"
             >
-              Courses
+             Master Config 
             </button>
           </h2>
-          <div
-            id="flush-collapseOne"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionFlushExample"
-          >
-            <div class="accordion-body py-1">
-              <div class="list-group list-group-flush">
-                <button
-                  type="button"
-                  class="list-group-item list-group-item-action"
-                >
-                  B.tech
-                </button>
-                <button
-                  type="button"
-                  class="list-group-item list-group-item-action"
-                >
-                  MCA
-                </button>
-                <button
-                  type="button"
-                  class="list-group-item list-group-item-action"
-                >
-                  MBA
-                </button>
-                <button
-                  type="button"
-                  class="list-group-item list-group-item-action"
-                >
-                  B.Pharma
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -153,6 +113,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item fs-4 p-0 my-2"><button class="btn nav-btn w-100 p-3 text-start"> <i class="bi bi-pentagon"></i> &nbsp; Master configuration</button></li>
+      <!-- <li class="list-group-item fs-4 p-0 my-2"><button class="btn nav-btn w-100 p-3">Master configuration</button></li>
+      <li class="list-group-item fs-4 p-0 my-2"><button class="btn nav-btn w-100 p-3">Master configuration</button></li> -->
+    </ul>
   </div>
 </div>
