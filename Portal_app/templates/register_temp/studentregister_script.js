@@ -23,7 +23,7 @@ myApp.controller("studentregisterController", function ($scope, $http, $state, $
        address: $scope.address,
        phone: $scope.phone,
        fathername: $scope.fathername,
-       mothername: $scope.fathername,
+       mothername: $scope.mothername,
         pass : pass,
         id: $scope.selectedDepartment,
         

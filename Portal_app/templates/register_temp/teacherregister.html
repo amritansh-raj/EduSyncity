@@ -7,7 +7,7 @@
             <div class="row g-0">
                 <div class=" row col">
                     <div class="card-body ">
-                        <form class="row rounded-5 g-0" ng-submit="register()" name="loginForm"enctype="multipart/form-data">
+                        <form class="row rounded-5 g-0" ng-submit="register()" name="registerForm"enctype="multipart/form-data">
                             <h1 class="text-center mb-5 text-uppercase"  style="color: rgb(82, 12, 49) !important;">Teacher registration form</h1>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -27,14 +27,14 @@
                                       </div>
                                       <div
                                       class="text-danger"
-                                      ng-if="loginForm.Firstname.$dirty && Firstname.username.$invalid"
+                                      ng-if="registerForm.Firstname.$dirty && registerForm.Firstname.$invalid"
                                       style="font-size: 14px"
                                     >
-                                      <span ng-if="loginForm.Firstname.$error.required">
+                                      <span ng-if="registerForm.Firstname.$error.required">
                                         <i class="bi bi-exclamation-circle"></i> &nbsp; Firstname
                                         is required.
                                       </span>
-                                      <span ng-if="loginForm.Firstname.$error.Firstname">
+                                      <span ng-if="registerForm.Firstname.$error.Firstname">
                                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                                         Firstname format.
                                       </span>
@@ -54,7 +54,22 @@
                                           required
                                         />
                                         <label for="lastname">Last name</label>
-                                    </div></div></div>
+                                    </div>
+                                    <div
+                                    class="text-danger"
+                                    ng-if="registerForm.lastname.$dirty && registerForm.lastname.$invalid"
+                                    style="font-size: 14px"
+                                  >
+                                    <span ng-if="registerForm.lastname.$error.required">
+                                      <i class="bi bi-exclamation-circle"></i> &nbsp; Lastname
+                                      is required.
+                                    </span>
+                                    <span ng-if="registerForm.lastname.$error.lastname">
+                                      <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                                      Lastname format.
+                                    </span>
+                                  </div>
+                                </div></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
