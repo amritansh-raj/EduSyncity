@@ -17,16 +17,16 @@ myApp.controller("studentregisterController", [
       }
 
       var sendData = {
-        firstname: $scope.Firstname,
-        lastname: $scope.lastname,
-        username: $scope.username,
-        email: $scope.email,
-        age: $scope.age,
-        address: $scope.address,
-        phone: $scope.phone,
-        fathername: $scope.fathername,
-        mothername: $scope.fathername,
-        pass: pass,
+        firstname : $scope.Firstname,
+        lastname : $scope.lastname,
+        username :$scope.username,
+        email :$scope.email,
+       age: $scope.age,
+       address: $scope.address,
+       phone: $scope.phone,
+       fathername: $scope.fathername,
+       mothername: $scope.fathername,
+        pass : pass,
         id: $scope.selectedDepartment,
       };
 
