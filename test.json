@@ -2,24 +2,26 @@
   {
     "pk": 1,
     "name": "Master Configuration",
+    "icon": "bi bi-pentagon",
+    "type": "button",
+    "state": "dashBoard.masterConfig",
     "child": [],
-    "state": "master",
-    "icon": null,
-    "type": "button"
+    "$$hashKey": "object:6"
   },
   {
     "pk": 11,
     "name": "Register As",
+    "icon": "bi bi-person-fill-add",
+    "type": "dropdown",
+    "state": "register",
     "child": [
-      { "name": "faculty", "icon": null, "type": "button" },
       {
-        "name": "student",
-        "icon": null,
-        "type": "button"
+        "name": "Faculty"
+      },
+      {
+        "name": "Student"
       }
     ],
-    "state": "register",
-    "icon": null,
-    "type": "dropdown"
+    "$$hashKey": "object:7"
   }
 ]
