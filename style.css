@@ -91,3 +91,18 @@ body {
   color: white;
   border: none;
 }
+
+.grey-bg {  
+  background-color: #F5F7FA;
+}
+  .custom-button {
+      color:  rgb(82, 12, 49);
+      border-color: black;
+  }
+  .custom-button:hover {
+      background-color:rgb(82, 12, 49); 
+  }
+  .custom-input::placeholder {
+      border-color: black;
+      color: rgb(82, 12, 49);}
+     
