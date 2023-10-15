@@ -85,3 +85,9 @@ body {
 .accordion-header {
   border: none;
 }
+
+.nav-btn, .nav-btn:active{
+  font-size: 20px;
+  color: white;
+  border: none;
+}
