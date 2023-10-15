@@ -46,7 +46,8 @@ body {
   color: aliceblue;
 }
 
-.accordion-button:focus {
+.accordion-button:focus,
+.form-select:focus {
   box-shadow: none;
   border-color: rgba(0, 0, 0, 0.125);
 }
@@ -75,34 +76,33 @@ body {
   background-color: #3d3f42;
   color: white;
 }
-/* .list-group-item:hover{
-  background-color: #3d3f42;
-  color: white;
-  transition: background-color 0.5s ease;
-} */
 
 .accordion-item,
 .accordion-header {
   border: none;
 }
 
-.nav-btn, .nav-btn:active{
+.nav-btn,
+.nav-btn:active {
   font-size: 20px;
   color: white;
   border: none;
 }
 
-.grey-bg {  
-  background-color: #F5F7FA;
+.grey-bg {
+  background-color: #f5f7fa;
 }
-  .custom-button {
-      color:  rgb(82, 12, 49);
-      border-color: black;
-  }
-  .custom-button:hover {
-      background-color:rgb(82, 12, 49); 
-  }
-  .custom-input::placeholder {
-      border-color: black;
-      color: rgb(82, 12, 49);}
-     
+
+.custom-button {
+  color: rgb(82, 12, 49);
+  border-color: black;
+}
+
+.custom-button:hover {
+  background-color: rgb(82, 12, 49);
+}
+
+.custom-input::placeholder {
+  border-color: black;
+  color: rgb(82, 12, 49);
+}
