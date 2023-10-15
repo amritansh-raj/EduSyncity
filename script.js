@@ -34,12 +34,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "/Portal_app/templates/dashboard/states/master_config.html",
       controller: "masterController",
     })
-    .state("studentregister", {
+    .state("dashBoard.studentregister", {
       url: "/EduSyncity/studentregister",
       templateUrl: "/Portal_app/templates/register_temp/studentregister.html",
       controller: "studentregisterController",
     })
-    .state("teacherregister", {
+    .state("dashBoard.teacherregister", {
       url: "/EduSyncity/teacherregister",
       templateUrl: "/Portal_app/templates/register_temp/teacherregister.html",
       controller: "teacherregisterController",

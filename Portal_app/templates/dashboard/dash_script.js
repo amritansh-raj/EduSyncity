@@ -44,6 +44,7 @@ myApp.controller("dbController", [
 
     $scope.stateChange = function (stateName) {
       $state.go(stateName);
+      console.log(stateName)
     };
   },
 ]);

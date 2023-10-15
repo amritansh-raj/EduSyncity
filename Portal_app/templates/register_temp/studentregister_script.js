@@ -17,16 +17,16 @@ myApp.controller("studentregisterController", [
       }
 
       var sendData = {
-        firstname : $scope.Firstname,
-        lastname : $scope.lastname,
-        username :$scope.username,
-        email :$scope.email,
-       age: $scope.age,
-       address: $scope.address,
-       phone: $scope.phone,
-       fathername: $scope.fathername,
-       mothername: $scope.fathername,
-        pass : pass,
+        firstname: $scope.Firstname,
+        lastname: $scope.lastname,
+        username: $scope.username,
+        email: $scope.email,
+        age: $scope.age,
+        address: $scope.address,
+        phone: $scope.phone,
+        fathername: $scope.fathername,
+        mothername: $scope.fathername,
+        pass: pass,
         id: $scope.selectedDepartment,
       };
 
@@ -46,36 +46,39 @@ myApp.controller("studentregisterController", [
         });
     };
 
-    $scope.coursess = [];
+    $scope.courses = [];
     $scope.departments = [];
-    $scope.selectedcourses = null;
-
-    $scope.loadDoctors = function () {
-      if ($scope.selectedcourses) {
-        httpService
-          .get(" ", {
-            params: { coursesid: $scope.selectedcourses },
-          })
-          .then((response) => {
-            console.log(response);
-            $scope.departments = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        $scope.departments = [];
-      }
-    };
 
     httpService
-      .get(" ")
+      .get("courses/")
       .then((response) => {
-        console.log(response);
-        $scope.coursess = response.data;
+        courses = response.data;
+
+        if (courses) {
+          $scope.courses = courses;
+        }
+
+        console.log(courses);
       })
       .catch((error) => {
         console.log(error);
       });
+
+    $scope.selctedCourse = (course) => {
+      httpService
+        .get("departments/", { course_id: course })
+        .then((response) => {
+          departments = response.data;
+
+          if (departments) {
+            $scope.departments = departments;
+          }
+
+          console.log($scope.departments);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
   },
 ]);
