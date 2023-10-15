@@ -45,14 +45,23 @@
               </div>
             </div>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end" style="background-color: #1e2125;">
-            <li><button class="dropdown-item custom-btn" ng-click="logout()">Logout</button></li>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            style="background-color: #1e2125"
+          >
+            <li>
+              <button class="dropdown-item custom-btn" ng-click="logout()">
+                Logout
+              </button>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </nav>
-  <div class="h-100" style="background-color: #121212"></div>
+  <div class="h-100" style="background-color: #121212" ui-view>
+    sadlkasmdklas lkasdmlaskdmas
+  </div>
 </div>
 
 <div
@@ -62,10 +71,10 @@
   aria-labelledby="navCanvasLabel"
   style="background-color: #1e2125"
 >
-  <header class="offcanvas-header" style="background-color: #252f3e;">
+  <header class="offcanvas-header" style="background-color: #252f3e">
     <h3 class="offcanvas-title" id="navCanvasLabel" style="color: #22d3ee">
       EduSyncity
-    </h5>
+    </h3>
     <button
       type="button"
       class="btn"
@@ -114,10 +123,16 @@
         </div>
       </div>
     </div> -->
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item fs-4 p-0 my-2"><button class="btn nav-btn w-100 p-3 text-start"> <i class="bi bi-pentagon"></i> &nbsp; Master configuration</button></li>
-      <!-- <li class="list-group-item fs-4 p-0 my-2"><button class="btn nav-btn w-100 p-3">Master configuration</button></li>
-      <li class="list-group-item fs-4 p-0 my-2"><button class="btn nav-btn w-100 p-3">Master configuration</button></li> -->
+    <ul class="list-group list-group-flush" ng-repeat="data in panelData">
+      <li class="list-group-item fs-4 p-0 my-2">
+        <button
+          class="btn nav-btn w-100 p-3 text-start"
+          ng-click="stateChange(data.state)"
+          data-bs-dismiss="offcanvas"
+        >
+          <i class="{{data.icon}} me-2 fs-4"></i> &nbsp; {{data.name}}
+        </button>
+      </li>
     </ul>
   </div>
 </div>

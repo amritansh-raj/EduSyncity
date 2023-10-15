@@ -4,7 +4,7 @@ myApp.controller("dbController", [
   "$state",
   function ($scope, httpService, $state) {
     $scope.logout = function () {
-      showLoader();
+      // showLoader();
       httpService
         .get("logout/")
         .then((response) => {
@@ -17,6 +17,33 @@ myApp.controller("dbController", [
         .finally(() => {
           hideLoader();
         });
+    };
+
+    display = () => {
+      // showLoader();
+      httpService
+        .get("sidebar/")
+        .then((response) => {
+          panelData = response.data;
+
+          if (panelData) {
+            $scope.panelData = panelData;
+          }
+
+          console.log($scope.panelData);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          hideLoader();
+        });
+    };
+
+    display();
+
+    $scope.stateChange = function (stateName) {
+      $state.go(stateName);
     };
   },
 ]);

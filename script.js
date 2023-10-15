@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.67.122:8000/eduadmin/");
+myApp.constant("apiUrl", "https://10.42.0.182:8000/eduadmin/");
 
 myApp.service("httpService", [
   "$http",
@@ -16,7 +16,7 @@ myApp.service("httpService", [
 ]);
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise("/EduSyncity/login");
+  $urlRouterProvider.otherwise("EduSyncity/login");
 
   $stateProvider
     .state("login", {
@@ -24,15 +24,20 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "/Portal_app/templates/login_temp/login.html",
       controller: "loginController",
     })
+    .state("register", {
+      url: "/EduSyncity/register",
+      templateUrl: "/Portal_app/templates/register_temp/register.html",
+      controller: "registerController",
+    })
     .state("dashBoard", {
       url: "/EduSyncity/dashBoard",
       templateUrl: "/Portal_app/templates/dashboard/dashboard.html",
       controller: "dbController",
     })
-    .state("register", {
-      url: "/EduSyncity/register",
-      templateUrl: "/Portal_app/templates/register_temp/register.html",
-      controller: "registerController",
+    .state("dashBoard.masterConfig",{
+      url: "/EduSyncity/config",
+      templateUrl: "/Portal_app/templates/dashboard/states/master_config.html",
+      controller: "masterController",
     });
 });
 
@@ -50,3 +55,5 @@ validatePass = (pass) => {
   var passPatern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return passPatern.test(pass);
 };
+
+

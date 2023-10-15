@@ -29,6 +29,7 @@ myApp.controller("loginController", [
             if (role === 1) {
               $state.go("dashBoard");
             }
+            alertify.set('notifier','position', 'top-right');
             alertify.success("logged in succesfully!!");
           })
           .catch((error) => {
