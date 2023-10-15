@@ -1,7 +1,22 @@
 myApp.controller("dbController", [
   "$scope",
-  "$http",
-  function ($scope, $http) {
-    
+  "httpService",
+  "$state",
+  function ($scope, httpService, $state) {
+    $scope.logout = function () {
+      showLoader();
+      httpService
+        .get("logout/")
+        .then((response) => {
+          $state.go("login");
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          hideLoader();
+        });
+    };
   },
 ]);

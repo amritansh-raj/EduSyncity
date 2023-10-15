@@ -86,17 +86,23 @@ body {
   border: none;
 }
 
-    .grey-bg {  
-    background-color: #F5F7FA;
+.nav-btn, .nav-btn:active{
+  font-size: 20px;
+  color: white;
+  border: none;
 }
-    .custom-button {
-        color:  rgb(82, 12, 49);
-        border-color: black;
-    }
-    .custom-button:hover {
-        background-color:rgb(82, 12, 49); 
-    }
-    .custom-input::placeholder {
-        border-color: black;
-        color: rgb(82, 12, 49);}
-       
+
+.grey-bg {  
+  background-color: #F5F7FA;
+}
+  .custom-button {
+      color:  rgb(82, 12, 49);
+      border-color: black;
+  }
+  .custom-button:hover {
+      background-color:rgb(82, 12, 49); 
+  }
+  .custom-input::placeholder {
+      border-color: black;
+      color: rgb(82, 12, 49);}
+     

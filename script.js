@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.85.67:8000/demoadmin/");
+myApp.constant("apiUrl", "https://10.21.67.122:8000/eduadmin/");
 
 myApp.service("httpService", [
   "$http",
@@ -10,7 +10,7 @@ myApp.service("httpService", [
     };
 
     this.post = function (url, data) {
-      return $http.post(apiUrl + url, data, {withCredentials: true });
+      return $http.post(apiUrl + url, data, { withCredentials: true });
     };
   },
 ]);
@@ -41,17 +41,17 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     });
 });
 
-function showLoader() {
+showLoader = () => {
   document.getElementById("loader").style.display = "block";
   document.getElementById("mainContent").style.display = "none";
-}
+};
 
-function hideLoader() {
+hideLoader = () => {
   document.getElementById("loader").style.display = "none";
   document.getElementById("mainContent").style.display = "block";
-}
+};
 
-function validatePass(pass) {
+validatePass = (pass) => {
   var passPatern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return passPatern.test(pass);
-}
+};
