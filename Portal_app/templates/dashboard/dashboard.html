@@ -1,4 +1,4 @@
-<div class="vh-100 overflow-y-hidden">
+<div class="vh-100">
   <nav class="navbar navbar-expand-lg" style="background-color: #1e2125">
     <div
       class="container-fluid d-flex justify-content-center align-items-center"
@@ -59,7 +59,11 @@
       </div>
     </div>
   </nav>
-  <div class="h-100" style="background-color: #121212" ui-view>
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="background-color: #121212; height: calc(100% - 60px) !important"
+    ui-view
+  >
     sadlkasmdklas lkasdmlaskdmas
   </div>
 </div>
@@ -72,9 +76,11 @@
   style="background-color: #1e2125"
 >
   <header class="offcanvas-header" style="background-color: #252f3e">
-    <h3 class="offcanvas-title" id="navCanvasLabel" style="color: #22d3ee">
-      EduSyncity
-    </h3>
+    <a class="text-decoration-none" ui-sref="dashBoard">
+      <h3 class="offcanvas-title" id="navCanvasLabel" style="color: #22d3ee">
+        EduSyncity
+      </h3>
+    </a>
     <button
       type="button"
       class="btn"
