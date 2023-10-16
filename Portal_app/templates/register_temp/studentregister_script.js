@@ -40,9 +40,6 @@ myApp.controller("studentregisterController", [
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          hideLoader();
         });
     };
 
@@ -50,7 +47,7 @@ myApp.controller("studentregisterController", [
     $scope.departments = [];
 
     httpService
-      .get("courses/")
+      .get("educore/courses/")
       .then((response) => {
         courses = response.data;
 
@@ -66,7 +63,7 @@ myApp.controller("studentregisterController", [
 
     $scope.selctedCourse = (course) => {
       httpService
-        .get("departments/", { course_id: course })
+        .get("educore/departments/", { course_id: course })
         .then((response) => {
           departments = response.data;
 

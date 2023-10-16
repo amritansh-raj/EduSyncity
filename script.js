@@ -6,11 +6,19 @@ myApp.service("httpService", [
   "apiUrl",
   function ($http, apiUrl) {
     this.get = function (url, params) {
-      return $http.get(apiUrl + url, { params: params, withCredentials: true });
+      return $http
+        .get(apiUrl + url, { params: params, withCredentials: true })
+        .finally(() => {
+          hideLoader();
+        });
     };
 
     this.post = function (url, data) {
-      return $http.post(apiUrl + url, data, { withCredentials: true });
+      return $http
+        .post(apiUrl + url, data, { withCredentials: true })
+        .finally(() => {
+          hideLoader();
+        });
     };
   },
 ]);
@@ -29,7 +37,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "/Portal_app/templates/dashboard/dashboard.html",
       controller: "dbController",
     })
-    .state("dashBoard.masterConfig",{
+    .state("dashBoard.masterConfig", {
       url: "/EduSyncity/config",
       templateUrl: "/Portal_app/templates/dashboard/states/master_config.html",
       controller: "masterController",
@@ -60,5 +68,3 @@ validatePass = (pass) => {
   var passPatern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return passPatern.test(pass);
 };
-
-
