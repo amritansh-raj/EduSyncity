@@ -40,9 +40,6 @@ myApp.controller("studentregisterController", [
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          hideLoader();
         });
     };
 

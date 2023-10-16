@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
+              <div class="card-body p-4 p-lg-5 text-black" id="login-form">
                 <div
                   class="d-flex justify-content-center align-items-center mb-3 pb-1"
                 >
@@ -87,9 +87,20 @@
                     </div>
                   </div>
 
-                  <div class="pt-1 mb-4 d-flex justify-content-center">
+                  <div class="pt-1 d-flex justify-content-center">
                     <button type="submit" class="btn btn-dark btn-lg btn-block">
                       Login
+                    </button>
+                  </div>
+                  <div class="mb-2 d-flex justify-content-center text-muted">
+                    <button
+                      type="button"
+                      class="btn"
+                      ng-click="showForgotPasswordForm()"
+                    >
+                      <p class="text-decoration-underline m-0">
+                        Forgot Password?
+                      </p>
                     </button>
                   </div>
                 </form>
@@ -97,9 +108,197 @@
                 <div
                   class="d-flex justify-content-center align-items-center text-center"
                 >
-                  <a href="#!" class="small text-muted">Terms of use.</a> <br />
+                  <a
+                    href="https://www.kiet.edu/disclaimers-and-policies"
+                    class="small text-muted"
+                    >Terms of use.</a
+                  >
+                  <br />
                   &nbsp;&nbsp;
-                  <a href="#!" class="small text-muted">Privacy policy</a>
+                  <a
+                    href="https://tech.kiet.edu/privacy_policy/kietpariksha_privacy.html"
+                    class="small text-muted"
+                    >Privacy policy</a
+                  >
+                </div>
+              </div>
+
+              <div
+                class="card-body p-4 p-lg-5 text-black"
+                id="forgot-password-form"
+                style="display: none"
+              >
+                <div
+                  class="d-flex justify-content-center align-items-center mb-3 pb-1"
+                >
+                  <span class="h1 fw-bold mb-0">EduSyncity</span>
+                </div>
+
+                <h5 class="d-flex justify-content-center fw-normal mb-3 pb-3">
+                  Forgot Password
+                </h5>
+
+                <form name="forgotPasswordForm" ng-submit="forgotPassword()">
+                  <div class="form-outline mb-4">
+                    <div class="form-floating">
+                      <input
+                        type="username"
+                        id="username"
+                        class="form-control form-control-lg"
+                        ng-model="username"
+                        name="username"
+                        placeholder="username"
+                        required
+                      />
+                      <label for="username">Username or Email</label>
+                    </div>
+
+                    <div
+                      class="text-danger"
+                      ng-if="forgotPasswordForm.username.$dirty && forgotPasswordForm.username.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="forgotPasswordForm.username.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; username
+                        is required.
+                      </span>
+                      <span ng-if="forgotPasswordForm.username.$error.username">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        username format.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="form-floating">
+                      <input
+                        type="password"
+                        id="old-password"
+                        class="form-control form-control-lg"
+                        ng-model="oldPassword"
+                        name="oldPassword"
+                        placeholder="old password"
+                        required
+                      />
+                      <label for="old-password">Old Password</label>
+                    </div>
+
+                    <div
+                      class="text-danger"
+                      ng-if="forgotPasswordForm.oldPassword.$dirty && forgotPasswordForm.oldPassword.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span
+                        ng-if="forgotPasswordForm.oldPassword.$error.required"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Old
+                        Password is required.
+                      </span>
+                      <span
+                        ng-if="forgotPasswordForm.oldPassword.$error.password"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        password format.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="form-floating">
+                      <input
+                        type="password"
+                        id="new-password"
+                        class="form-control form-control-lg"
+                        ng-model="newPassword"
+                        name="newPassword"
+                        placeholder="new password"
+                        required
+                      />
+                      <label for="new-password">New Password</label>
+                    </div>
+
+                    <div
+                      class="text-danger"
+                      ng-if="forgotPasswordForm.newPassword.$dirty && forgotPasswordForm.newPassword.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span
+                        ng-if="forgotPasswordForm.newPassword.$error.required"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; New
+                        Password is required.
+                      </span>
+                      <span
+                        ng-if="forgotPasswordForm.newPassword.$error.password"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        password format.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="form-floating">
+                      <input
+                        type="password"
+                        id="confirm-new-password"
+                        class="form-control form-control-lg"
+                        ng-model="confirmNewPassword"
+                        name="confirmNewPassword"
+                        placeholder="confirm new password"
+                        required
+                      />
+                      <label for="confirm-new-password"
+                        >Confirm New Password</label
+                      >
+                    </div>
+
+                    <div
+                      class="text-danger"
+                      ng-if="forgotPasswordForm.confirmNewPassword.$dirty && forgotPasswordForm.confirmNewPassword.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span
+                        ng-if="forgotPasswordForm.confirmNewPassword.$error.required"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Confirm
+                        New Password is required.
+                      </span>
+                      <span
+                        ng-if="forgotPasswordForm.confirmNewPassword.$error.password"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        password format.
+                      </span>
+                      <span ng-if="newPassword !== confirmNewPassword">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;
+                        Passwords do not match.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="pt-1 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-dark btn-lg btn-block">
+                      Reset Password
+                    </button>
+                  </div>
+                </form>
+
+                <div
+                  class="d-flex justify-content-center align-items-center text-center"
+                >
+                  <a
+                    href="https://www.kiet.edu/disclaimers-and-policies"
+                    class="small text-muted"
+                    >Terms of use.</a
+                  >
+                  <br />
+                  &nbsp;&nbsp;
+                  <a
+                    href="https://tech.kiet.edu/privacy_policy/kietpariksha_privacy.html"
+                    class="small text-muted"
+                    >Privacy policy</a
+                  >
                 </div>
               </div>
             </div>
