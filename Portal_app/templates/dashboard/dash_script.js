@@ -6,7 +6,7 @@ myApp.controller("dbController", [
     display = () => {
       // showLoader();
       httpService
-        .get("sidebar/")
+        .get("educore/sidebar/")
         .then((response) => {
           panelData = response.data;
 
@@ -31,7 +31,7 @@ myApp.controller("dbController", [
     $scope.logout = function () {
       // showLoader();
       httpService
-        .get("logout/")
+        .get("eduadmin/logout/")
         .then((response) => {
           $state.go("login");
           console.log(response);
