@@ -1,416 +1,450 @@
 <section class="h-100 bg-dark">
-  <div class="container h-100">
-    <div class="vh-100 p-3 d-flex justify-content-center align-items-center">
+  <div class="container py-5 h-100">
+    <div
+      class="vh-100 p-3 mb-2 d-flex justify-content-center align-items-center"
+    >
       <div class="col-0-md-3">
         <div
           class="card mb-3 bg-trasparent shadow-lg p-3 mb-5 bg-body-tertiary rounded"
         >
           <div class="row g-0">
-            <div class="card-body">
-              <form
-                class="row rounded-5 g-0"
-                ng-submit="register()"
-                name="registerForm"
-              >
-                <h1
-                  class="text-center mb-5 text-uppercase"
-                  style="color: rgb(82, 12, 49) !important"
+            <div class="row col">
+              <div class="card-body">
+                <form
+                  class="row rounded-5 g-0"
+                  ng-submit="register()"
+                  name="registerForm"
                 >
-                  Student registration form
-                </h1>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="Firstname"
-                          id="Firstname"
-                          class="form-control form-control-lg"
-                          ng-model="Firstname"
-                          name="Firstname"
-                          placeholder="Firstname"
-                          required
-                        />
-                        <label for="Firstname">First name</label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.Firstname.$dirty && registerForm.Firstname.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.Firstname.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Firstname is required.
-                        </span>
-                        <span ng-if="registerForm.Firstname.$error.Firstname">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid Firstname format.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="lastname"
-                          id="lastname"
-                          class="form-control form-control-lg"
-                          ng-model="lastname"
-                          name="lastname"
-                          placeholder="Lastname"
-                          required
-                        />
-                        <label for="lastname">Last name</label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.lastname.$dirty && registerForm.lastname.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.lastname.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Lastname is required.
-                        </span>
-                        <span ng-if="registerForm.lastname.$error.lastname">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid Lastname format.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="input-group mb-3">
+                  <h1
+                    class="text-center mb-5 text-uppercase"
+                    style="color: rgb(82, 12, 49) !important"
+                  >
+                    Student registration form
+                  </h1>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
                         <div class="form-floating">
                           <input
-                            type="username"
-                            id="username"
+                            type="Firstname"
+                            id="Firstname"
                             class="form-control form-control-lg"
-                            ng-model="username"
-                            name="username"
-                            placeholder="Username"
+                            ng-model="Firstname"
+                            name="Firstname"
+                            placeholder="Firstname"
                             required
                           />
-                          <label for="username">Username </label>
+                          <label for="Firstname">First name</label>
                         </div>
                         <div
                           class="text-danger"
-                          ng-if="registerForm.username.$dirty && registerForm.username.$invalid"
+                          ng-if="registerForm.Firstname.$dirty && registerForm.Firstname.$invalid"
                           style="font-size: 14px"
                         >
-                          <span ng-if="registerForm.username.$error.required">
+                          <span ng-if="registerForm.Firstname.$error.required">
                             <i class="bi bi-exclamation-circle"></i> &nbsp;
-                            username is required.
+                            Firstname is required.
                           </span>
-                          <span ng-if="registerForm.username.$error.username">
+                          <span ng-if="registerForm.Firstname.$error.Firstname">
                             <i class="bi bi-exclamation-circle"></i> &nbsp;
-                            Invalid username format.
+                            Invalid Firstname format.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="lastname"
+                            id="lastname"
+                            class="form-control form-control-lg"
+                            ng-model="lastname"
+                            name="lastname"
+                            placeholder="Lastname"
+                            required
+                          />
+                          <label for="lastname">Last name</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.lastname.$dirty && registerForm.lastname.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="registerForm.lastname.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Lastname is required.
+                          </span>
+                          <span ng-if="registerForm.lastname.$error.lastname">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid Lastname format.
                           </span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="email"
-                          id="email"
-                          class="form-control form-control-lg"
-                          ng-model="email"
-                          name="email"
-                          placeholder="Email"
-                          required
-                        />
-                        <label for="email">Email</label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.email.$dirty && registerForm.email.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.email.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp; email
-                          is required.
-                        </span>
-                        <span ng-if="registerForm.email.$error.email">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid email format.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="number"
-                          id="age"
-                          class="form-control form-control-lg"
-                          ng-model="age"
-                          name="age"
-                          placeholder="Age"
-                          required
-                        />
-                        <label for="age">Age</label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.age.$dirty && registerForm.age.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.age.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;age is
-                          required.
-                        </span>
-                        <span ng-if="registerForm.age.$error.age">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid age format.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="number"
-                          id="phone"
-                          class="form-control form-control-lg"
-                          ng-model="phone"
-                          name="phone"
-                          pattern="[6789][0-9]{9}"
-                          placeholder="Phone Number"
-                          required
-                        />
-                        <label for="phone">Phone Number</label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.phone.$dirty && registerForm.phone.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.phone.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp; phone
-                          number is required.
-                        </span>
-                        <span ng-if="registerForm.phone.$error.pattern">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid phonenumber format.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          id="fathername"
-                          class="form-control form-control-lg"
-                          ng-model="fathername"
-                          name="fathername"
-                          placeholder="Father's Name"
-                          required
-                        />
-                        <label for="fathername">Father's Name</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          id="mothername"
-                          class="form-control form-control-lg"
-                          ng-model="mothername"
-                          name="mothername"
-                          placeholder="Mother's Name"
-                          required
-                        />
-                        <label for="mothername">Mother's Name</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          id="address"
-                          class="form-control form-control-lg"
-                          ng-model="address"
-                          name="address"
-                          placeholder="Address"
-                          required
-                        />
-                        <label for="address">Address</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <select
-                          class="form-select"
-                          id="coursesDropdown"
-                          ng-model="selectedcourse"
-                          ng-change="selctedCourse(selectedcourse)"
-                          aria-label="Floating label select example"
-                        >
-                          <option value="" disabled>Select Courses</option>
-                          <option
-                            ng-repeat="course in courses"
-                            value="{{course.id }}"
-                            style="color: black"
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="input-group mb-3">
+                          <div class="form-floating">
+                            <input
+                              type="username"
+                              id="username"
+                              class="form-control form-control-lg"
+                              ng-model="username"
+                              name="username"
+                              placeholder="Username"
+                              required
+                            />
+                            <label for="username">Username </label>
+                          </div>
+                          <div
+                            class="text-danger"
+                            ng-if="registerForm.username.$dirty && registerForm.username.$invalid"
+                            style="font-size: 14px"
                           >
-                            {{course.name}}
-                          </option>
-                        </select>
-                        <label for="address">Courses</label>
+                            <span ng-if="registerForm.username.$error.required">
+                              <i class="bi bi-exclamation-circle"></i> &nbsp;
+                              username is required.
+                            </span>
+                            <span ng-if="registerForm.username.$error.username">
+                              <i class="bi bi-exclamation-circle"></i> &nbsp;
+                              Invalid username format.
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="email"
+                            id="email"
+                            class="form-control form-control-lg"
+                            ng-model="email"
+                            name="email"
+                            placeholder="Email"
+                            required
+                          />
+                          <label for="email">Email</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.email.$dirty && registerForm.email.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="registerForm.email.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            email is required.
+                          </span>
+                          <span ng-if="registerForm.email.$error.email">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid email format.
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <select
-                          class="form-select"
-                          id="departmentDropdown"
-                          ng-model="selectedDepartment"
-                          ng-change="selctedCourse(selectedcourse)"
-                          aria-label="Floating label select example"
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="number"
+                            id="age"
+                            class="form-control form-control-lg"
+                            ng-model="age"
+                            name="age"
+                            placeholder="Age"
+                            required
+                          />
+                          <label for="age">Age</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.age.$dirty && registerForm.age.$invalid"
+                          style="font-size: 14px"
                         >
-                          <option value="" disabled>Select Departments</option>
-                          <option
-                            ng-repeat="department in departments"
-                            value="{{ department.id }}"
+                          <span ng-if="registerForm.age.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;age
+                            is required.
+                          </span>
+                          <span ng-if="registerForm.age.$error.age">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid age format.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="number"
+                            id="phone"
+                            class="form-control form-control-lg"
+                            ng-model="phone"
+                            name="phone"
+                            pattern="[6789][0-9]{9}"
+                            placeholder="Phone Number"
+                            required
+                          />
+                          <label for="phone">Phone Number</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.phone.$dirty && registerForm.phone.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="registerForm.phone.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            phone number is required.
+                          </span>
+                          <span ng-if="registerForm.phone.$error.pattern">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid phonenumber format.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            id="fathername"
+                            class="form-control form-control-lg"
+                            ng-model="fathername"
+                            name="fathername"
+                            placeholder="Father's Name"
+                            required
+                          />
+                          <label for="fathername">Father's Name</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.fathername.$dirty && registerForm.fathername.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="registerForm.fathername.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            father's name is required.
+                          </span>
+                          <span ng-if="registerForm.fathername.$error.pattern">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid father's name format.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            id="mothername"
+                            class="form-control form-control-lg"
+                            ng-model="mothername"
+                            name="mothername"
+                            placeholder="Mother's Name"
+                            required
+                          />
+                          <label for="mothername">Mother's Name</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.mothername.$dirty && registerForm.mothername.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="registerForm.mothername.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            mother's name is required.
+                          </span>
+                          <span ng-if="registerForm.mothername.$error.pattern">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid mother's name format.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            id="address"
+                            class="form-control form-control-lg"
+                            ng-model="address"
+                            name="address"
+                            placeholder="Address"
+                            required
+                          />
+                          <label for="address">Address</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.address.$dirty && registerForm.address.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="registerForm.address.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            address is required.
+                          </span>
+                          <span ng-if="registerForm.address.$error.pattern">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid address format.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <select
+                            class="form-select"
+                            id="coursesDropdown"
+                            ng-model="selectedcourses"
+                            ng-change="loadDoctors()"
+                            aria-label="Floating label select example"
                           >
-                            {{ department.department__name }}
-                          </option>
-                        </select>
-                        <label for="floatingSelect">Departments</label>
+                            <option value="" disabled>Select Courses</option>
+                            <option
+                              ng-repeat="courses in coursess"
+                              value="{{courses.id }}"
+                            >
+                              {{courses.courses}}
+                            </option>
+                          </select>
+                          <label for="courses">Courses</label>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <select
-                          class="form-select"
-                          id="floatingSelect"
-                          aria-label="Floating label select example"
-                        >
-                          <option selected>Selected Year</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="2">3</option>
-                          <option value="2">4</option>
-                        </select>
-                        <label for="floatingSelect">Year</label>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <select
+                            class="form-select"
+                            id="departmentDropdown"
+                            ng-model="selectedDepartment"
+                            aria-label="Floating label select example"
+                          >
+                            <option value="" disabled>
+                              Select Departments
+                            </option>
+                            <option
+                              ng-repeat="department in departments"
+                              value="{{ department.id }}"
+                            >
+                              {{ department.department }}
+                            </option>
+                          </select>
+                          <label for="floatingSelect">Departments</label>
+                        </div>
                       </div>
                     </div>
+                    <!-- <div class="col-md-6 mb-4">
+                                                  <div class="form-outline">
+                                                    <div class="form-floating">
+                                                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                                          <option selected></option>
+                                                          <option value="1"></option>
+                                                          <option value="2"></option>
+                                                         
+                                                        </select>
+                                                        <label for="floatingSelect">Year</label>
+                                                      </div>
+                                                       
+                                                    </div></div> -->
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="password"
-                          id="password"
-                          class="form-control form-control-lg"
-                          ng-model="password"
-                          name="password"
-                          placeholder="Password"
-                          pattern="/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/"
-                          required
-                        />
-                        <label for="password">Password</label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.password.$dirty && registerForm.password.$invalid"
-                        style="font-size: 12px"
-                      >
-                        <span ng-if="registerForm.password.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Password is required.
-                        </span>
-                        <span ng-if="registerForm.password.$error.pattern">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid password format.
-                        </span>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="password"
+                            id="password"
+                            class="form-control form-control-lg"
+                            ng-model="password"
+                            name="password"
+                            placeholder="Password"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            required
+                          />
+                          <label for="password">Password</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.password.$dirty && registerForm.password.$invalid"
+                          style="font-size: 12px"
+                        >
+                          <span ng-if="registerForm.password.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Password is required.
+                          </span>
+                          <span ng-if="registerForm.password.$error.pattern">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid password format.
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <div class="form-floating">
-                        <input
-                          type="password"
-                          id="confirm"
-                          class="form-control form-control-lg"
-                          ng-model="cfpassword"
-                          name="confirm"
-                          ng-pattern="email.Reg"
-                          placeholder="Confirm Password"
-                          required
-                        />
-                        <label for="cfpassword">Confirm Password</label>
-                      </div>
-                      <div
-                        class="error form-hint"
-                        ng-messages="registerForm.confirm.$error"
-                        data-ng-show="registerForm.confirm.$dirty"
-                      >
-                        <p
-                          ng-show="registerForm.confirm.$error.required"
-                          ng-message="required"
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <div class="form-floating">
+                          <input
+                            type="password"
+                            id="confirm"
+                            class="form-control form-control-lg"
+                            ng-model="cfpassword"
+                            name="confirm"
+                            ng-pattern="email.Reg"
+                            placeholder="Confirm Password"
+                            required
+                          />
+                          <label for="cfpassword">Confirm Password</label>
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="registerForm.confirm.$dirty && registerForm.confirm.$invalid"
+                          style="font-size: 12px"
                         >
-                          {{"You can't leave this empty."}}
-                        </p>
-                        <p
-                          ng-show="!(registerForm.confirm.$error.pattern && registerForm.confirm.$error.required) && registerForm.password.$invalid && !registerForm.confirm.$invalid"
-                          ng-message="pattern"
-                        >
-                          {{"Confirm Password with our strong password
-                          policy!"}}
-                        </p>
-                        <p
-                          ng-show="registerForm.confirm.$invalid && !registerForm.confirm.$error.required && registerForm.confirm.$error.pattern"
-                          ng-message=""
-                        >
-                          {{"These passwords don't match. Try again?"}}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                          <span ng-if="registerForm.confirm.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Password is required.
+                          </span>
+                          <span
+                            ng-if="!(registerForm.confirm.$error.pattern && registerForm.confirm.$error.required) && registerForm.password.$invalid && !registerForm.confirm.$invalid"
+                          >
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Confirm Password with our strong password policy!
+                          </span>
 
-                <div class="row mt-4">
-                  <div class="d-grid gap-2 col-5 mx-auto">
-                    <button
-                      class="btn btn-outline-success custom-button"
-                      type="submit"
-                    >
-                      Register
-                    </button>
+                          <!-- <p ng-show="registerForm.confirm.$invalid && !registerForm.confirm.$error.required && registerForm.confirm.$error.pattern && registerForm.password.$modelValue != registerForm.confirm.$modelValue " ng-message="">{{"These passwords don't match. Try again?"}}</p> -->
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </form>
+
+                  <div class="row mt-4">
+                    <div class="d-grid gap-2 col-5 mx-auto">
+                      <button
+                        class="btn btn-outline-success custom-button"
+                        type="submit"
+                      >
+                        Register
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
