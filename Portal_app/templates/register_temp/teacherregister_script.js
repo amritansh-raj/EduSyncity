@@ -24,8 +24,8 @@ myApp.controller("teacherregisterController", [
         age: $scope.age,
         address: $scope.address,
         phone: $scope.phone,
-        qualification:$scope.department,
-        id: $scope.selectedDepartment,
+        qualification:$scope.qualification,
+        id: $scope.selectedYear,
       };
 
       console.log(sendData);
@@ -43,7 +43,7 @@ myApp.controller("teacherregisterController", [
 
     $scope.courses = [];
     $scope.departments = [];
-
+    $scope.years = [];
     httpService
       .get("courses/")
       .then((response) => {
@@ -75,5 +75,22 @@ myApp.controller("teacherregisterController", [
           console.log(error);
         });
     };
+    $scope.selctedDepartment = (department) => {
+      httpService
+        .get("years/", { department_id: department })
+        .then((response) => {
+          years = response.data;
+
+          if (years) {
+            $scope.years = years;
+          }
+
+          console.log($scope.years);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
   },
 ]);
