@@ -21,7 +21,7 @@ myApp.controller("loginController", [
       } else {
         $scope.loginForm.password.$setValidity("password", true);
         httpService
-          .post("login/", postData)
+          .post("eduadmin/login/", postData)
           .then((response) => {
             console.log(response);
             role = response.data[0].role;
