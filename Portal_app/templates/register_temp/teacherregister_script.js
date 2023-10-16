@@ -1,57 +1,79 @@
 myApp.controller("teacherregisterController", [
-    "$scope",
-    "$http",
-    "$state",
-    "httpService",
-    function ($scope, $http, $state, httpService) {
-      $scope.register = function () {
-        showLoader();
-        
-        pass = $scope.password;
-        console.log(username);
-        console.log(pass);
-  
-        if (!validatePass(pass)) {
-          $scope.registerForm.password.$setValidity("password", false);
-          hideLoader();
-        } else {
-          $scope.registerForm.password.$setValidity("password", true);
-          hideLoader();
-        }
-  
-        postData = {
-            firstname : $scope.Firstname,
-            lastname : $scope.lastname,
-            username :$scope.username,
-            email :$scope.email,
-           age: $scope.age,
-           address: $scope.address,
-           phone: $scope.phone,
-          qualification:$scope.department,
-            pass : pass,
-            confirmpass:$scope.cfpassword,
-        };
-  
-        httpService
-          .post("registerteacher/", postData)
-          .then(function (response) {
-            console.log(response);
-            role = response.data[0].role;
-            console.log(role);
-            if(role === 1){
-              $state.go("login");
-            }
-            alertify.success("Ok");
-          })
-          .catch(function (error) {
-            console.error(error);
-          })
-          .finally(function () {
-            hideLoader();
-          });
-  
-       
+  "$scope",
+  "httpService",
+  "$state",
+  function ($scope, httpService, $state) {
+    $scope.register = function () {
+      showLoader();
+      pass = $scope.password;
+      console.log(pass);
+
+      if (!validatePass(pass)) {
+        $scope.registerForm.password.$setValidity("password", false);
+        hideLoader();
+      } else {
+        $scope.registerForm.password.$setValidity("password", true);
+        hideLoader();
+      }
+
+      var sendData = {
+        firstname: $scope.Firstname,
+        lastname: $scope.lastname,
+        username: $scope.username,
+        email: $scope.email,
+        age: $scope.age,
+        address: $scope.address,
+        phone: $scope.phone,
+        qualification:$scope.department,
+        id: $scope.selectedDepartment,
       };
-    },
-  ]);
-  
+
+      console.log(sendData);
+
+      httpService
+        .post("", sendData)
+        .then((response) => {
+          var register = response.data;
+          console.log(register);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    $scope.courses = [];
+    $scope.departments = [];
+
+    httpService
+      .get("courses/")
+      .then((response) => {
+        courses = response.data;
+
+        if (courses) {
+          $scope.courses = courses;
+        }
+
+        console.log(courses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    $scope.selctedCourse = (course) => {
+      httpService
+        .get("departments/", { course_id: course })
+        .then((response) => {
+          departments = response.data;
+
+          if (departments) {
+            $scope.departments = departments;
+          }
+
+          console.log($scope.departments);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+  },
+]);

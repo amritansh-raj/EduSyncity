@@ -1,6 +1,6 @@
 <section class="h-100 bg-dark">
   <div class="container h-100">
-    <div class="h-100 d-flex justify-content-center align-items-center">
+    <div class="vh-100 d-flex justify-content-center align-items-center">
       <div class="col-0-md-3">
         <div
           class="card bg-trasparent shadow-lg p-3 bg-body-tertiary rounded"
@@ -249,19 +249,21 @@
                       <div class="form-floating">
                         <select
                           class="form-select"
-                          id="departmentDropdown"
-                          ng-model="selectedDepartment"
+                          id="coursesDropdown"
+                          ng-model="selectedcourse"
+                          ng-change="selctedCourse(selectedcourse)"
                           aria-label="Floating label select example"
                         >
-                          <option value="" disabled>Select Departments</option>
+                          <option value="" disabled>Select Courses</option>
                           <option
-                            ng-repeat="department in departments"
-                            value="{{ department.id }}"
+                            ng-repeat="course in courses"
+                            value="{{course.id }}"
+                            style="color: black"
                           >
-                            {{ department.department }}
+                            {{course.name}}
                           </option>
                         </select>
-                        <label for="floatingSelect">Departments</label>
+                        <label for="address">Courses</label>
                       </div>
                     </div>
                   </div>
@@ -270,99 +272,73 @@
                       <div class="form-floating">
                         <select
                           class="form-select"
-                          id="coursesDropdown"
-                          ng-model="selectedcourses"
-                          ng-change="loadDoctors()"
+                          id="departmentDropdown"
+                          ng-model="selectedDepartment"
+                          ng-change="selctedCourse(selectedcourse)"
                           aria-label="Floating label select example"
                         >
-                          <option value="" disabled>Select Courses</option>
+                          <option value="" disabled>Select Departments</option>
                           <option
-                            ng-repeat="courses in coursess"
-                            value="{{courses.id }}"
+                            ng-repeat="department in departments"
+                            value="{{ department.id }}"
                           >
-                            {{courses.courses}}
+                            {{ department.department__name }}
                           </option>
                         </select>
-                        <label for="courses">Courses</label>
+                        <label for="floatingSelect">Departments</label>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
                       <div class="form-floating">
-                        <input
-                          type="password"
-                          id="password"
-                          class="form-control form-control-lg"
-                          ng-model="password"
-                          name="password"
-                          placeholder="Password"
-                          required
-                          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                        />
-                        <label for="password">Password</label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.password.$dirty && registerForm.password.$invalid"
-                        style="font-size: 12px"
-                      >
-                        <span ng-if="registerForm.password.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Password is required.
-                        </span>
-                        <span ng-if="registerForm.password.$error.pattern">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid password format.
-                        </span>
+                           <select
+                          class="form-select"
+                          id="yearDropdown"
+                          ng-model="selectedYear"
+                          ng-change="selctedDepartment(selecteddepartment)"
+                          aria-label="Floating label select example"
+                        >
+                          <option value="" disabled>Select Years</option>
+                          <option
+                            ng-repeat="year in years"
+                            value="{{ year.id }}"
+                          >
+                            {{ year.year__name }}
+                          </option>
+                        </select>
+                        <label for="floatingSelect">Years</label>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
                       <div class="form-floating">
-                        <input
-                          type="password"
-                          id="confirm"
-                          class="form-control form-control-lg"
-                          ng-model="cfpassword"
-                          name="confirm"
-                          ng-pattern="email.Reg"
-                          placeholder="Confirm Password"
-                          required
-                        />
-                        <label for="cfpassword">Confirm Password</label>
-                      </div>
-                      <div
-                        class="error form-hint"
-                        ng-messages="registerForm.confirm.$error"
-                        data-ng-show="registerForm.confirm.$dirty"
-                      >
-                        <p
-                          ng-show="registerForm.confirm.$error.required"
-                          ng-message="required"
+                        <!-- <select
+                          class="form-select"
+                          id="departmentDropdown"
+                          ng-model="selectedDepartment"
+                          ng-change="selctedCourse(selectedcourse)"
+                          aria-label="Floating label select example"
                         >
-                          {{"You can't leave this empty."}}
-                        </p>
-                        <p
-                          ng-show="!(registerForm.confirm.$error.pattern && registerForm.confirm.$error.required) && registerForm.password.$invalid && !registerForm.confirm.$invalid"
-                          ng-message="pattern"
-                        >
-                          {{"Confirm Password with our strong password
-                          policy!"}}
-                        </p>
-                        <p
-                          ng-show="registerForm.confirm.$invalid && !registerForm.confirm.$error.required && registerForm.confirm.$error.pattern"
-                          ng-message=""
-                        >
-                          {{"These passwords don't match. Try again?"}}
-                        </p>
+                          <option value="" disabled>Select Departments</option>
+                          <option
+                            ng-repeat="department in departments"
+                            value="{{ department.id }}"
+                          >
+                            {{ department.department__name }}
+                          </option>
+                        </select> -->
+                        <!-- <label for="floatingSelect">Departments</label> -->
                       </div>
                     </div>
                   </div>
                 </div>
+                
+               
 
                 <div class="row mt-4">
                   <div class="d-grid gap-2 col-5 mx-auto">
