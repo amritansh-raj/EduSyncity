@@ -1,14 +1,11 @@
 myApp.controller("teacherregisterController", [
   "$scope",
-  "$http",
-  "$state",
   "httpService",
-  function ($scope, $http, $state, httpService) {
+  "$state",
+  function ($scope, httpService, $state) {
     $scope.register = function () {
       showLoader();
-
       pass = $scope.password;
-      console.log(username);
       console.log(pass);
 
       if (!validatePass(pass)) {
@@ -19,7 +16,7 @@ myApp.controller("teacherregisterController", [
         hideLoader();
       }
 
-      postData = {
+      var sendData = {
         firstname: $scope.Firstname,
         lastname: $scope.lastname,
         username: $scope.username,
@@ -27,25 +24,73 @@ myApp.controller("teacherregisterController", [
         age: $scope.age,
         address: $scope.address,
         phone: $scope.phone,
-        qualification: $scope.department,
-        pass: pass,
-        confirmpass: $scope.cfpassword,
+        qualification:$scope.qualification,
+        id: $scope.selectedYear,
       };
 
+      console.log(sendData);
+
       httpService
-        .post("registerteacher/", postData)
-        .then(function (response) {
-          console.log(response);
-          role = response.data[0].role;
-          console.log(role);
-          if (role === 1) {
-            $state.go("login");
-          }
-          alertify.success("Ok");
+        .post("", sendData)
+        .then((response) => {
+          var register = response.data;
+          console.log(register);
         })
-        .catch(function (error) {
-          console.error(error);
+        .catch((error) => {
+          console.log(error);
         });
     };
+
+    $scope.courses = [];
+    $scope.departments = [];
+    $scope.years = [];
+    httpService
+      .get("educore/courses/")
+      .then((response) => {
+        courses = response.data;
+
+        if (courses) {
+          $scope.courses = courses;
+        }
+
+        console.log(courses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    $scope.selctedCourse = (course) => {
+      httpService
+        .get("educore/departments/", { course_id: course })
+        .then((response) => {
+          departments = response.data;
+
+          if (departments) {
+            $scope.departments = departments;
+          }
+
+          console.log($scope.departments);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    $scope.selctedDepartment = (department) => {
+      httpService
+        .get("years/", { department_id: department })
+        .then((response) => {
+          years = response.data;
+
+          if (years) {
+            $scope.years = years;
+          }
+
+          console.log($scope.years);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
   },
 ]);
