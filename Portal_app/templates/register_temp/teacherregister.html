@@ -317,22 +317,22 @@
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
                       <div class="form-floating">
-                        <!-- <select
+                        <select
                           class="form-select"
-                          id="departmentDropdown"
-                          ng-model="selectedDepartment"
-                          ng-change="selctedCourse(selectedcourse)"
+                          id="subjectDropdown"
+                          ng-model="selectedSubject"
+                          ng-change="selctedYear(selectedyear)"
                           aria-label="Floating label select example"
                         >
-                          <option value="" disabled>Select Departments</option>
+                          <option value="" disabled>Select Subjects</option>
                           <option
-                            ng-repeat="department in departments"
-                            value="{{ department.id }}"
+                            ng-repeat="subject in subjects"
+                            value="{{ subject.id }}"
                           >
-                            {{ department.department__name }}
+                            {{ subject.subject__name }}
                           </option>
-                        </select> -->
-                        <!-- <label for="floatingSelect">Departments</label> -->
+                        </select> 
+                         <label for="floatingSelect">Subjects</label>
                       </div>
                     </div>
                   </div>

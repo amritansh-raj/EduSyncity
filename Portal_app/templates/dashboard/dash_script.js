@@ -22,7 +22,7 @@ myApp.controller("dbController", [
     display = () => {
       // showLoader();
       httpService
-        .get("sidebar/")
+        .get("educore/sidebar/")
         .then((response) => {
           panelData = response.data;
 

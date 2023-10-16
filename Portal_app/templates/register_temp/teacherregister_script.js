@@ -45,7 +45,7 @@ myApp.controller("teacherregisterController", [
     $scope.departments = [];
     $scope.years = [];
     httpService
-      .get("courses/")
+      .get("educore/courses/")
       .then((response) => {
         courses = response.data;
 
@@ -61,7 +61,7 @@ myApp.controller("teacherregisterController", [
 
     $scope.selctedCourse = (course) => {
       httpService
-        .get("departments/", { course_id: course })
+        .get("educore/departments/", { course_id: course })
         .then((response) => {
           departments = response.data;
 
