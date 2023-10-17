@@ -22,6 +22,28 @@ myApp.controller("masterController", [
         });
     };
 
+    $scope.getChild = (id) => {
+      httpService.get("", { params: id }).then((response) => {
+        childs = response.data;
+
+        if (childs) {
+          $scope.childs = childs;
+        }
+
+        console.log($scope.childs);
+      });
+    };
     display();
+
+    $scope.showInput = () => {
+      $scope.adding = true;
+    };
+
+    $scope.addChild = () => {
+      var child = document.querySelector('input[name=child]').value;
+      console.log(child);
+      
+      $scope.adding = false;
+    };
   },
 ]);
