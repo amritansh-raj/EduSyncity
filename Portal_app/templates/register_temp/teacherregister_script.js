@@ -88,12 +88,25 @@ myApp.controller("teacherregisterController", [
         .catch((error) => {
           console.log(error);
         });
-        
+        // httpService
+        // .get("educore/subjects/", { department_id: department },{ course_id: course},{ year: year})
+        // .then((response) => {
+        //   subjects = response.data;
+
+        //   if (subjects) {
+        //     $scope.subjects = subjects;
+        //   }
+
+        //   console.log($scope.subjects);
+        // })
+        // .catch((error) => {
+        //   console.log(error);
+        // });
     };
     
-    $scope.selctedYear = (year) => {
+    $scope.selctedYear = (year,course,department) => {
       httpService
-        .get("educore/subjects/", { year_id: year },{ department_id: department },{ course_id: course})
+        .get("educore/subjects/", { year : year },{ department_id: department },{ course_id: course})
         .then((response) => {
           subjects = response.data;
 

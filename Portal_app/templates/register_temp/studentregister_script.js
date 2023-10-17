@@ -5,29 +5,31 @@ myApp.controller("studentregisterController", [
   function ($scope, httpService, $state) {
     $scope.register = function () {
       showLoader();
-      pass = $scope.password;
-      console.log(pass);
+      // pass = $scope.password;
+      // console.log(pass);
 
-      if (!validatePass(pass)) {
-        $scope.registerForm.password.$setValidity("password", false);
-        hideLoader();
-      } else {
-        $scope.registerForm.password.$setValidity("password", true);
-        hideLoader();
-      }
+      // if (!validatePass(pass)) {
+      //   $scope.registerForm.password.$setValidity("password", false);
+      //   hideLoader();
+      // } else {
+      //   $scope.registerForm.password.$setValidity("password", true);
+      //   hideLoader();
+      // }
 
       var sendData = {
-        firstname: $scope.Firstname,
-        lastname: $scope.lastname,
-        username: $scope.username,
+        first_name: $scope.Firstname,
+        last_name: $scope.lastname,
+        user_name: $scope.username,
         email: $scope.email,
         age: $scope.age,
         address: $scope.address,
-        phone: $scope.phone,
-        fathername: $scope.fathername,
-        mothername: $scope.fathername,
-        pass: pass,
-        id: $scope.selectedDepartment,
+        contact: $scope.phone,
+        father_name: $scope.fathername,
+        mother_name: $scope.mothername,
+        course: $scope.selectedcourse,
+        department: $scope.selectedDepartment,
+        year: $scope.selectedYear,
+        gender:$scope.gender
       };
 
       console.log(sendData);
@@ -45,7 +47,7 @@ myApp.controller("studentregisterController", [
 
     $scope.courses = [];
     $scope.departments = [];
-
+    $scope.years = [];
     httpService
       .get("educore/courses/")
       .then((response) => {
@@ -76,6 +78,24 @@ myApp.controller("studentregisterController", [
         .catch((error) => {
           console.log(error);
         });
+        httpService
+        .get("educore/years/", { course_id: course })
+        .then((response) => {
+          years = response.data;
+
+          if (years) {
+            $scope.years = years;
+          }
+
+          console.log($scope.years);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        
     };
+    
+    
+
   },
 ]);

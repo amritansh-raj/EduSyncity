@@ -290,7 +290,7 @@
                             {{course.name}}
                           </option>
                         </select>
-                        <label for="address">Courses</label>
+                        <label for="course">Courses</label>
                       </div>
                     </div>
                   </div>
@@ -332,7 +332,7 @@
                           <option value="" disabled>Select Years</option>
                           <option
                             ng-repeat="year in years"
-                            value="{{ year.id }}"
+                            value="{{ year }}"
                           >
                             {{ year }}
                           </option>
@@ -354,7 +354,7 @@
                           <option value="" disabled>Select Subjects</option>
                           <option
                             ng-repeat="subject in subjects"
-                            value="{{ subject.id }}"
+                            value="{{ subject.id}}"
                           >
                             {{ subject.subject__name }}
                           </option>
