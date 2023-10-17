@@ -224,6 +224,21 @@
                         />
                         <label for="address">Address</label>
                       </div>
+                      <div
+                      class="text-danger"
+                      ng-if="registerForm.address.$dirty && registerForm.address.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="registerForm.address.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;address
+                        is required.
+                      </span>
+                      <span ng-if="registerForm.address.$error.type">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;
+                        Invalid address format.
+                      </span>
+                    </div>
+                      
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
@@ -240,6 +255,20 @@
                         />
                         <label for="qualification">Qualification</label>
                       </div>
+                      <div
+                      class="text-danger"
+                      ng-if="registerForm.qualification.$dirty && registerForm.qualification.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="registerForm.qualification.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; qualification
+                        is required.
+                      </span>
+                      <span ng-if="registerForm.qualification.$error.type">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;
+                        Invalid qualification format.
+                      </span>
+                    </div>
                     </div>
                   </div>
                 </div>
