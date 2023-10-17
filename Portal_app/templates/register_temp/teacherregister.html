@@ -1,11 +1,9 @@
-<section class="h-100 bg-dark">
-  <div class="container h-100">
-    <div class="vh-100 d-flex justify-content-center align-items-center">
+<section class="bg-dark">
+  <div class="container p-0">
+    <div class="d-flex justify-content-center align-items-center">
       <div class="col-0-md-3">
-        <div
-          class="card bg-trasparent shadow-lg p-3 bg-body-tertiary rounded"
-        >
-          <div class="row g-0">
+        <div class="card bg-trasparent shadow-lg bg-body-tertiary rounded">
+          <div class="card-body overflow-auto" style="max-height: 900px">
             <div class="card-body">
               <form
                 class="row rounded-5 g-0"
@@ -328,7 +326,7 @@
                           class="form-select"
                           id="yearDropdown"
                           ng-model="selectedYear"
-                          ng-change="selctedDepartment(selecteddepartment)"
+                          ng-change="selctedCourse(selectedcourse)"
                           aria-label="Floating label select example"
                         >
                           <option value="" disabled>Select Years</option>
@@ -336,7 +334,7 @@
                             ng-repeat="year in years"
                             value="{{ year.id }}"
                           >
-                            {{ year.year__name }}
+                            {{ year }}
                           </option>
                         </select>
                         <label for="floatingSelect">Years</label>
@@ -380,7 +378,7 @@
                   </div>
                 </div>
               </form>
-            </div>
+           
           </div>
         </div>
       </div>
