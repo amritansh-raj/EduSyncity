@@ -7,19 +7,18 @@ myApp.controller("masterController", [
       showLoader();
 
       httpService
-        .get("")
+        .get("educore/courses/")
         .then((response) => {
           options = response.data;
 
           if (options) {
             $scope.options = options;
           }
+
+          console.log($scope.options);
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          hideLoader();
         });
     };
 
