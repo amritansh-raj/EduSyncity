@@ -7,10 +7,8 @@ myApp.controller("loginController", [
       showLoader();
       username = $scope.username;
       pass = $scope.password;
-      console.log(username);
-      console.log(pass);
-
-      postData = {
+     
+      var postData = {
         username: username,
         password: pass,
       };
@@ -25,7 +23,6 @@ myApp.controller("loginController", [
           .then((response) => {
             console.log(response);
             role = response.data[0].role;
-            console.log(role);
             if (role === 1) {
               $state.go("dashBoard");
             }
@@ -36,10 +33,30 @@ myApp.controller("loginController", [
             console.error(error);
           });
       }
+    };
 
-      $scope.showForgotPasswordForm = () => {
-        
-      }
+    $scope.showForm = () => {
+      $scope.show = $scope.show ? false : true;
+    };
+
+    $scope.changePassword = function () {
+      var data = {
+        username: $scope.fusername,
+        oldPassword: $scope.oldPassword,
+        newPassword: $scope.newPassword,
+        confirmNewPassword: $scope.confirmNewPassword,
+      };
+
+      console.log(data);
+
+      httpService
+        .post("", data)
+        .then((r) => {
+          console.log(r);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     };
   },
 ]);

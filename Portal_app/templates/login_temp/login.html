@@ -15,7 +15,11 @@
             </div>
 
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black" id="login-form">
+              <div
+                class="card-body p-4 p-lg-5 text-black"
+                id="login-form"
+                ng-show="!show"
+              >
                 <div
                   class="d-flex justify-content-center align-items-center mb-3 pb-1"
                 >
@@ -92,18 +96,13 @@
                       Login
                     </button>
                   </div>
-                  <div class="mb-2 d-flex justify-content-center text-muted">
-                    <button
-                      type="button"
-                      class="btn"
-                      ng-click="showForgotPasswordForm()"
-                    >
-                      <p class="text-decoration-underline m-0">
-                        Forgot Password?
-                      </p>
-                    </button>
-                  </div>
                 </form>
+
+                <div class="mb-2 d-flex justify-content-center text-muted">
+                  <button class="btn" ng-click="showForm()">
+                    Forgot password?
+                  </button>
+                </div>
 
                 <div
                   class="d-flex justify-content-center align-items-center text-center"
@@ -126,7 +125,7 @@
               <div
                 class="card-body p-4 p-lg-5 text-black"
                 id="forgot-password-form"
-                style="display: none"
+                ng-show="show"
               >
                 <div
                   class="d-flex justify-content-center align-items-center mb-3 pb-1"
@@ -138,31 +137,35 @@
                   Forgot Password
                 </h5>
 
-                <form name="forgotPasswordForm" ng-submit="forgotPassword()">
+                <form name="forgotPasswordForm" ng-submit="changePassword()">
                   <div class="form-outline mb-4">
                     <div class="form-floating">
                       <input
-                        type="username"
-                        id="username"
+                        type="text"
+                        id="fusername"
                         class="form-control form-control-lg"
-                        ng-model="username"
-                        name="username"
-                        placeholder="username"
+                        ng-model="fusername"
+                        name="fusername"
+                        placeholder="fusername"
                         required
                       />
-                      <label for="username">Username or Email</label>
+                      <label for="fusername">Username or Email</label>
                     </div>
 
                     <div
                       class="text-danger"
-                      ng-if="forgotPasswordForm.username.$dirty && forgotPasswordForm.username.$invalid"
+                      ng-if="forgotPasswordForm.fusername.$dirty && forgotPasswordForm.fusername.$invalid"
                       style="font-size: 14px"
                     >
-                      <span ng-if="forgotPasswordForm.username.$error.required">
+                      <span
+                        ng-if="forgotPasswordForm.fusername.$error.required"
+                      >
                         <i class="bi bi-exclamation-circle"></i> &nbsp; username
                         is required.
                       </span>
-                      <span ng-if="forgotPasswordForm.username.$error.username">
+                      <span
+                        ng-if="forgotPasswordForm.fusername.$error.fusername"
+                      >
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         username format.
                       </span>
@@ -270,7 +273,7 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         password format.
                       </span>
-                      <span ng-if="newPassword !== confirmNewPassword">
+                      <span ng-if="newPassword !=== confirmNewPassword">
                         <i class="bi bi-exclamation-circle"></i> &nbsp;
                         Passwords do not match.
                       </span>
@@ -284,21 +287,8 @@
                   </div>
                 </form>
 
-                <div
-                  class="d-flex justify-content-center align-items-center text-center"
-                >
-                  <a
-                    href="https://www.kiet.edu/disclaimers-and-policies"
-                    class="small text-muted"
-                    >Terms of use.</a
-                  >
-                  <br />
-                  &nbsp;&nbsp;
-                  <a
-                    href="https://tech.kiet.edu/privacy_policy/kietpariksha_privacy.html"
-                    class="small text-muted"
-                    >Privacy policy</a
-                  >
+                <div class="d-flex justify-content-center text-muted">
+                  <button class="btn" ng-click="showForm()">Go Back</button>
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.42.0.51:8000/");
+myApp.constant("apiUrl", "https://10.21.66.210:8000/");
 
 myApp.service("httpService", [
   "$http",
@@ -16,6 +16,22 @@ myApp.service("httpService", [
     this.post = function (url, data) {
       return $http
         .post(apiUrl + url, data, { withCredentials: true })
+        .finally(() => {
+          hideLoader();
+        });
+    };
+
+    this.put = function (url, data) {
+      return $http
+        .put(apiUrl + url, data, { withCredentials: true })
+        .finally(() => {
+          hideLoader();
+        });
+    };
+
+    this.delete = function (url, params) {
+      return $http
+        .delete(apiUrl + url, { params: params, withCredentials: true })
         .finally(() => {
           hideLoader();
         });
@@ -72,4 +88,10 @@ hideLoader = () => {
 validatePass = (pass) => {
   var passPatern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return passPatern.test(pass);
+};
+
+hideModal = (modalId) => {
+  const getModal = document.getElementById(modalId);
+  const modal = bootstrap.Modal.getInstance(getModal);
+  modal.hide();
 };

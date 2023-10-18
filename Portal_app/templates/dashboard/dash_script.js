@@ -4,11 +4,11 @@ myApp.controller("dbController", [
   "$state",
   function ($scope, httpService, $state) {
     display = () => {
-      // showLoader();
+      showLoader();
       httpService
         .get("educore/sidebar/")
-        .then((response) => {
-          panelData = response.data;
+        .then((r) => {
+          panelData = r.data;
 
           if (panelData) {
             $scope.panelData = panelData;
@@ -16,8 +16,8 @@ myApp.controller("dbController", [
 
           console.log($scope.panelData);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          console.log(e);
         });
     };
 
@@ -25,19 +25,19 @@ myApp.controller("dbController", [
 
     $scope.stateChange = function (stateName) {
       $state.go(stateName);
-      console.log(stateName)
     };
 
     $scope.logout = function () {
-      // showLoader();
+      showLoader();
       httpService
         .get("eduadmin/logout/")
-        .then((response) => {
+        .then((r) => {
           $state.go("login");
-          console.log(response);
+          console.log(r);
+          alertify.success("logged out succesfully!!");
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          console.log(e);
         });
     };
   },
