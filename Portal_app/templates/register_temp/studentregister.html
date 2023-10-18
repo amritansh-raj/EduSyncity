@@ -357,12 +357,59 @@
                       <option value="" disabled>Select Years</option>
                       <option
                         ng-repeat="year in years"
-                        value="{{ year.id }}"
+                        value="{{ year }}"
                       >
                         {{ year }}
                       </option>
                     </select>
                       <label for="floatingSelect">Year</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <div class="form-floating">
+                      <select
+                      class="form-select"
+                      id="departmentDropdown"
+                      ng-model="selectedGender"
+                      ng-change="selctedGender(selectedgender)"
+                      aria-label="Floating label select example"
+                    >
+                      <option value="" disabled>Select Gender</option>
+                      <option
+                        ng-repeat=" gender in genders"
+                        value="{{ gender }}"
+                      >
+                        {{ gender.gender }}
+                      </option>
+                    </select>
+                      <label for="floatingSelect">Gender</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <div class="form-floating">
+                      <select
+                      class="form-select"
+                      id="yearDropdown"
+                      ng-model="selectedReligion"
+                      ng-change="selctedReligion(selectedreligion)"
+                      aria-label="Floating label select example"
+                    >
+                      <option value="" disabled>Select Religion</option>
+                      <option
+                        ng-repeat="religion in religions"
+                        value="{{ religion }}"
+                      >
+                        {{ religion }}
+                      </option>
+                    </select>
+                      <label for="floatingSelect">Religion</label>
                     </div>
                   </div>
                 </div>

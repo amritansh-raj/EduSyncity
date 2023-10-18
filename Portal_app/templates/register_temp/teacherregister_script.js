@@ -25,7 +25,8 @@ myApp.controller("teacherregisterController", [
         address: $scope.address,
         phone: $scope.phone,
         qualification:$scope.qualification,
-        id: $scope.selectedYear,
+        year: $scope.selectedYear,
+
       };
 
       console.log(sendData);
@@ -58,6 +59,35 @@ myApp.controller("teacherregisterController", [
       .catch((error) => {
         console.log(error);
       });
+      httpService
+      .get("educore/courses/")
+      .then((response) => {
+        courses = response.data;
+
+        if (courses) {
+          $scope.courses = courses;
+        }
+
+        console.log(courses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      httpService
+      .get("educore/courses/")
+      .then((response) => {
+        courses = response.data;
+
+        if (courses) {
+          $scope.courses = courses;
+        }
+
+        console.log(courses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
 
     $scope.selctedCourse = (course) => {
       httpService
@@ -88,25 +118,13 @@ myApp.controller("teacherregisterController", [
         .catch((error) => {
           console.log(error);
         });
-        // httpService
-        // .get("educore/subjects/", { department_id: department },{ course_id: course},{ year: year})
-        // .then((response) => {
-        //   subjects = response.data;
-
-        //   if (subjects) {
-        //     $scope.subjects = subjects;
-        //   }
-
-        //   console.log($scope.subjects);
-        // })
-        // .catch((error) => {
-        //   console.log(error);
-        // });
     };
     
-    $scope.selctedYear = (year,course,department) => {
+    $scope.selctedYear = (year,department,course) => {
+      console.log("sadad1");
+      console.log(year,department,course)
       httpService
-        .get("educore/subjects/", { year : year },{ department_id: department },{ course_id: course})
+        .get("educore/subjects/", { year : year , department_id: department.id ,course_id: course})
         .then((response) => {
           subjects = response.data;
 

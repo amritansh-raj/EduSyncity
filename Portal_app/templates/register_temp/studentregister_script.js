@@ -29,13 +29,14 @@ myApp.controller("studentregisterController", [
         course: $scope.selectedcourse,
         department: $scope.selectedDepartment,
         year: $scope.selectedYear,
-        gender:$scope.gender
+        gender:$scope.selectedGender,
+        religion:$scope.selectedReligion,
       };
 
       console.log(sendData);
 
       httpService
-        .post("", sendData)
+        .post("eduadmin/register_student", sendData)
         .then((response) => {
           var register = response.data;
           console.log(register);
@@ -62,6 +63,35 @@ myApp.controller("studentregisterController", [
       .catch((error) => {
         console.log(error);
       });
+      httpService
+      .get("educore/religions/")
+      .then((response) => {
+        religions = response.data;
+
+        if (courses) {
+          $scope.religions = religions;
+        }
+
+        console.log(religions);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      httpService
+      .get("educore/gender/")
+      .then((response) => {
+        genders = response.data;
+
+        if (courses) {
+          $scope.genders = genders;
+        }
+
+        console.log(genders);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
 
     $scope.selctedCourse = (course) => {
       httpService
