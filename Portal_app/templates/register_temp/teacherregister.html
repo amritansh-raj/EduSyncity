@@ -88,15 +88,15 @@
                         class="form-select"
                         id="departmentDropdown"
                         ng-model="selectedTitle"
-                        ng-change="selctedTitle(selectedtitle)"
+                       
                         aria-label="Floating label select example"
                       >
                         <option value="" disabled>Select Title</option>
                         <option
                           ng-repeat=" title in titles"
-                          value="{{ title }}"
+                          value="{{ title.id }}"
                         >
-                          {{ title.title}}
+                          {{ title.name}}
                         </option>
                       </select>
                         <label for="floatingSelect">Title</label>
@@ -177,7 +177,7 @@
                         class="form-control form-control-lg"
                         ng-model="phone"
                         name="phone"
-                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                        pattern="[6789][0-9]{9}"
                         placeholder="Phone Number"
                         required
                       />
@@ -193,8 +193,8 @@
                         number is required.
                       </span>
                       <span ng-if="registerForm.phone.$error.pattern">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp;
-                        Invalid phonenumber format.
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        phonenumber format.
                       </span>
                       </div>
                     </div>
@@ -237,16 +237,16 @@
                         <select
                       class="form-select"
                       id="yearDropdown"
-                      ng-model="selectedReligion"
-                      ng-change="selctedReligion(selectedreligion)"
+                      ng-model="selectedGender"
+                     
                       aria-label="Floating label select example"
                     >
-                      <option value="" disabled>Select Religion</option>
+                      <option value="" disabled>Select Gender</option>
                       <option
-                        ng-repeat="religion in religions"
-                        value="{{ religion }}"
+                        ng-repeat="gender in genders"
+                        value="{{ gender.id }}"
                       >
-                        {{ religion }}
+                        {{ gender.name }}
                       </option>
                     </select>
                       <label for="floatingSelect">Religion</label>
@@ -354,7 +354,7 @@
                           <option value="" disabled>Select Departments</option>
                           <option
                             ng-repeat="department in departments"
-                            value="{{ department.id }}"
+                            value="{{ department.department_id }}"
                           >
                             {{ department.department__name }}
                           </option>
@@ -400,9 +400,9 @@
                           <option value="" disabled>Select Subjects</option>
                           <option
                             ng-repeat="subject in subjects"
-                            value="{{ subject.id}}"
+                            value="{{subject.id}}"
                           >
-                            {{ subject.subject__name }}
+                            {{ subject.subject_name}}
                           </option>
                         </select> 
                          <label for="floatingSelect">Subjects</label>

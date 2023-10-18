@@ -335,7 +335,7 @@
                       <option value="" disabled>Select Departments</option>
                       <option
                         ng-repeat="department in departments"
-                        value="{{ department.id }}"
+                        value="{{ department }}"
                       >
                         {{ department.department__name }}
                       </option>
@@ -384,7 +384,7 @@
                         ng-repeat=" gender in genders"
                         value="{{ gender }}"
                       >
-                        {{ gender.gender }}
+                        {{ gender.name }}
                       </option>
                     </select>
                       <label for="floatingSelect">Gender</label>
@@ -406,7 +406,7 @@
                         ng-repeat="religion in religions"
                         value="{{ religion }}"
                       >
-                        {{ religion }}
+                        {{ religion.name }}
                       </option>
                     </select>
                       <label for="floatingSelect">Religion</label>

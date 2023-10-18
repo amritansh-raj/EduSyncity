@@ -36,7 +36,9 @@ myApp.controller("studentregisterController", [
       console.log(sendData);
 
       httpService
-        .post("eduadmin/register_student", sendData)
+        .post("eduadmin/register_student", sendData,{
+        headers: { 'Content-Type': undefined },
+        withCredentials: true})
         .then((response) => {
           var register = response.data;
           console.log(register);
@@ -64,7 +66,7 @@ myApp.controller("studentregisterController", [
         console.log(error);
       });
       httpService
-      .get("educore/religions/")
+      .get("educore/religion/")
       .then((response) => {
         religions = response.data;
 
