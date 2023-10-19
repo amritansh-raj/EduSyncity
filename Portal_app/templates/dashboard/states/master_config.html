@@ -6,8 +6,8 @@
           <label class="input-group-text" for="courses">Parents</label>
           <select
             class="form-select criteria-btn"
-            ng-change="getChild(selectedCriteria)"
-            ng-model="selectedCriteria"
+            ng-change="getChild(selectedParent)"
+            ng-model="selectedParent"
             ng-options="option.id as option.name for option in options"
           >
             <option value="" selected>Select Parent</option>
@@ -46,6 +46,7 @@
               </div>
               <div class="card mx-3 my-4">
                 <button
+                  id="addBtn"
                   class="btn card-body text-center"
                   ng-click="showInput()"
                   ng-if="!adding"
@@ -70,7 +71,7 @@
                         class="btn btn-outline-secondary custom-button"
                         type="submit"
                       >
-                        Button
+                        Add
                       </button>
                     </div>
                   </form>
@@ -110,7 +111,7 @@
               type="text"
               class="form-control"
               ng-model="childName"
-              placeholder="{{selectedChild.department__name}}"
+              placeholder="{{selectedChild.name}}"
               aria-label="Example text with two button addons"
               id="editInputField"
               disabled
