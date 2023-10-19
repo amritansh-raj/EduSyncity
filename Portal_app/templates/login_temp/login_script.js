@@ -7,7 +7,7 @@ myApp.controller("loginController", [
       showLoader();
       username = $scope.username;
       pass = $scope.password;
-     
+
       var postData = {
         username: username,
         password: pass,

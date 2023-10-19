@@ -36,7 +36,7 @@ myApp.controller("studentregisterController", [
       console.log(sendData);
 
       httpService
-        .post("eduadmin/register_student", sendData,{
+        .post("eduadmin/register_student/", sendData,{
         headers: { 'Content-Type': undefined },
         withCredentials: true})
         .then((response) => {
@@ -70,7 +70,7 @@ myApp.controller("studentregisterController", [
       .then((response) => {
         religions = response.data;
 
-        if (courses) {
+        if (religions) {
           $scope.religions = religions;
         }
 
@@ -84,7 +84,7 @@ myApp.controller("studentregisterController", [
       .then((response) => {
         genders = response.data;
 
-        if (courses) {
+        if (genders) {
           $scope.genders = genders;
         }
 

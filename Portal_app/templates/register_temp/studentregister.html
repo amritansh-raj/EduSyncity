@@ -335,7 +335,7 @@
                       <option value="" disabled>Select Departments</option>
                       <option
                         ng-repeat="department in departments"
-                        value="{{ department }}"
+                        value="{{department.department_id}}"
                       >
                         {{ department.department__name }}
                       </option>
@@ -351,7 +351,7 @@
                       class="form-select"
                       id="yearDropdown"
                       ng-model="selectedYear"
-                      ng-change="selctedCourse(selectedcourse)"
+                     
                       aria-label="Floating label select example"
                     >
                       <option value="" disabled>Select Years</option>
@@ -376,13 +376,13 @@
                       class="form-select"
                       id="departmentDropdown"
                       ng-model="selectedGender"
-                      ng-change="selctedGender(selectedgender)"
+                     
                       aria-label="Floating label select example"
                     >
                       <option value="" disabled>Select Gender</option>
                       <option
                         ng-repeat=" gender in genders"
-                        value="{{ gender }}"
+                        value="{{ gender.id }}"
                       >
                         {{ gender.name }}
                       </option>
@@ -398,13 +398,13 @@
                       class="form-select"
                       id="yearDropdown"
                       ng-model="selectedReligion"
-                      ng-change="selctedReligion(selectedreligion)"
+                     
                       aria-label="Floating label select example"
                     >
                       <option value="" disabled>Select Religion</option>
                       <option
                         ng-repeat="religion in religions"
-                        value="{{ religion }}"
+                        value="{{ religion.id }}"
                       >
                         {{ religion.name }}
                       </option>

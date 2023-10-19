@@ -24,19 +24,18 @@ myApp.controller("teacherregisterController", [
         age: $scope.age,
         address: $scope.address,
         contact: $scope.phone,
-        qualification:$scope.qualification,
+        qualification: $scope.qualification,
         year: $scope.selectedYear,
-        course:$scope.selectedcourse,
+        course: $scope.selectedcourse,
         department: $scope.selectedDepartment,
-        subject:$scope.selectedSubject,
-        title:$scope.selectedTitle,
-        gender:$scope.selectedGender,
+        subject: $scope.selectedSubject,
+        title: $scope.selectedTitle,
+        gender: $scope.selectedGender,
       };
 
       console.log(sendData);
-
       httpService
-        .post("eduadmin/register_faculty/", sendData,{
+        .post("eduadmin/register_faculty/", sendData, {
           headers: { 'Content-Type': undefined },
           withCredentials: true
         })
@@ -66,7 +65,7 @@ myApp.controller("teacherregisterController", [
       .catch((error) => {
         console.log(error);
       });
-      httpService
+    httpService
       .get("educore/title/")
       .then((response) => {
         titles = response.data;
@@ -80,10 +79,10 @@ myApp.controller("teacherregisterController", [
       .catch((error) => {
         console.log(error);
       });
-      httpService
+    httpService
       .get("educore/gender/")
       .then((response) => {
-        genders= response.data;
+        genders = response.data;
 
         if (genders) {
           $scope.genders = genders;
@@ -94,7 +93,7 @@ myApp.controller("teacherregisterController", [
       .catch((error) => {
         console.log(error);
       });
-      
+
 
     $scope.selctedCourse = (course) => {
       httpService
@@ -111,7 +110,7 @@ myApp.controller("teacherregisterController", [
         .catch((error) => {
           console.log(error);
         });
-        httpService
+      httpService
         .get("educore/years/", { course_id: course })
         .then((response) => {
           years = response.data;
@@ -126,19 +125,16 @@ myApp.controller("teacherregisterController", [
           console.log(error);
         });
     };
-    
-    $scope.selctedYear = (year,department,course) => {
-      
-      console.log(year,department,course)
+
+    $scope.selctedYear = (year, department, course) => {
+      console.log(year, department, course)
       httpService
-        .get("educore/subjects/", { year : year , department_id: department ,course_id: course})
+        .get("educore/subjects/", { year: year, department_id: department, course_id: course })
         .then((response) => {
           subjects = response.data;
-
           if (subjects) {
             $scope.subjects = subjects;
           }
-
           console.log($scope.subjects);
         })
         .catch((error) => {
