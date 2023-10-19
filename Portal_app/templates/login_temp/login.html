@@ -4,14 +4,14 @@
       <div class="col col-xl-8">
         <div class="card" style="border-radius: 1rem">
           <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <div class="d-flex h-100">
-                <img
-                  src="/Portal_app/media/login.svg"
-                  alt="login form"
-                  class="img-fluid"
-                />
-              </div>
+            <div
+              class="col-md-6 col-lg-5 d-none d-md-block d-flex justify-content-center align-items-center"
+            >
+              <img
+                src="/Portal_app/media/login.svg"
+                alt="login form"
+                class="img-fluid mt-5"
+              />
             </div>
 
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -70,6 +70,7 @@
                         ng-model="password"
                         name="password"
                         placeholder="password"
+                        pattern="(?=.*\d)(?=.*[$@$!%*#?&_^])(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         required
                       />
                       <label for="password">Password</label>
@@ -84,7 +85,7 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Password
                         is required.
                       </span>
-                      <span ng-if="loginForm.password.$error.password">
+                      <span ng-if="loginForm.password.$error.pattern">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         password format.
                       </span>
@@ -181,6 +182,7 @@
                         ng-model="oldPassword"
                         name="oldPassword"
                         placeholder="old password"
+                        pattern="(?=.*\d)(?=.*[$@$!%*#?&_^])(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         required
                       />
                       <label for="old-password">Old Password</label>
@@ -198,7 +200,7 @@
                         Password is required.
                       </span>
                       <span
-                        ng-if="forgotPasswordForm.oldPassword.$error.password"
+                        ng-if="forgotPasswordForm.oldPassword.$error.pattern"
                       >
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         password format.
@@ -215,29 +217,26 @@
                         ng-model="newPassword"
                         name="newPassword"
                         placeholder="new password"
+                        pattern="(?=.*\d)(?=.*[$@$!%*#?&_^])(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         required
                       />
                       <label for="new-password">New Password</label>
                     </div>
-
                     <div
-                      class="text-danger"
-                      ng-if="forgotPasswordForm.newPassword.$dirty && forgotPasswordForm.newPassword.$invalid"
-                      style="font-size: 14px"
-                    >
-                      <span
-                        ng-if="forgotPasswordForm.newPassword.$error.required"
-                      >
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; New
-                        Password is required.
-                      </span>
-                      <span
-                        ng-if="forgotPasswordForm.newPassword.$error.password"
-                      >
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                        password format.
-                      </span>
-                    </div>
+                    class="text-danger"
+                    ng-if="forgotPasswordForm.newPassword.$dirty && forgotPasswordForm.newPassword.$invalid"
+                    style="font-size: 12px"
+                  >
+                    <span ng-if="forgotPasswordForm.newPassword.$error.required">
+                      <i class="bi bi-exclamation-circle"></i> &nbsp; Password
+                      is required.
+                    </span>
+                    <span ng-if="forgotPasswordForm.newPassword.$error.pattern">
+                      <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                      password format.
+                    </span>
+                  </div>
+                   
                   </div>
 
                   <div class="form-outline mb-4">
@@ -249,6 +248,7 @@
                         ng-model="confirmNewPassword"
                         name="confirmNewPassword"
                         placeholder="confirm new password"
+                        pattern="(?=.*\d)(?=.*[$@$!%*#?&_^])(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         required
                       />
                       <label for="confirm-new-password"
@@ -258,7 +258,7 @@
 
                     <div
                       class="text-danger"
-                      ng-if="forgotPasswordForm.confirmNewPassword.$dirty && forgotPasswordForm.confirmNewPassword.$invalid"
+                     
                       style="font-size: 14px"
                     >
                       <span
@@ -267,13 +267,13 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Confirm
                         New Password is required.
                       </span>
-                      <span
-                        ng-if="forgotPasswordForm.confirmNewPassword.$error.password"
+                      <!-- <span
+                        ng-if="forgotPasswordForm.confirmNewPassword.$error.pattern"
                       >
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         password format.
-                      </span>
-                      <span ng-if="newPassword !=== confirmNewPassword">
+                      </span> -->
+                      <span ng-if=" forgotPasswordForm.confirmNewPassword.$viewValue != '' && (forgotPasswordForm.newPassword.$viewValue != forgotPasswordForm.confirmNewPassword.$viewValue)" >
                         <i class="bi bi-exclamation-circle"></i> &nbsp;
                         Passwords do not match.
                       </span>
