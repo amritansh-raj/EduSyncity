@@ -20,17 +20,14 @@ myApp.controller("loginController", [
         $scope.loginForm.password.$setValidity("password", true);
         httpService
           .post("eduadmin/login/", postData)
-          .then((response) => {
-            console.log(response);
-            role = response.data[0].role;
-            if (role === 1) {
-              $state.go("dashBoard");
-            }
+          .then((r) => {
+            console.log(r);
+            $state.go("dashBoard");
             alertify.set("notifier", "position", "top-right");
             alertify.success("logged in succesfully!!");
           })
-          .catch((error) => {
-            console.error(error);
+          .catch((e) => {
+            console.e(e);
           });
       }
     };
@@ -42,20 +39,22 @@ myApp.controller("loginController", [
     $scope.changePassword = function () {
       var data = {
         username: $scope.fusername,
-        oldPassword: $scope.oldPassword,
-        newPassword: $scope.newPassword,
-        confirmNewPassword: $scope.confirmNewPassword,
+        old_password: $scope.oldPassword,
+        new_password: $scope.newPassword,
       };
 
       console.log(data);
 
       httpService
-        .post("", data)
+        .post("eduadmin/forgot_password/", data)
         .then((r) => {
           console.log(r);
+          $scope.showForm();
+          alertify.success(r.data.message);
         })
         .catch((e) => {
           console.log(e);
+          alertify.e(e.data.message);
         });
     };
   },

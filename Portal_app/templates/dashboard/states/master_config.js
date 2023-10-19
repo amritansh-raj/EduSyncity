@@ -14,8 +14,6 @@ myApp.controller("masterController", [
           if (options) {
             $scope.options = options;
           }
-
-          console.log($scope.options);
         })
         .catch((e) => {
           console.log(e);
@@ -23,6 +21,8 @@ myApp.controller("masterController", [
     };
 
     $scope.getChild = (id) => {
+      $scope.parentId = id;
+      console.log($scope.parentId);
       showLoader();
       httpService
         .get("educore/childs/", { parent_id: id })
@@ -39,6 +39,7 @@ myApp.controller("masterController", [
           console.log(e);
         });
     };
+
     display();
 
     $scope.showInput = () => {
@@ -46,13 +47,23 @@ myApp.controller("masterController", [
     };
 
     $scope.addChild = () => {
-      var child = document.querySelector("input[name=child]").value;
-      console.log(child);
-
-      $scope.adding = false;
+      var childName = document.querySelector("input[name=child]").value;
+      httpService
+        .post("eduadmin/dropdown/", { id: $scope.parentId, name: childName })
+        .then((r) => {
+          $scope.getChild($scope.parentId);
+          $scope.adding = false;
+          console.log(r);
+          alertify.success(r.data.message);
+        })
+        .catch((e) => {
+          console.log(e);
+          alertify.error(e.data.message);
+        });
     };
 
     $scope.openModal = (child) => {
+      console.log(child);
       $scope.selectedChild = child;
     };
 
@@ -78,9 +89,12 @@ myApp.controller("masterController", [
         .put("eduadmin/dropdown/", childData)
         .then((r) => {
           console.log(r);
+          $scope.getChild($scope.parentId);
+          alertify.success(r.data.message);
         })
         .catch((e) => {
           console.log(e);
+          alertify.error(e.data.message);
         });
     };
 
@@ -91,10 +105,13 @@ myApp.controller("masterController", [
         .delete("eduadmin/dropdown/", { id: selectedChild.id })
         .then((r) => {
           console.log(r);
+          $scope.getChild($scope.parentId);
           hideModal(String(modalId));
+          alertify.success(r.data.message);
         })
         .catch((e) => {
           console.log(e);
+          alertify.error(e.data.message);
         });
     };
   },

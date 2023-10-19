@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.67.186:8000/");
+myApp.constant("apiUrl", "https://10.42.0.182:8000/");
 
 myApp.service("httpService", [
   "$http",
@@ -40,7 +40,7 @@ myApp.service("httpService", [
 ]);
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise("EduSyncity/login");
+  $urlRouterProvider.otherwise("/EduSyncity/login");
 
   $stateProvider
     .state("login", {
@@ -58,16 +58,17 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "/Portal_app/templates/dashboard/dashboard.html",
       controller: "dbController",
     })
-    .state("dashBoard.masterConfig", {
-      url: "/EduSyncity/config",
-      templateUrl: "/Portal_app/templates/dashboard/states/master_config.html",
-      controller: "masterController",
-    })
     .state("dashBoard.studentregister", {
       url: "/EduSyncity/studentregister",
       templateUrl: "/Portal_app/templates/register_temp/studentregister.html",
       controller: "studentregisterController",
     })
+    .state("dashBoard.masterConfig", {
+      url: "/EduSyncity/config",
+      templateUrl: "/Portal_app/templates/dashboard/states/master_config.html",
+      controller: "masterController",
+    })
+
     .state("dashBoard.teacherregister", {
       url: "/EduSyncity/teacherregister",
       templateUrl: "/Portal_app/templates/register_temp/teacherregister.html",

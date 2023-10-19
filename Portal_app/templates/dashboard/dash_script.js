@@ -3,6 +3,16 @@ myApp.controller("dbController", [
   "httpService",
   "$state",
   function ($scope, httpService, $state) {
+    httpService
+      .get("educore/loggedin/")
+      .then((r) => {
+        $scope.username = r.data.username;
+        $scope.letter = $scope.username.charAt(0).toUpperCase();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     display = () => {
       showLoader();
       httpService
