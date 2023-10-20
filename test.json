@@ -1,27 +1,30 @@
 [
   {
-    "pk": 1,
-    "name": "Master Configuration",
-    "icon": "bi bi-pentagon",
-    "type": "button",
-    "state": "dashBoard.masterConfig",
-    "child": [],
-    "$$hashKey": "object:6"
+    "q": "question",
+    "marks": "5",
+    "type": "subjective"
   },
   {
-    "pk": 11,
-    "name": "Register As",
-    "icon": "bi bi-person-fill-add",
-    "type": "dropdown",
-    "state": "register",
-    "child": [
+    "q": "question",
+    "marks": "5",
+    "type": "MCQ",
+    "options": [
       {
-        "name": "Faculty"
+        "option": "value",
+        "correct": false
       },
       {
-        "name": "Student"
+        "option": "value",
+        "correct": false
+      },
+      {
+        "option": "value",
+        "correct": true
+      },
+      {
+        "option": "value",
+        "correct": false
       }
-    ],
-    "$$hashKey": "object:7"
+    ]
   }
 ]

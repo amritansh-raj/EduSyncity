@@ -48,11 +48,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "/Portal_app/templates/login_temp/login.html",
       controller: "loginController",
     })
-    .state("quizz", {
-      url: "/EduSyncity/quizz",
-      templateUrl: "/Portal_app/templates/quizz_temp/quizz.html",
-      controller: "quizzController",
-    })
     .state("dashBoard", {
       url: "/EduSyncity/dashBoard",
       templateUrl: "/Portal_app/templates/dashboard/dashboard.html",
@@ -73,6 +68,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       url: "/EduSyncity/teacherregister",
       templateUrl: "/Portal_app/templates/register_temp/teacherregister.html",
       controller: "teacherregisterController",
+    })
+    .state("dashBoard.qPaper", {
+      url: "/EduSyncity/qPaper",
+      templateUrl: "/Portal_app/templates/qPaper_temp/qPaper.html",
+      controller: "qPaperController",
     });
 });
 
