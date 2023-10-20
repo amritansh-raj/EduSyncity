@@ -5,17 +5,6 @@ myApp.controller("studentregisterController", [
   function ($scope, httpService, $state) {
     $scope.register = function () {
       showLoader();
-      // pass = $scope.password;
-      // console.log(pass);
-
-      // if (!validatePass(pass)) {
-      //   $scope.registerForm.password.$setValidity("password", false);
-      //   hideLoader();
-      // } else {
-      //   $scope.registerForm.password.$setValidity("password", true);
-      //   hideLoader();
-      // }
-
       var sendData = {
         first_name: $scope.Firstname,
         last_name: $scope.lastname,

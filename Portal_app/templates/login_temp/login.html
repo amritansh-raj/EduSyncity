@@ -40,6 +40,7 @@
                         ng-model="username"
                         name="username"
                         placeholder="username"
+                        
                         required
                       />
                       <label for="username">Username or Email</label>
@@ -54,10 +55,11 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; username
                         is required.
                       </span>
-                      <span ng-if="loginForm.username.$error.username">
+                      <!-- <span ng-if="loginForm.username.$error.pattern">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                        username format.
-                      </span>
+                        email format.
+                      </span> -->
+                      
                     </div>
                   </div>
 
