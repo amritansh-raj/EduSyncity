@@ -1,0 +1,209 @@
+<div class="container-fluid h-100">
+  <div class="container pt-3 h-100">
+    <div class="col h-100">
+      <div
+        class="row-3 d-flex flex-column justify-content-center align-items-center"
+        style="background-color: #252f3e"
+      >
+        <h1 class="text-center text-white pt-3">KIET Group Of Institutions</h1>
+        <h4 class="text-center text-white pt-2 m-0">Subject</h4>
+
+        <div class="d-flex justify-content-between p-3 w-100">
+          <div class="input-group p-2 w-25">
+            <div class="row d-flex justify-content-start">
+              <div class="col-sm-2">
+                <label
+                  for="staticEmail text-white"
+                  class="col-form-label text-white"
+                  >M.M.</label
+                >
+              </div>
+              <div class="col-sm-2">
+                <input
+                  type="text"
+                  readonly
+                  class="form-control-plaintext text-white"
+                  id="staticEmail"
+                  value="60"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="input-group my-2 w-50">
+            <label class="input-group-text" for="courses">Exam</label>
+            <select
+              class="form-select criteria-btn"
+              ng-change="getChild(selectedParent)"
+              ng-model="selectedParent"
+              ng-options="option.id as option.name for option in options"
+            >
+              <option value="" selected>Select Exam</option>
+            </select>
+          </div>
+          <div class="input-group p-2 w-25">
+            <div class="row d-flex justify-content-end">
+              <div class="col-sm-2">
+                <label
+                  for="staticEmail text-white"
+                  class="col-form-label text-white"
+                  >Time</label
+                >
+              </div>
+              <div class="col-sm-2">
+                <input
+                  type="text"
+                  readonly
+                  class="form-control-plaintext text-white"
+                  id="staticEmail"
+                  value="60"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row-9 h-75 d-flex overflow-auto"
+        style="background-color: #252f3e"
+      >
+        <div class="container d-flex justify-content-center text-white">
+          <div class="col h-100 w-100">
+            <div class="row d-flex flex-row justify-content-around">
+              <div
+                class="d-flex flex-row justify-content-around"
+                ng-show="!subDisplay && !mcqDisplay"
+              >
+                <div class="d-flex justify-content-center">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                    ng-click="toggleSubDisplay()"
+                  >
+                    Add Subjective question
+                  </button>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                    ng-click="toggleMcqDisplay()"
+                  >
+                    Add Mcq
+                  </button>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary btn-lg">
+                    Right
+                  </button>
+                </div>
+              </div>
+              <div
+                class="d-flex flex-row justify-content-around"
+                ng-show="subDisplay"
+              >
+                <form ng-submit="addSubQ()">
+                  <input
+                    type="text"
+                    name="question"
+                    id="question"
+                    class="form-control"
+                    ng-model="question"
+                    placeholder="Q."
+                    required
+                  />
+                  <input
+                    type="number"
+                    name="marks"
+                    id="marks"
+                    class="form-control"
+                    ng-model="marks"
+                    placeholder="Max marks"
+                    min="1"
+                    required
+                  />
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+              </div>
+              <div
+                class="d-flex flex-row justify-content-around"
+                ng-show="mcqDisplay"
+              >
+                <form ng-submit="addMcqQ()">
+                  <input
+                    type="text"
+                    name="question"
+                    id="question"
+                    class="form-control"
+                    ng-model="question"
+                    placeholder="Q."
+                    required
+                  />
+                  <input
+                    type="number"
+                    name="marks"
+                    id="marks"
+                    class="form-control"
+                    ng-model="marks"
+                    placeholder="Max marks"
+                    min="1"
+                    required
+                  />
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+                <form ng-submit="addChoice()">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Choice"
+                      name="choice"
+                      ng-model="choice"
+                      required
+                    />
+                    <button class="btn btn-outline-secondary" type="submit">
+                      Button
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <h4 class="text-center text-white pt-2 m-0">Added questions</h4>
+              <table class="table table-responsive table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col">Index</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Max Marks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="question in questions">
+                    <td>{{$index + 1}}</td>
+                    <td>{{question.question}}</td>
+                    <td ng-if="question.type === 'multChoice'">
+                      <table class="table table-responsive">
+                        <thead>
+                          <th scope="col">Index</th>
+                          <th scope="col">Choices</th>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="choice in question.choices">
+                            <td scope="col">{{$index + 1}}</td>
+                            <td scope="col">{{choice.choice}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td>{{question.marks}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="questionpaper"></div>
+      </div>
+    </div>
+  </div>
+</div>
