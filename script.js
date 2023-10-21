@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.66.247:8000/");
+myApp.constant("apiUrl", "https://10.21.66.62:8000/");
 
 myApp.service("httpService", [
   "$http",
@@ -96,3 +96,13 @@ hideModal = (modalId) => {
   const modal = bootstrap.Modal.getInstance(getModal);
   modal.hide();
 };
+
+const date = new Date();
+
+const day = date.getDate();
+const month = date.getMonth() + 1;
+const year = date.getFullYear();
+
+const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
+  .toString()
+  .padStart(2, "0")}`;

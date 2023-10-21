@@ -1,32 +1,38 @@
-[
-  {
-    "question": "What is your name?",
-    "marks": 10,
-    "type": "subjective",
-    "$$hashKey": "object:13"
-  },
-  {
-    "question": "Your name is?",
-    "marks": 10,
-    "type": "multChoice",
-    "choices": [
-      {
-        "choice": "Amritansh",
-        "$$hashKey": "object:18"
-      },
-      {
-        "choice": "Sukriti",
-        "$$hashKey": "object:19"
-      },
-      {
-        "choice": "Nikhil",
-        "$$hashKey": "object:20"
-      },
-      {
-        "choice": "Swapnil",
-        "$$hashKey": "object:21"
-      }
-    ],
-    "$$hashKey": "object:15"
-  }
-]
+{
+  "questions": [
+    {
+      "question": "What is your name?",
+      "marks": 10,
+      "type": "subjective",
+      "$$hashKey": "object:13"
+    },
+    {
+      "question": "Your name is?",
+      "marks": 10,
+      "type": "multChoice",
+      "choices": [
+        {
+          "choice": "Amritansh",
+          "$$hashKey": "object:18"
+        },
+        {
+          "choice": "Sukriti",
+          "$$hashKey": "object:19"
+        },
+        {
+          "choice": "Nikhil",
+          "$$hashKey": "object:20"
+        },
+        {
+          "choice": "Swapnil",
+          "$$hashKey": "object:21"
+        }
+      ],
+      "$$hashKey": "object:15"
+    }
+  ],
+  "date": "2023-10-20",
+  "start_time": "11:01",
+  "subject": 1,
+  "exam_type": 65
+}

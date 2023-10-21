@@ -21,7 +21,6 @@ myApp.controller("loginController", [
         httpService
           .post("eduadmin/login/", postData)
           .then((r) => {
-            console.log(r);
             $state.go("dashBoard");
             alertify.set("notifier", "position", "top-right");
             alertify.success("logged in succesfully!!");
