@@ -28,6 +28,7 @@ myApp.controller("qPaperController", [
           console.log(r.data);
           $scope.maxMarks = r.data[0].marks__name;
           $scope.time = r.data[0].duration__name;
+          console.log($scope.time);
           $scope.hours = Math.floor($scope.time / 60);
           $scope.min = $scope.time % 60;
         })
@@ -117,7 +118,7 @@ myApp.controller("qPaperController", [
     };
 
     $scope.delChoice = (index) => {
-      $scope.selectedChoices.splice(index, 1)
+      $scope.selectedChoices.splice(index, 1);
     };
 
     $scope.createExam = () => {

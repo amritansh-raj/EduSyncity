@@ -42,18 +42,53 @@ myApp.controller("masterController", [
 
     display();
 
-    $scope.showInput = () => {
-      $scope.adding = true;
+    $scope.toggleParentForm = () => {
+      $scope.showParentForm = !$scope.showParentForm;
+    };
+
+    $scope.toggleAddChild = () => {
+      $scope.adding = !$scope.adding;
+    };
+
+    $scope.toggleAddParent = () => {
+      $scope.addParent = !$scope.addParent;
+    };
+
+    $scope.addParent = () => {
+      data = {
+        name: $scope.parent,
+        child: $scope.depth,
+      };
+
+      httpService
+        .post("educore/parents/", data)
+        .then((r) => {
+          console.log(r);
+          alertify.success(r.data.message);
+          display();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     };
 
     $scope.addChild = () => {
       var childName = document.querySelector("input[name=child]").value;
-      var editOn=document.querySelector("input[ng-model='myCheckbox.val1']").value;
-      var deleteOn=document.querySelector("input[ng-model='myCheckbox.val2']").value;
+      var editOn = document.querySelector(
+        "input[ng-model='myCheckbox.val1']"
+      ).value;
+      var deleteOn = document.querySelector(
+        "input[ng-model='myCheckbox.val2']"
+      ).value;
       console.log(editOn);
       console.log(deleteOn);
       httpService
-        .post("eduadmin/child/", { id: $scope.parentId, name: childName,delete:deleteOn ,edit:editOn})
+        .post("eduadmin/child/", {
+          id: $scope.parentId,
+          name: childName,
+          delete: deleteOn,
+          edit: editOn,
+        })
         .then((r) => {
           $scope.getChild($scope.parentId);
           $scope.adding = false;
@@ -71,9 +106,23 @@ myApp.controller("masterController", [
       $scope.selectedChild = child;
     };
 
+    $scope.openParentModal = (parent) => {
+      $scope.selectedParent = parent;
+    };
+
     $scope.edit = () => {
       $scope.editing = true;
       document.getElementById("editInputField").removeAttribute("disabled");
+    };
+
+    $scope.editParent = () => {
+      $scope.toggleAddParent();
+      document.getElementById("parentName").removeAttribute("disabled");
+    };
+
+    $scope.cancelEditParent = () => {
+      $scope.toggleAddParent();
+      document.getElementById("parentName").setAttribute("disabled", "");
     };
 
     $scope.notEditing = () => {
@@ -102,6 +151,14 @@ myApp.controller("masterController", [
         });
     };
 
+    $scope.saveParent = (selectedParent) => {
+      console.log(selectedParent);
+      parentDate = {
+        id: selectedParent.id,
+        // name 
+      };
+    };
+
     $scope.delete = (selectedChild, modalId) => {
       showLoader();
 
@@ -118,5 +175,7 @@ myApp.controller("masterController", [
           alertify.error(e.data.message);
         });
     };
+
+    $scope.delParent = (selectedParent, modalId) => {};
   },
 ]);

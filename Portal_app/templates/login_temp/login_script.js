@@ -13,6 +13,12 @@ myApp.controller("loginController", [
         password: pass,
       };
 
+      // if (!validateUsername(username) || !validateEmail(username)) {
+      //   alertify.error("Invalid username or email");
+      //   hideLoader();
+      // } else {
+      // }
+
       if (!validatePass(pass)) {
         $scope.loginForm.password.$setValidity("password", false);
         hideLoader();
@@ -26,7 +32,7 @@ myApp.controller("loginController", [
             alertify.success("logged in succesfully!!");
           })
           .catch((e) => {
-            console.e(e);
+            console.log(e);
           });
       }
     };

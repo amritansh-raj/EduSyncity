@@ -11,7 +11,7 @@
             >
               <h1
                 class="text-center mb-5 text-uppercase"
-                style="color: rgb(82, 12, 49) !important"
+                style="color: #1e2125 !important"
               >
                 Student registration form
               </h1>
@@ -80,33 +80,31 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <div class="input-group mb-3">
-                      <div class="form-floating">
-                        <input
-                          type="username"
-                          id="username"
-                          class="form-control form-control-lg"
-                          ng-model="username"
-                          name="username"
-                          placeholder="Username"
-                          required
-                        />
-                        <label for="username">Username </label>
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.username.$dirty && registerForm.username.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.username.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          username is required.
-                        </span>
-                        <span ng-if="registerForm.username.$error.username">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid username format.
-                        </span>
-                      </div>
+                    <div class="form-floating">
+                      <input
+                        type="username"
+                        id="username"
+                        class="form-control form-control-lg"
+                        ng-model="username"
+                        name="username"
+                        placeholder="Username"
+                        required
+                      />
+                      <label for="username">Username </label>
+                    </div>
+                    <div
+                      class="text-danger"
+                      ng-if="registerForm.username.$dirty && registerForm.username.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="registerForm.username.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; username
+                        is required.
+                      </span>
+                      <span ng-if="registerForm.username.$error.username">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        username format.
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -152,6 +150,7 @@
                         ng-model="age"
                         name="age"
                         placeholder="Age"
+                        min="17"
                         required
                       />
                       <label for="age">Age</label>
@@ -162,12 +161,11 @@
                       style="font-size: 14px"
                     >
                       <span ng-if="registerForm.age.$error.required">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp;age is
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;Age is
                         required.
                       </span>
-                      <span ng-if="registerForm.age.$error.age">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                        age format.
+                      <span ng-if="registerForm.age.$error.min">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Age should be greater than 16
                       </span>
                     </div>
                   </div>
@@ -193,12 +191,12 @@
                       style="font-size: 14px"
                     >
                       <span ng-if="registerForm.phone.$error.required">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; phone
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Phone
                         number is required.
                       </span>
                       <span ng-if="registerForm.phone.$error.pattern">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                        phonenumber format.
+                        phone number format.
                       </span>
                     </div>
                   </div>
@@ -228,7 +226,6 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; father's
                         name is required.
                       </span>
-                    
                     </div>
                   </div>
                 </div>
@@ -283,7 +280,6 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; address
                         is required.
                       </span>
-                      
                     </div>
                   </div>
                 </div>
@@ -291,21 +287,21 @@
                   <div class="form-outline">
                     <div class="form-floating">
                       <select
-                      class="form-select"
-                      id="coursesDropdown"
-                      ng-model="selectedcourse"
-                      ng-change="selctedCourse(selectedcourse)"
-                      aria-label="Floating label select example"
-                    >
-                      <option value="" disabled>Select Courses</option>
-                      <option
-                        ng-repeat="course in courses"
-                        value="{{course.id }}"
-                        style="color: black"
+                        class="form-select"
+                        id="coursesDropdown"
+                        ng-model="selectedcourse"
+                        ng-change="selctedCourse(selectedcourse)"
+                        aria-label="Floating label select example"
                       >
-                        {{course.name}}
-                      </option>
-                    </select>
+                        <option value="" disabled>Select Courses</option>
+                        <option
+                          ng-repeat="course in courses"
+                          value="{{course.id }}"
+                          style="color: black"
+                        >
+                          {{course.name}}
+                        </option>
+                      </select>
                       <label for="courses">Courses</label>
                     </div>
                   </div>
@@ -316,20 +312,20 @@
                   <div class="form-outline">
                     <div class="form-floating">
                       <select
-                      class="form-select"
-                      id="departmentDropdown"
-                      ng-model="selectedDepartment"
-                      ng-change="selctedCourse(selectedcourse)"
-                      aria-label="Floating label select example"
-                    >
-                      <option value="" disabled>Select Departments</option>
-                      <option
-                        ng-repeat="department in departments"
-                        value="{{department.department_id}}"
+                        class="form-select"
+                        id="departmentDropdown"
+                        ng-model="selectedDepartment"
+                        ng-change="selctedCourse(selectedcourse)"
+                        aria-label="Floating label select example"
                       >
-                        {{ department.department__name }}
-                      </option>
-                    </select>
+                        <option value="" disabled>Select Departments</option>
+                        <option
+                          ng-repeat="department in departments"
+                          value="{{department.department_id}}"
+                        >
+                          {{ department.department__name }}
+                        </option>
+                      </select>
                       <label for="floatingSelect">Departments</label>
                     </div>
                   </div>
@@ -338,20 +334,16 @@
                   <div class="form-outline">
                     <div class="form-floating">
                       <select
-                      class="form-select"
-                      id="yearDropdown"
-                      ng-model="selectedYear"
-                     
-                      aria-label="Floating label select example"
-                    >
-                      <option value="" disabled>Select Years</option>
-                      <option
-                        ng-repeat="year in years"
-                        value="{{ year }}"
+                        class="form-select"
+                        id="yearDropdown"
+                        ng-model="selectedYear"
+                        aria-label="Floating label select example"
                       >
-                        {{ year }}
-                      </option>
-                    </select>
+                        <option value="" disabled>Select Years</option>
+                        <option ng-repeat="year in years" value="{{ year }}">
+                          {{ year }}
+                        </option>
+                      </select>
                       <label for="floatingSelect">Year</label>
                     </div>
                   </div>
@@ -363,20 +355,19 @@
                   <div class="form-outline">
                     <div class="form-floating">
                       <select
-                      class="form-select"
-                      id="departmentDropdown"
-                      ng-model="selectedGender"
-                     
-                      aria-label="Floating label select example"
-                    >
-                      <option value="" disabled>Select Gender</option>
-                      <option
-                        ng-repeat=" gender in genders"
-                        value="{{ gender.id }}"
+                        class="form-select"
+                        id="departmentDropdown"
+                        ng-model="selectedGender"
+                        aria-label="Floating label select example"
                       >
-                        {{ gender.name }}
-                      </option>
-                    </select>
+                        <option value="" disabled>Select Gender</option>
+                        <option
+                          ng-repeat=" gender in genders"
+                          value="{{ gender.id }}"
+                        >
+                          {{ gender.name }}
+                        </option>
+                      </select>
                       <label for="floatingSelect">Gender</label>
                     </div>
                   </div>
@@ -385,26 +376,25 @@
                   <div class="form-outline">
                     <div class="form-floating">
                       <select
-                      class="form-select"
-                      id="yearDropdown"
-                      ng-model="selectedReligion"
-                     
-                      aria-label="Floating label select example"
-                    >
-                      <option value="" disabled>Select Religion</option>
-                      <option
-                        ng-repeat="religion in religions"
-                        value="{{ religion.id }}"
+                        class="form-select"
+                        id="yearDropdown"
+                        ng-model="selectedReligion"
+                        aria-label="Floating label select example"
                       >
-                        {{ religion.name }}
-                      </option>
-                    </select>
+                        <option value="" disabled>Select Religion</option>
+                        <option
+                          ng-repeat="religion in religions"
+                          value="{{ religion.id }}"
+                        >
+                          {{ religion.name }}
+                        </option>
+                      </select>
                       <label for="floatingSelect">Religion</label>
                     </div>
                   </div>
                 </div>
               </div>
-            
+
               <div class="row mt-4">
                 <div class="d-grid gap-2 col-5 mx-auto">
                   <button
