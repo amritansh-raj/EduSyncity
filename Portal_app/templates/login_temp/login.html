@@ -4,14 +4,14 @@
       <div class="col col-xl-8">
         <div class="card" style="border-radius: 1rem">
           <div class="row g-0">
-            <div
-              class="col-md-6 col-lg-5 d-none d-md-block d-flex justify-content-center align-items-center"
-            >
-              <img
-                src="/Portal_app/media/login.svg"
-                alt="login form"
-                class="img-fluid mt-5"
-              />
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <div class="d-flex h-100">
+                <img
+                  src="/Portal_app/media/login.svg"
+                  alt="login form"
+                  class="img-fluid"
+                />
+              </div>
             </div>
 
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -40,7 +40,6 @@
                         ng-model="username"
                         name="username"
                         placeholder="username"
-                        
                         required
                       />
                       <label for="username">Username or Email</label>
@@ -59,7 +58,6 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         email format.
                       </span> -->
-                      
                     </div>
                   </div>
 
@@ -225,20 +223,23 @@
                       <label for="new-password">New Password</label>
                     </div>
                     <div
-                    class="text-danger"
-                    ng-if="forgotPasswordForm.newPassword.$dirty && forgotPasswordForm.newPassword.$invalid"
-                    style="font-size: 12px"
-                  >
-                    <span ng-if="forgotPasswordForm.newPassword.$error.required">
-                      <i class="bi bi-exclamation-circle"></i> &nbsp; Password
-                      is required.
-                    </span>
-                    <span ng-if="forgotPasswordForm.newPassword.$error.pattern">
-                      <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                      password format.
-                    </span>
-                  </div>
-                   
+                      class="text-danger"
+                      ng-if="forgotPasswordForm.newPassword.$dirty && forgotPasswordForm.newPassword.$invalid"
+                      style="font-size: 12px"
+                    >
+                      <span
+                        ng-if="forgotPasswordForm.newPassword.$error.required"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Password
+                        is required.
+                      </span>
+                      <span
+                        ng-if="forgotPasswordForm.newPassword.$error.pattern"
+                      >
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        password format.
+                      </span>
+                    </div>
                   </div>
 
                   <div class="form-outline mb-4">
@@ -258,11 +259,7 @@
                       >
                     </div>
 
-                    <div
-                      class="text-danger"
-                     
-                      style="font-size: 14px"
-                    >
+                    <div class="text-danger" style="font-size: 14px">
                       <span
                         ng-if="forgotPasswordForm.confirmNewPassword.$error.required"
                       >
@@ -275,7 +272,9 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         password format.
                       </span> -->
-                      <span ng-if=" forgotPasswordForm.confirmNewPassword.$viewValue != '' && (forgotPasswordForm.newPassword.$viewValue != forgotPasswordForm.confirmNewPassword.$viewValue)" >
+                      <span
+                        ng-if=" forgotPasswordForm.confirmNewPassword.$viewValue != '' && (forgotPasswordForm.newPassword.$viewValue != forgotPasswordForm.confirmNewPassword.$viewValue)"
+                      >
                         <i class="bi bi-exclamation-circle"></i> &nbsp;
                         Passwords do not match.
                       </span>

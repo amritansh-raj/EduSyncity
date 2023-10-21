@@ -24,7 +24,7 @@
                   readonly
                   class="form-control-plaintext text-white"
                   id="staticEmail"
-                  value="60"
+                  value="{{maxMarks}}"
                 />
               </div>
             </div>
@@ -33,9 +33,9 @@
             <label class="input-group-text" for="courses">Exam</label>
             <select
               class="form-select criteria-btn"
-              ng-change="getChild(selectedParent)"
-              ng-model="selectedParent"
-              ng-options="option.id as option.name for option in options"
+              ng-change="getExam(selectedExam)"
+              ng-model="selectedExam"
+              ng-options="option.pk as option.name for option in exams"
             >
               <option value="" selected>Select Exam</option>
             </select>
@@ -49,13 +49,13 @@
                   >Time</label
                 >
               </div>
-              <div class="col-sm-2">
+              <div class="col-sm-5">
                 <input
                   type="text"
                   readonly
                   class="form-control-plaintext text-white"
                   id="staticEmail"
-                  value="60"
+                  value="{{hours}} hrs {{min}} min"
                 />
               </div>
             </div>
@@ -67,11 +67,11 @@
         style="background-color: #252f3e"
       >
         <div class="container d-flex justify-content-center text-white">
-          <div class="col h-100 w-100">
+          <div class="col h-100 w-100" ng-show="maxMarks">
             <div class="row d-flex flex-row justify-content-around">
               <div
                 class="d-flex flex-row justify-content-around"
-                ng-show="!subDisplay && !mcqDisplay"
+                ng-show="!subDisplay && !mcqDisplay && !dateDisplay"
               >
                 <div class="d-flex justify-content-center">
                   <button
@@ -92,8 +92,12 @@
                   </button>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary btn-lg">
-                    Right
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                    ng-click="toggleDateDisplay()"
+                  >
+                    Add date
                   </button>
                 </div>
               </div>
@@ -122,6 +126,13 @@
                     required
                   />
                   <button type="submit" class="btn btn-primary">Add</button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    ng-click="toggleSubDisplay()"
+                  >
+                    Cancel
+                  </button>
                 </form>
               </div>
               <div
@@ -149,6 +160,13 @@
                     required
                   />
                   <button type="submit" class="btn btn-primary">Add</button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    ng-click="toggleMcqDisplay()"
+                  >
+                    Cancel
+                  </button>
                 </form>
                 <form ng-submit="addChoice()">
                   <div class="input-group mb-3">
@@ -161,48 +179,218 @@
                       required
                     />
                     <button class="btn btn-outline-secondary" type="submit">
-                      Button
+                      Add choice
                     </button>
                   </div>
                 </form>
+                <ol class="list-group list-group-numbered">
+                  <li class="list-group-item" ng-repeat="choice in choices">
+                    {{choice.choice}}
+                  </li>
+                </ol>
+              </div>
+              <div
+                class="d-flex flex-row justify-content-around"
+                ng-show="dateDisplay"
+              >
+                <form ng-submit="addDateTime()">
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    class="form-control"
+                    ng-model="date"
+                    min="{{todaysDate}}"
+                    required
+                  />
+                  <input
+                    type="time"
+                    name="time"
+                    id="time"
+                    class="form-control"
+                    placeholder="hr:min"
+                    ng-model="time"
+                    required
+                  />
+                  <button type="submit" class="btn btn-primary">Add</button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    ng-click="toggleDateDisplay()"
+                  >
+                    Cancel
+                  </button>
+                </form>
               </div>
             </div>
-            <div class="row">
-              <h4 class="text-center text-white pt-2 m-0">Added questions</h4>
-              <table class="table table-responsive table-borderless">
+            <div class="row" ng-show="questions.length">
+              <h3 class="text-center text-white pt-2 mt-4">Added questions</h3>
+              <table class="table table-dark table-responsive mt-3">
                 <thead>
                   <tr>
-                    <th scope="col">Index</th>
-                    <th scope="col">Question</th>
-                    <th scope="col">Max Marks</th>
+                    <th scope="col text-center" style="width: 5%">Index</th>
+                    <th scope="col text-center" style="width: 50%">Question</th>
+                    <th scope="col text-center" style="width: 10%">
+                      Max Marks
+                    </th>
+                    <th scope="col text-center" style="width: 25%">Choices</th>
+                    <th scope="col" style="width: 5%">Edit</th>
+                    <th scope="col" style="width: 5%">Del</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="question in questions">
                     <td>{{$index + 1}}</td>
                     <td>{{question.question}}</td>
-                    <td ng-if="question.type === 'multChoice'">
-                      <table class="table table-responsive">
-                        <thead>
-                          <th scope="col">Index</th>
-                          <th scope="col">Choices</th>
-                        </thead>
+                    <td>{{question.marks}}</td>
+                    <td class="p-0">
+                      <table
+                        class="table table-dark table-responsive m-0"
+                        ng-if="question.type === 'multChoice'"
+                      >
                         <tbody>
                           <tr ng-repeat="choice in question.choices">
-                            <td scope="col">{{$index + 1}}</td>
                             <td scope="col">{{choice.choice}}</td>
                           </tr>
                         </tbody>
                       </table>
                     </td>
-                    <td>{{question.marks}}</td>
+                    <td>
+                      <button
+                        class="btn"
+                        type="button"
+                        ng-click="openModal(question, $index)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                      >
+                        <i class="bi bi-pencil-square text-white"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn" type="button" ng-click="delQ($index)">
+                        <i class="bi bi-trash text-white"></i>
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
+            <div class="row" ng-show="questions.length">
+              <div class="d-grid gap-2">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  ng-click="createExam()"
+                >
+                  Submit paper
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="questionpaper"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="editModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editModalLabel">Edit question</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="editQ()" id="editFrom">
+          <div
+            class="input-group mb-3"
+            ng-show="selectedOption.type === 'subjective'"
+          >
+            <span class="input-group-text">Question</span>
+            <input
+              type="text"
+              name="question"
+              id="question"
+              class="form-control"
+              ng-model="selectedQ"
+              required
+            />
+            <span class="input-group-text">Marks</span>
+            <input
+              type="number"
+              name="marks"
+              id="marks"
+              class="form-control w-25"
+              ng-model="selectedM"
+              min="1"
+              required
+            />
+          </div>
+          <div
+            class="input-group mb-3"
+            ng-show="selectedOption.type === 'multChoice'"
+          >
+            <span class="input-group-text"
+              ><i class="bi bi-question-circle"></i
+            ></span>
+            <input
+              type="text"
+              name="question"
+              id="question"
+              class="form-control"
+              ng-model="selectedQ"
+              required
+            />
+            <span class="input-group-text">@</span>
+            <input
+              type="number"
+              name="marks"
+              id="marks"
+              class="form-control w-25"
+              ng-model="selectedM"
+              min="1"
+              required
+            />
+            <div
+              class="input-group"
+              ng-repeat="choices in selectedOption.choices"
+            >
+              <input
+                type="text"
+                name="question"
+                id="question"
+                class="form-control"
+                ng-model="choices.choice"
+                required
+              />
+              <button ng-click="delChoice($index)">Del</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          form="editFrom"
+          data-bs-dismiss="modal"
+        >
+          Edit
+        </button>
       </div>
     </div>
   </div>
