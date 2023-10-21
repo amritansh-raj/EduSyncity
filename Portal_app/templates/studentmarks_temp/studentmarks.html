@@ -1,0 +1,52 @@
+<div class="container-fluid h-100">
+  <div class="container pt-3 h-100">
+    <div class="col h-100">
+      <div
+        class="row-3 h-100 d-flex flex-column "
+        style="background-color: #252f3e"
+      >
+        <h1 class="text-center text-white pt-3">Marks</h1>
+
+        <div class="d-flex justify-content-center p-3 w-100">
+          <div class="input-group p-2 w-50">
+            <label class="input-group-text" for="courses">Exam</label>
+            <select
+              class="form-select criteria-btn"
+              ng-change="getChild(selectedParent)"
+              ng-model="selectedParent"
+              ng-options="option.id as option.name for option in options"
+            >
+              <option value="" selected>Select Exam</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="card w-100 ">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              
+            </div>
+          </div> -->
+          
+
+        <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0 mt-5">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quia consectetur earum commodi aut vero quaerat iusto odit architecto eveniet.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 mt-5">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quia consectetur earum commodi aut vero quaerat iusto odit architecto eveniet. </p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@ myApp.controller("masterController", [
       showLoader();
 
       httpService
-        .get("educore/parents/")
+        .get("educore/get_parents/")
         .then((r) => {
           options = r.data;
 
@@ -25,7 +25,7 @@ myApp.controller("masterController", [
       console.log($scope.parentId);
       showLoader();
       httpService
-        .get("educore/childs/", { parent_id: id })
+        .get("educore/get_childs/", { parent_id: id })
         .then((r) => {
           childs = r.data;
 
@@ -48,8 +48,12 @@ myApp.controller("masterController", [
 
     $scope.addChild = () => {
       var childName = document.querySelector("input[name=child]").value;
+      var editOn=document.querySelector("input[ng-model='myCheckbox.val1']").value;
+      var deleteOn=document.querySelector("input[ng-model='myCheckbox.val2']").value;
+      console.log(editOn);
+      console.log(deleteOn);
       httpService
-        .post("eduadmin/dropdown/", { id: $scope.parentId, name: childName })
+        .post("eduadmin/child/", { id: $scope.parentId, name: childName,delete:deleteOn ,edit:editOn})
         .then((r) => {
           $scope.getChild($scope.parentId);
           $scope.adding = false;
@@ -86,7 +90,7 @@ myApp.controller("masterController", [
       };
 
       httpService
-        .put("eduadmin/dropdown/", childData)
+        .put("eduadmin/child/", childData)
         .then((r) => {
           console.log(r);
           $scope.getChild($scope.parentId);
@@ -102,7 +106,7 @@ myApp.controller("masterController", [
       showLoader();
 
       httpService
-        .delete("eduadmin/dropdown/", { id: selectedChild.id })
+        .delete("eduadmin/child/", { id: selectedChild.id })
         .then((r) => {
           console.log(r);
           $scope.getChild($scope.parentId);

@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.66.247:8000/");
+myApp.constant("apiUrl", "https://10.42.0.51:8000/");
 
 myApp.service("httpService", [
   "$http",
@@ -73,6 +73,16 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       url: "/EduSyncity/qPaper",
       templateUrl: "/Portal_app/templates/qPaper_temp/qPaper.html",
       controller: "qPaperController",
+    })
+    .state("dashBoard.aSheet", {
+      url: "/EduSyncity/aSheet",
+      templateUrl: "/Portal_app/templates/aSheet_temp/aSheet.html",
+      controller: "aSheetController",
+    })
+    .state("dashBoard.studentmarks", {
+      url: "/EduSyncity/studentmarks",
+      templateUrl: "/Portal_app/templates/studentmarks_temp/studentmarks.html",
+      controller: "studentmarksController",
     });
 });
 
