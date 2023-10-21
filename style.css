@@ -48,7 +48,8 @@ body {
 
 .accordion-button:focus,
 .form-select:focus,
-#addChild:focus, .nofocus:focus {
+#addChild:focus,
+.nofocus:focus {
   box-shadow: none;
   border-color: rgba(0, 0, 0, 0.125);
 }
@@ -95,12 +96,21 @@ body {
 }
 
 .custom-button {
-  color: rgb(82, 12, 49);
-  border-color: black;
+  color: white;
+  background-color: #1e2125;
+  /* border-color: black; */
 }
 
 .custom-button:hover {
-  background-color: rgb(82, 12, 49);
+  background-color: #1e2125;
+  color: white;
+}
+
+.custom-button:active,
+.custom-button:focus {
+  background-color: #1e2125;
+  color: white;
+  border-color: none;
 }
 
 .custom-input::placeholder {
