@@ -33,6 +33,7 @@ myApp.controller("loginController", [
           })
           .catch((e) => {
             console.log(e);
+            alertify.alert("Wrong credentials");
           });
       }
     };
