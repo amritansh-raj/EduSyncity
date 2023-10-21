@@ -6,8 +6,7 @@
         style="background-color: #252f3e"
       >
         <h1 class="text-center text-white pt-3">KIET Group Of Institutions</h1>
-        <h4 class="text-center text-white pt-2 m-0">Subject</h4>
-
+       
         <div class="d-flex justify-content-between p-3 w-100">
           <div class="input-group p-2 w-25">
             <div class="row d-flex justify-content-start">
@@ -18,7 +17,7 @@
                   >M.M.</label
                 >
               </div>
-              <div class="col-sm-2">
+              <div class="col-sm-6">
                 <input
                   type="text"
                   readonly
@@ -40,6 +39,19 @@
               <option value="" selected>Select Exam</option>
             </select>
           </div>
+          <div class="input-group p-2 w-50">
+            <label class="input-group-text" for="courses">Subject</label>
+            <select
+              class="form-select criteria-btn"
+              ng-change="getChild(selectedParent)"
+              ng-model="selectedParent"
+              ng-options="option.id as option.name for option in options"
+            >
+              <option value="" selected>Select Subject</option>
+            </select>
+            
+          </div>
+
           <div class="input-group p-2 w-25">
             <div class="row d-flex justify-content-end">
               <div class="col-sm-2">
@@ -49,7 +61,7 @@
                   >Time</label
                 >
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-6">
                 <input
                   type="text"
                   readonly
@@ -76,7 +88,7 @@
                 <div class="d-flex justify-content-center">
                   <button
                     type="button"
-                    class="btn btn-primary btn-lg"
+                    class="btn btn-primary btn-lg btn-dark"
                     ng-click="toggleSubDisplay()"
                   >
                     Add Subjective question
@@ -85,7 +97,7 @@
                 <div class="d-flex justify-content-center">
                   <button
                     type="button"
-                    class="btn btn-primary btn-lg"
+                    class="btn btn-primary btn-lg btn-dark"
                     ng-click="toggleMcqDisplay()"
                   >
                     Add Mcq
@@ -94,7 +106,7 @@
                 <div class="d-flex justify-content-center">
                   <button
                     type="button"
-                    class="btn btn-primary btn-lg"
+                    class="btn btn-primary btn-lg btn-dark"
                     ng-click="toggleDateDisplay()"
                   >
                     Add date
@@ -106,79 +118,127 @@
                 ng-show="subDisplay"
               >
                 <form ng-submit="addSubQ()">
-                  <input
-                    type="text"
-                    name="question"
-                    id="question"
-                    class="form-control"
-                    ng-model="question"
-                    placeholder="Q."
-                    required
-                  />
+                  
+                  <div class="row g-2">
+                    <div class="col-md">
+                      <div class="form-floating">
+                        <input
+                        type="text"
+                        name="question"
+                        id="question"
+                        class="form-control nofocus"
+                        ng-model="question"
+                        placeholder="Q."
+                        required
+                      /> 
+                      <label for="floatingInputGroup1" style="color: #14181f;" >Question</label>
+                      </div>
+                    </div>
+                    <div class="col-md">
+                      <div class="form-floating">
+                  
+                  
                   <input
                     type="number"
                     name="marks"
                     id="marks"
-                    class="form-control"
+                    class="form-control nofocus"
                     ng-model="marks"
                     placeholder="Max marks"
                     min="1"
                     required
-                  />
-                  <button type="submit" class="btn btn-primary">Add</button>
+                  /> <label for="floatingInputGrid"  style="color: #181d24;">Marks</label></div></div>
+                  <button type="submit" class="btn btn-primary btn-dark">Add</button>
                   <button
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-dark"
                     ng-click="toggleSubDisplay()"
                   >
                     Cancel
                   </button>
+                </div>
+                  
                 </form>
               </div>
               <div
                 class="d-flex flex-row justify-content-around"
                 ng-show="mcqDisplay"
               >
-                <form ng-submit="addMcqQ()">
+                <form ng-submit="addMcqQ()" name="registerForm">
+                  <div class="row g-2">
+                    <div class="col-md">
+                      <div class="form-floating">
                   <input
                     type="text"
                     name="question"
                     id="question"
-                    class="form-control"
+                    class="form-control nofocus"
                     ng-model="question"
                     placeholder="Q."
                     required
-                  />
+                  /> 
+                  <label for="floatingInputGroup1" style="color: #14181f;" >Question</label>
+                      </div>
+                      <div
+                      class="text-danger"
+                      ng-if="registerForm.question.$dirty && registerForm.question.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="registerForm.question.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;
+                        Question is required.
+                      </span>
+                      
+                    </div>
+                    </div>
+                    <div class="col-md">
+                      <div class="form-floating">
+                  
                   <input
                     type="number"
                     name="marks"
                     id="marks"
-                    class="form-control"
+                    class="form-control nofocus"
                     ng-model="marks"
                     placeholder="Max marks"
                     min="1"
                     required
-                  />
-                  <button type="submit" class="btn btn-primary">Add</button>
+                  /><label for="floatingInputGrid"  style="color: #181d24;">Marks</label></div>
+                  <div
+                  class="text-danger"
+                  ng-if="registerForm.marks.$dirty && registerForm.marks.$invalid"
+                  style="font-size: 14px"
+                >
+                  <span ng-if="registerForm.marks.$error.required">
+                    <i class="bi bi-exclamation-circle"></i> &nbsp;
+                    Marks is required.
+                  </span>
+                  <span ng-if="registerForm.marks.$error.min">
+                    <i class="bi bi-exclamation-circle"></i> &nbsp;
+                    Invalid Marks format.
+                  </span>
+                </div>
+                </div>
+                  <button type="submit" class="btn btn-primary btn-dark">Add</button>
                   <button
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-dark"
                     ng-click="toggleMcqDisplay()"
                   >
                     Cancel
-                  </button>
+                  </button></div>
                 </form>
                 <form ng-submit="addChoice()">
                   <div class="input-group mb-3">
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control nofocus"
                       placeholder="Choice"
                       name="choice"
                       ng-model="choice"
                       required
                     />
-                    <button class="btn btn-outline-secondary" type="submit">
+                    <button class="btn btn-outline-secondary btn-dark" type="submit">
                       Add choice
                     </button>
                   </div>
@@ -194,11 +254,12 @@
                 ng-show="dateDisplay"
               >
                 <form ng-submit="addDateTime()">
+                  
                   <input
                     type="date"
                     name="date"
                     id="date"
-                    class="form-control"
+                    class="form-control nofocus"
                     ng-model="date"
                     min="{{todaysDate}}"
                     required
@@ -207,7 +268,7 @@
                     type="time"
                     name="time"
                     id="time"
-                    class="form-control"
+                    class="form-control nofocus"
                     placeholder="hr:min"
                     ng-model="time"
                     required
@@ -278,7 +339,7 @@
             <div class="row" ng-show="questions.length">
               <div class="d-grid gap-2">
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-primary btn-light"
                   type="button"
                   ng-click="createExam()"
                 >
@@ -322,7 +383,7 @@
               type="text"
               name="question"
               id="question"
-              class="form-control"
+              class="form-control nofocus"
               ng-model="selectedQ"
               required
             />
@@ -331,7 +392,7 @@
               type="number"
               name="marks"
               id="marks"
-              class="form-control w-25"
+              class="form-control w-25 nofocus"
               ng-model="selectedM"
               min="1"
               required
@@ -348,7 +409,7 @@
               type="text"
               name="question"
               id="question"
-              class="form-control"
+              class="form-control nofocus"
               ng-model="selectedQ"
               required
             />
@@ -357,7 +418,7 @@
               type="number"
               name="marks"
               id="marks"
-              class="form-control w-25"
+              class="form-control w-25 nofocus"
               ng-model="selectedM"
               min="1"
               required
@@ -370,7 +431,7 @@
                 type="text"
                 name="question"
                 id="question"
-                class="form-control"
+                class="form-control nofocus"
                 ng-model="choices.choice"
                 required
               />
@@ -385,7 +446,7 @@
         </button>
         <button
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-primary nofocus"
           form="editFrom"
           data-bs-dismiss="modal"
         >
