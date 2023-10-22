@@ -117,7 +117,7 @@
                 class="d-flex flex-row justify-content-around"
                 ng-show="subDisplay"
               >
-                <form ng-submit="addSubQ()">
+                <form ng-submit="addSubQ()" name="register">
                   
                   <div class="row g-2">
                     <div class="col-md">
@@ -133,6 +133,17 @@
                       /> 
                       <label for="floatingInputGroup1" style="color: #14181f;" >Question</label>
                       </div>
+                      <div
+                      class="text-danger"
+                      ng-if="register.question.$dirty && register.question.$invalid"
+                      style="font-size: 14px"
+                    >
+                      <span ng-if="register.question.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;
+                        Question is required.
+                      </span>
+                      
+                    </div>
                     </div>
                     <div class="col-md">
                       <div class="form-floating">
@@ -147,7 +158,26 @@
                     placeholder="Max marks"
                     min="1"
                     required
-                  /> <label for="floatingInputGrid"  style="color: #181d24;">Marks</label></div></div>
+                  /> <label for="floatingInputGrid"  style="color: #181d24;">Marks</label></div>
+                  <div
+                  class="text-danger"
+                  ng-if="register.marks.$dirty && register.marks.$invalid"
+                  style="font-size: 14px"
+                >
+                  <span ng-if="register.marks.$error.required">
+                    <i class="bi bi-exclamation-circle"></i> &nbsp;
+                    Marks is required.
+                  </span>
+                  <span ng-if="register.marks.$error.min">
+                    <i class="bi bi-exclamation-circle"></i> &nbsp;
+                    Invalid Marks format.
+                  </span>
+                  <span ng-if="register.marks.$error.number">
+                    <i class="bi bi-exclamation-circle"></i> &nbsp;
+                    Invalid Marks format.
+                  </span>
+                </div>
+                </div>
                   <button type="submit" class="btn btn-primary btn-dark">Add</button>
                   <button
                     type="submit"
@@ -229,7 +259,7 @@
                   </button></div>
                 </form>
                 <form ng-submit="addChoice()">
-                  <div class="input-group mb-3">
+                  <div class="input-group mb-2">
                     <input
                       type="text"
                       class="form-control nofocus"
@@ -254,7 +284,9 @@
                 ng-show="dateDisplay"
               >
                 <form ng-submit="addDateTime()">
-                  
+                  <div class="row g-2">
+                    <div class="col-md">
+                      <div class="form-floating">
                   <input
                     type="date"
                     name="date"
@@ -264,6 +296,10 @@
                     min="{{todaysDate}}"
                     required
                   />
+                  <label for="floatingInputGroup1" style="color: #14181f;" >Date</label>
+                </div></div>
+                <div class="col-md">
+                  <div class="form-floating">
                   <input
                     type="time"
                     name="time"
@@ -273,10 +309,11 @@
                     ng-model="time"
                     required
                   />
-                  <button type="submit" class="btn btn-primary">Add</button>
+                  <label for="floatingInputGroup1" style="color: #14181f;" >Time</label></div></div>
+                  <button type="submit" class="btn btn-primary btn-dark">Add</button>
                   <button
                     type="button"
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-dark"
                     ng-click="toggleDateDisplay()"
                   >
                     Cancel
