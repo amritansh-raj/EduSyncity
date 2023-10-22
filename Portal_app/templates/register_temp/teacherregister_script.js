@@ -3,18 +3,45 @@ myApp.controller("teacherregisterController", [
   "httpService",
   "$state",
   function ($scope, httpService, $state) {
-    $scope.register = function () {
-      // showLoader();
-      // pass = $scope.password;
-      // console.log(pass);
+    $scope.years = [];
 
-      // if (!validatePass(pass)) {
-      //   $scope.registerForm.password.$setValidity("password", false);
-      //   hideLoader();
-      // } else {
-      //   $scope.registerForm.password.$setValidity("password", true);
-      //   hideLoader();
-      // }
+    display = () => {
+      showLoader();
+      httpService
+        .get("educore/title")
+        .then((r) => {
+          titles = r.data;
+
+          if (titles) {
+            $scope.titles = titles;
+          }
+
+          console.log(titles);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+      httpService
+        .get("educore/gender")
+        .then((r) => {
+          genders = r.data;
+
+          if (genders) {
+            $scope.genders = genders;
+          }
+
+          console.log(genders);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    display();
+
+    $scope.register = function () {
+      showLoader();
 
       var sendData = {
         firstname: $scope.Firstname,
@@ -25,126 +52,52 @@ myApp.controller("teacherregisterController", [
         address: $scope.address,
         contact: $scope.phone,
         qualification: $scope.qualification,
-        year: $scope.selectedYear,
-        course: $scope.selectedcourse,
-        department: $scope.selectedDepartment,
-        subject: $scope.selectedSubject,
         title: $scope.selectedTitle,
         gender: $scope.selectedGender,
       };
 
-      console.log(sendData);
+      if (!sendData.firstname) {
+        alertify.error("Enter Firstname");
+        hideLoader();
+        return;
+      } else if (!sendData.lastname) {
+        alertify.error("Enter lastname");
+        hideLoader();
+        return;
+      } else if (!sendData.username) {
+        alertify.error("Enter username");
+        hideLoader();
+        return;
+      } else if (!sendData.address) {
+        alertify.error("Enter address");
+        hideLoader();
+        return;
+      } else if (!sendData.qualification) {
+        alertify.error("Enter qualification");
+        hideLoader();
+        return;
+      } else if (!sendData.title) {
+        alertify.error("Enter title");
+        hideLoader();
+        return;
+      } else if (!sendData.gender) {
+        alertify.error("Enter gender");
+        hideLoader();
+        return;
+      }
+
       httpService
-        .post("eduadmin/register_faculty/", sendData, {
-          headers: { 'Content-Type': undefined },
-          withCredentials: true
-        })
-        .then((response) => {
+        .post("eduadmin/register_faculty/", sendData)
+        .then((r) => {
+          console.log(r.data);
           alertify.set("notifier", "position", "top-right");
-          alertify.success(response.data.message);
-          var register = response.data;
-          console.log(register);
+          alertify.success(r.data.message);
         })
-        .catch((error) => {
+        .catch((e) => {
           alertify.set("notifier", "position", "bottom-right");
-          alertify.error(error.data.message);
-          console.log(error);
+          alertify.error(e.data.message);
+          console.log(e.data);
         });
     };
-
-    $scope.courses = [];
-    $scope.departments = [];
-    $scope.years = [];
-    httpService
-      .get("educore/courses/")
-      .then((response) => {
-        courses = response.data;
-
-        if (courses) {
-          $scope.courses = courses;
-        }
-
-        console.log(courses);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    httpService
-      .get("educore/title")
-      .then((response) => {
-        titles = response.data;
-
-        if (titles) {
-          $scope.titles = titles;
-        }
-
-        console.log(titles);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    httpService
-      .get("educore/gender")
-      .then((response) => {
-        genders = response.data;
-
-        if (genders) {
-          $scope.genders = genders;
-        }
-
-        console.log(genders);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-
-    $scope.selctedCourse = (course) => {
-      httpService
-        .get("educore/departments/", { course_id: course })
-        .then((response) => {
-          departments = response.data;
-
-          if (departments) {
-            $scope.departments = departments;
-          }
-
-          console.log($scope.departments);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      httpService
-        .get("educore/years/", { course_id: course })
-        .then((response) => {
-          years = response.data;
-
-          if (years) {
-            $scope.years = years;
-          }
-
-          console.log($scope.years);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    $scope.selctedYear = (year, department, course) => {
-      console.log(year, department, course)
-      httpService
-        .get("educore/subjects/", { year: year, department_id: department, course_id: course })
-        .then((response) => {
-          subjects = response.data;
-          if (subjects) {
-            $scope.subjects = subjects;
-          }
-          console.log($scope.subjects);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
   },
 ]);

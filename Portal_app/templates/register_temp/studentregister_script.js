@@ -3,49 +3,11 @@ myApp.controller("studentregisterController", [
   "httpService",
   "$state",
   function ($scope, httpService, $state) {
-    $scope.register = function () {
-      showLoader();
-      var sendData = {
-        first_name: $scope.Firstname,
-        last_name: $scope.lastname,
-        username: $scope.username,
-        email: $scope.email,
-        age: $scope.age,
-        address: $scope.address,
-        contact: $scope.phone,
-        father_name: $scope.fathername,
-        mother_name: $scope.mothername,
-        course: $scope.selectedcourse,
-        department: $scope.selectedDepartment,
-        year: $scope.selectedYear,
-        gender: $scope.selectedGender,
-        religion: $scope.selectedReligion,
-      };
-
-      console.log(sendData);
-
-      httpService
-        .post("eduadmin/register_student/", sendData, {
-          headers: { "Content-Type": undefined },
-          withCredentials: true,
-        })
-        .then((r) => {
-          alertify.success(r.data.message);
-          var register = r.data;
-          console.log(register);
-         
-        })
-        .catch((e) => {
-          alertify.error(e.data.message);
-          console.log(e);
-        });
-    };
-
     $scope.courses = [];
     $scope.departments = [];
     $scope.years = [];
     httpService
-      .get("educore/courses/")
+      .get("educore/courses")
       .then((r) => {
         courses = r.data;
 
@@ -59,7 +21,7 @@ myApp.controller("studentregisterController", [
         console.log(e);
       });
     httpService
-      .get("educore/religion/")
+      .get("educore/religion")
       .then((r) => {
         religions = r.data;
 
@@ -73,7 +35,7 @@ myApp.controller("studentregisterController", [
         console.log(e);
       });
     httpService
-      .get("educore/gender/")
+      .get("educore/gender")
       .then((r) => {
         genders = r.data;
 
@@ -114,6 +76,96 @@ myApp.controller("studentregisterController", [
           console.log($scope.years);
         })
         .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    $scope.register = () => {
+      showLoader();
+      var sendData = {
+        first_name: $scope.Firstname,
+        last_name: $scope.lastname,
+        username: $scope.username,
+        email: $scope.email,
+        age: $scope.age,
+        address: $scope.address,
+        contact: $scope.phone,
+        father_name: $scope.fathername,
+        mother_name: $scope.mothername,
+        course: $scope.selectedcourse,
+        department: $scope.selectedDepartment,
+        year: $scope.selectedYear,
+        gender: $scope.selectedGender,
+        religion: $scope.selectedReligion,
+      };
+
+      if (!sendData.first_name) {
+        alertify.error("Enter Firstname");
+        hideLoader();
+        return;
+      } else if (!sendData.last_name) {
+        alertify.error("Enter lastname");
+        hideLoader();
+        return;
+      } else if (!sendData.father_name) {
+        alertify.error("Enter father's name");
+        hideLoader();
+        return;
+      } else if (!sendData.mother_name) {
+        alertify.error("Enter mother's name");
+        hideLoader();
+        return;
+      } else if (!sendData.username) {
+        alertify.error("Enter username");
+        hideLoader();
+        return;
+      } else if (!sendData.address) {
+        alertify.error("Enter address");
+        hideLoader();
+        return;
+      } else if (!sendData.course) {
+        alertify.error("Enter course");
+        hideLoader();
+        return;
+      } else if (!sendData.department) {
+        alertify.error("Enter department");
+        hideLoader();
+        return;
+      } else if (!sendData.year) {
+        alertify.error("Enter year");
+        hideLoader();
+        return;
+      } else if (!sendData.gender) {
+        alertify.error("Enter gender");
+        hideLoader();
+        return;
+      } else if (!sendData.religion) {
+        alertify.error("Enter religion");
+        hideLoader();
+        return;
+      }
+
+      if (!validatePhoneNumber(sendData.contact)) {
+        alertify.error("Invalid Phone number");
+        hideLoader();
+        return;
+      }
+
+      if (!validateEmail(sendData.email)) {
+        alertify.error("Invalid Email");
+        hideLoader();
+        return;
+      }
+
+      httpService
+        .post("eduadmin/register_student/", sendData)
+        .then((r) => {
+          alertify.success(r.data.message);
+          var register = r.data;
+          console.log(register);
+        })
+        .catch((e) => {
+          alertify.error(e.data.message);
           console.log(e);
         });
     };
