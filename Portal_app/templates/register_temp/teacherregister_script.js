@@ -40,10 +40,14 @@ myApp.controller("teacherregisterController", [
           withCredentials: true
         })
         .then((response) => {
+          alertify.set("notifier", "position", "top-right");
+          alertify.success(response.data.message);
           var register = response.data;
           console.log(register);
         })
         .catch((error) => {
+          alertify.set("notifier", "position", "bottom-right");
+          alertify.error(error.data.message);
           console.log(error);
         });
     };
@@ -66,7 +70,7 @@ myApp.controller("teacherregisterController", [
         console.log(error);
       });
     httpService
-      .get("educore/title/")
+      .get("educore/title")
       .then((response) => {
         titles = response.data;
 
@@ -80,7 +84,7 @@ myApp.controller("teacherregisterController", [
         console.log(error);
       });
     httpService
-      .get("educore/gender/")
+      .get("educore/gender")
       .then((response) => {
         genders = response.data;
 

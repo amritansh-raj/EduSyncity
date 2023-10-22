@@ -8,7 +8,7 @@ myApp.controller("studentregisterController", [
       var sendData = {
         first_name: $scope.Firstname,
         last_name: $scope.lastname,
-        user_name: $scope.username,
+        username: $scope.username,
         email: $scope.email,
         age: $scope.age,
         address: $scope.address,
@@ -29,11 +29,14 @@ myApp.controller("studentregisterController", [
         headers: { 'Content-Type': undefined },
         withCredentials: true})
         .then((response) => {
+          alertify.success(response.data.message);
           var register = response.data;
           console.log(register);
+         
         })
         .catch((error) => {
           console.log(error);
+          alertify.error(error.data.message);
         });
     };
 
@@ -41,7 +44,7 @@ myApp.controller("studentregisterController", [
     $scope.departments = [];
     $scope.years = [];
     httpService
-      .get("educore/courses/")
+      .get("educore/courses")
       .then((response) => {
         courses = response.data;
 
@@ -55,7 +58,7 @@ myApp.controller("studentregisterController", [
         console.log(error);
       });
       httpService
-      .get("educore/religion/")
+      .get("educore/religion")
       .then((response) => {
         religions = response.data;
 
@@ -69,7 +72,7 @@ myApp.controller("studentregisterController", [
         console.log(error);
       });
       httpService
-      .get("educore/gender/")
+      .get("educore/gender")
       .then((response) => {
         genders = response.data;
 

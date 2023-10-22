@@ -1,0 +1,109 @@
+<div class="container-fluid h-100">
+    <div class="container pt-3 h-100">
+      <div class="col h-100">
+        <div
+          class="row-3 h-100 d-flex flex-column "
+          style="background-color: #252f3e"
+        >
+          <h1 class="text-center text-white pt-3">Mapping  <i class="bi bi-link-45deg"></i></h1>
+          
+
+  
+          <div class="d-flex justify-content-center p-3 w-100">
+            <div class="input-group p-2 w-50">
+              <label class="input-group-text" for="courses">Fields</label>
+              <select
+                          class="form-select"
+                          id="coursesDropdown"
+                          ng-model="selectedcourse"
+                          ng-change="selctedCourse(selectedcourse)"
+                          aria-label="Floating label select example"
+                        >
+                          <option value="" disabled>Select Mapping Option</option>
+                          <option
+                            ng-repeat="course in courses"
+                            value="{{course.id }}"
+                            style="color: black"
+                          >
+                            {{course.name}}
+                          </option> 
+                        </select>
+            </div>
+          </div>
+          <!-- <div class="card w-100 ">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                
+              </div>
+            </div> -->
+            
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <div class="form-floating">
+                    <select
+                    class="form-select"
+                    id="departmentDropdown"
+                    ng-model="selectedDepartment"
+                    aria-label="Floating label select example"
+                  >
+                    <option value="" disabled>Select </option>
+                    <option
+                      ng-repeat="department in departments"
+                      value="{{ department.department_id }}"
+                    >
+                      {{ department.department__name }}
+                    </option>
+                  </select>
+                  <label for="floatingSelect">Select 1</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <div class="form-floating">
+                    <select
+                          class="form-select"
+                          id="yearDropdown"
+                          ng-model="selectedYear"
+                          ng-change="selctedYear(selectedYear,selectedDepartment,selectedcourse)"
+                          aria-label="Floating label select example"
+                        >
+                          <option value="" disabled>Select Years</option>
+                          <option
+                            ng-repeat="year in years"
+                            value="{{ year }}"
+                          >
+                            {{ year }}
+                          </option>
+                        </select>
+                        <label for="floatingSelect">Years</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  
+          <!-- <div class="row">
+              <div class="col-sm-6 mb-3 mb-sm-0 mt-5">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quia consectetur earum commodi aut vero quaerat iusto odit architecto eveniet.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-5">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quia consectetur earum commodi aut vero quaerat iusto odit architecto eveniet. </p>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

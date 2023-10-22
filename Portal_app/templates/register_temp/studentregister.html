@@ -20,7 +20,7 @@
                   <div class="form-outline">
                     <div class="form-floating">
                       <input
-                        type="Firstname"
+                        type="text"
                         id="Firstname"
                         class="form-control form-control-lg"
                         ng-model="Firstname"
@@ -39,7 +39,7 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp;
                         Firstname is required.
                       </span>
-                      <span ng-if="registerForm.Firstname.$error.Firstname">
+                      <span ng-if="registerForm.Firstname.$error.text">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         Firstname format.
                       </span>
@@ -50,7 +50,7 @@
                   <div class="form-outline">
                     <div class="form-floating">
                       <input
-                        type="lastname"
+                        type="text"
                         id="lastname"
                         class="form-control form-control-lg"
                         ng-model="lastname"
@@ -69,7 +69,7 @@
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Lastname
                         is required.
                       </span>
-                      <span ng-if="registerForm.lastname.$error.lastname">
+                      <span ng-if="registerForm.lastname.$error.text">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         Lastname format.
                       </span>
@@ -118,6 +118,7 @@
                         ng-model="email"
                         name="email"
                         placeholder="Email"
+                        min="6"
                         required
                       />
                       <label for="email">Email</label>
@@ -134,6 +135,10 @@
                       <span ng-if="registerForm.email.$error.email">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         email format.
+                      </span>
+                      <span ng-if="registerForm.email.$error.min">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;
+                        Invalid email format.
                       </span>
                     </div>
                   </div>
@@ -167,6 +172,10 @@
                       <span ng-if="registerForm.age.$error.min">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Age should be greater than 16
                       </span>
+                      <span ng-if="registerForm.age.$error.number">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp;
+                        Invalid age format.
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -195,6 +204,10 @@
                         number is required.
                       </span>
                       <span ng-if="registerForm.phone.$error.pattern">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        phone number format.
+                      </span>
+                      <span ng-if="registerForm.phone.$error.number">
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
                         phone number format.
                       </span>
