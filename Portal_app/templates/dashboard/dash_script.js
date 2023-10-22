@@ -54,8 +54,7 @@ myApp.controller("dbController", [
       .get("educore/loggedin/")
       .then((r) => {
         $scope.user_name = r.data.username;
-        console.log( $scope.user_name)
-        // $scope.letter = $scope.user_name.charAt(0).toUpperCase();
+        $scope.letter = $scope.user_name.charAt(0).toUpperCase();
       })
       .catch((e) => {
         console.log(e);

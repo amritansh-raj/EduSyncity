@@ -31,7 +31,7 @@
               <div
                 class="col-12 col-sm-auto col-md-auto p-0 d-none d-sm-block text-center"
               >
-              {{user_name}}
+                {{user_name}}
               </div>
               <div
                 class="col-12 col-sm-auto p-0 col-md-auto h-100 d-flex justify-content-center align-items-center"
@@ -64,7 +64,9 @@
     style="background-color: #121212; height: calc(100% - 60px) !important"
     ui-view=""
   >
-    <canvas id="myChart" ng-model="myChart" width="400" height="400"></canvas>
+    <div class="container">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
   </div>
 </div>
 

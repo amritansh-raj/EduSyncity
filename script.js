@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.66.247:8000/");
+myApp.constant("apiUrl", "https://10.42.0.182:8000/");
 
 myApp.service("httpService", [
   "$http",
@@ -106,14 +106,14 @@ validatePass = (pass) => {
   return passPatern.test(pass);
 };
 
-validateUsername = (Username) => {
-  var usernamePatern = /^[a-zA-Z0-9_-]{3,16}$/;
-  return usernamePatern.test(Username);
-};
-
 validateEmail = (email) => {
   var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return emailPattern.test(email);
+};
+
+validatePhoneNumber = (phoneNumber) => {
+  var phonePattern = /^\d{10}$/;
+  return phonePattern.test(phoneNumber);
 };
 
 hideModal = (modalId) => {
