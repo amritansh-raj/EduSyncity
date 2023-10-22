@@ -21,7 +21,7 @@
                 ng-show="!show"
               >
                 <div
-                  class="d-flex justify-content-center align-items-center mb-3 pb-1"
+                  class="d-flex justify-content-center align-items-center pb-1"
                 >
                   <span class="h1 fw-bold mb-0">EduSyncity</span>
                 </div>
@@ -31,7 +31,7 @@
                 </h5>
 
                 <form name="loginForm" ng-submit="login()">
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-3">
                     <div class="form-floating">
                       <input
                         type="username"
@@ -51,7 +51,7 @@
                       style="font-size: 14px"
                     >
                       <span ng-if="loginForm.username.$error.required">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; username
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Username or Email
                         is required.
                       </span>
                       <!-- <span ng-if="loginForm.username.$error.pattern">
@@ -61,10 +61,10 @@
                     </div>
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-1">
                     <div class="form-floating">
                       <input
-                        type="password"
+                        type="{{inputType}}"
                         id="password"
                         class="form-control form-control-lg"
                         ng-model="password"
@@ -92,6 +92,21 @@
                     </div>
                   </div>
 
+                  <div class="mb-3">
+                    <input
+                      type="checkbox"
+                      id="checkbox"
+                      ng-model="passwordCheckbox"
+                      ng-click="hideShowPassword()"
+                    />
+                    <label for="checkbox" ng-if="passwordCheckbox"
+                      >Hide password</label
+                    >
+                    <label for="checkbox" ng-if="!passwordCheckbox"
+                      >Show password</label
+                    >
+                  </div>
+
                   <div class="pt-1 d-flex justify-content-center">
                     <button type="submit" class="btn btn-dark btn-lg btn-block">
                       Login
@@ -101,7 +116,7 @@
 
                 <div class="mb-2 d-flex justify-content-center text-muted">
                   <button class="btn" ng-click="showForm()">
-                    Forgot password?
+                    Change password?
                   </button>
                 </div>
 
@@ -129,17 +144,17 @@
                 ng-show="show"
               >
                 <div
-                  class="d-flex justify-content-center align-items-center mb-3 pb-1"
+                  class="d-flex justify-content-center align-items-center pb-1"
                 >
                   <span class="h1 fw-bold mb-0">EduSyncity</span>
                 </div>
 
                 <h5 class="d-flex justify-content-center fw-normal mb-3 pb-3">
-                  Forgot Password
+                  Change Password
                 </h5>
 
                 <form name="forgotPasswordForm" ng-submit="changePassword()">
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-3">
                     <div class="form-floating">
                       <input
                         type="text"
@@ -173,10 +188,10 @@
                     </div>
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-3">
                     <div class="form-floating">
                       <input
-                        type="password"
+                        type="{{inputType}}"
                         id="old-password"
                         class="form-control form-control-lg"
                         ng-model="oldPassword"
@@ -208,10 +223,10 @@
                     </div>
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-3">
                     <div class="form-floating">
                       <input
-                        type="password"
+                        type="{{inputType}}"
                         id="new-password"
                         class="form-control form-control-lg"
                         ng-model="newPassword"
@@ -225,7 +240,7 @@
                     <div
                       class="text-danger"
                       ng-if="forgotPasswordForm.newPassword.$dirty && forgotPasswordForm.newPassword.$invalid"
-                      style="font-size: 12px"
+                      style="font-size: 14px"
                     >
                       <span
                         ng-if="forgotPasswordForm.newPassword.$error.required"
@@ -242,10 +257,10 @@
                     </div>
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-3">
                     <div class="form-floating">
                       <input
-                        type="password"
+                        type="{{inputType}}"
                         id="confirm-new-password"
                         class="form-control form-control-lg"
                         ng-model="confirmNewPassword"
@@ -261,17 +276,11 @@
 
                     <div class="text-danger" style="font-size: 14px">
                       <span
-                        ng-if="forgotPasswordForm.confirmNewPassword.$error.required"
+                        ng-if="forgotPasswordForm.confirmNewPassword.$touched && forgotPasswordForm.confirmNewPassword.$error.required"
                       >
                         <i class="bi bi-exclamation-circle"></i> &nbsp; Confirm
                         New Password is required.
                       </span>
-                      <!-- <span
-                        ng-if="forgotPasswordForm.confirmNewPassword.$error.pattern"
-                      >
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                        password format.
-                      </span> -->
                       <span
                         ng-if=" forgotPasswordForm.confirmNewPassword.$viewValue != '' && (forgotPasswordForm.newPassword.$viewValue != forgotPasswordForm.confirmNewPassword.$viewValue)"
                       >
@@ -281,9 +290,24 @@
                     </div>
                   </div>
 
+                  <div class="mb-3">
+                    <input
+                      type="checkbox"
+                      id="checkbox"
+                      ng-model="passwordCheckbox"
+                      ng-click="hideShowPassword()"
+                    />
+                    <label for="checkbox" ng-if="passwordCheckbox"
+                      >Hide password</label
+                    >
+                    <label for="checkbox" ng-if="!passwordCheckbox"
+                      >Show password</label
+                    >
+                  </div>
+
                   <div class="pt-1 d-flex justify-content-center">
                     <button type="submit" class="btn btn-dark btn-lg btn-block">
-                      Reset Password
+                      Change Password
                     </button>
                   </div>
                 </form>

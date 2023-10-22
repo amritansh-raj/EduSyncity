@@ -139,10 +139,14 @@ myApp.controller("qPaperController", [
         // httpService
         //   .post("eduexam/paper_details/", samplejson)
         //   .then((r) => {
+          // alertify.success(r.data.message);
+
         //     console.log(r);
         //   })
         //   .catch((e) => {
         //     console.log(e);
+        // alertify.error(e.data.message);
+
         //   });
       }
     };

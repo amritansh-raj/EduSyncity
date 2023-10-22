@@ -47,7 +47,11 @@ myApp.controller("masterController", [
     };
 
     $scope.toggleAddChild = () => {
-      $scope.adding = !$scope.adding;
+      if ($scope.childs) {
+        $scope.adding = !$scope.adding;
+      } else {
+        alertify.error("Please select a parent from drowpdown above");
+      }
     };
 
     $scope.toggleAddParent = () => {
@@ -112,7 +116,7 @@ myApp.controller("masterController", [
 
     $scope.edit = () => {
       $scope.editing = true;
-      document.getElementById("editInputField").removeAttribute("disabled");
+      document.getElementById("addInputField").removeAttribute("disabled");
     };
 
     $scope.editParent = () => {
@@ -127,7 +131,7 @@ myApp.controller("masterController", [
 
     $scope.notEditing = () => {
       $scope.editing = false;
-      document.getElementById("editInputField").setAttribute("disabled", "");
+      document.getElementById("addInputField").setAttribute("disabled", "");
     };
 
     $scope.save = (selectedChild) => {
@@ -152,11 +156,24 @@ myApp.controller("masterController", [
     };
 
     $scope.saveParent = (selectedParent) => {
-      console.log(selectedParent);
-      parentDate = {
+      showLoader();
+
+      parentData = {
         id: selectedParent.id,
-        // name 
+        name: selectedParent.name,
       };
+
+      httpService
+        .put("eduadmin/child/", parentData)
+        .then((r) => {
+          console.log(r);
+          display();
+          alertify.success(r.data.message);
+        })
+        .catch((e) => {
+          console.log(e);
+          alertify.error(e.data.message);
+        });
     };
 
     $scope.delete = (selectedChild, modalId) => {
@@ -176,6 +193,20 @@ myApp.controller("masterController", [
         });
     };
 
-    $scope.delParent = (selectedParent, modalId) => {};
+    $scope.delParent = (selectedParent, modalId) => {
+      showLoader();
+
+      httpService
+        .put("eduadmin/child/", parentData)
+        .then((r) => {
+          console.log(r);
+          display();
+          alertify.success(r.data.message);
+        })
+        .catch((e) => {
+          console.log(e);
+          alertify.error(e.data.message);
+        });
+    };
   },
 ]);

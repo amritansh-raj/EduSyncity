@@ -18,25 +18,26 @@ myApp.controller("studentregisterController", [
         course: $scope.selectedcourse,
         department: $scope.selectedDepartment,
         year: $scope.selectedYear,
-        gender:$scope.selectedGender,
-        religion:$scope.selectedReligion,
+        gender: $scope.selectedGender,
+        religion: $scope.selectedReligion,
       };
 
       console.log(sendData);
 
       httpService
-        .post("eduadmin/register_student/", sendData,{
-        headers: { 'Content-Type': undefined },
-        withCredentials: true})
-        .then((response) => {
-          alertify.success(response.data.message);
-          var register = response.data;
+        .post("eduadmin/register_student/", sendData, {
+          headers: { "Content-Type": undefined },
+          withCredentials: true,
+        })
+        .then((r) => {
+          alertify.success(r.data.message);
+          var register = r.data;
           console.log(register);
          
         })
-        .catch((error) => {
-          console.log(error);
-          alertify.error(error.data.message);
+        .catch((e) => {
+          alertify.error(e.data.message);
+          console.log(e);
         });
     };
 
@@ -44,9 +45,9 @@ myApp.controller("studentregisterController", [
     $scope.departments = [];
     $scope.years = [];
     httpService
-      .get("educore/courses")
-      .then((response) => {
-        courses = response.data;
+      .get("educore/courses/")
+      .then((r) => {
+        courses = r.data;
 
         if (courses) {
           $scope.courses = courses;
@@ -54,13 +55,13 @@ myApp.controller("studentregisterController", [
 
         console.log(courses);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        console.log(e);
       });
-      httpService
-      .get("educore/religion")
-      .then((response) => {
-        religions = response.data;
+    httpService
+      .get("educore/religion/")
+      .then((r) => {
+        religions = r.data;
 
         if (religions) {
           $scope.religions = religions;
@@ -68,13 +69,13 @@ myApp.controller("studentregisterController", [
 
         console.log(religions);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        console.log(e);
       });
-      httpService
-      .get("educore/gender")
-      .then((response) => {
-        genders = response.data;
+    httpService
+      .get("educore/gender/")
+      .then((r) => {
+        genders = r.data;
 
         if (genders) {
           $scope.genders = genders;
@@ -82,16 +83,15 @@ myApp.controller("studentregisterController", [
 
         console.log(genders);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        console.log(e);
       });
-      
 
     $scope.selctedCourse = (course) => {
       httpService
         .get("educore/departments/", { course_id: course })
-        .then((response) => {
-          departments = response.data;
+        .then((r) => {
+          departments = r.data;
 
           if (departments) {
             $scope.departments = departments;
@@ -99,13 +99,13 @@ myApp.controller("studentregisterController", [
 
           console.log($scope.departments);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          console.log(e);
         });
-        httpService
+      httpService
         .get("educore/years/", { course_id: course })
-        .then((response) => {
-          years = response.data;
+        .then((r) => {
+          years = r.data;
 
           if (years) {
             $scope.years = years;
@@ -113,13 +113,9 @@ myApp.controller("studentregisterController", [
 
           console.log($scope.years);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          console.log(e);
         });
-        
     };
-    
-    
-
   },
 ]);
