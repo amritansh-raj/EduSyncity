@@ -10,6 +10,21 @@ myApp.controller("qPaperController", [
     $scope.exam = {};
 
     httpService
+      .get("eduexam/department_course/")
+      .then((r) => {
+        courses = r.data;
+
+        if (courses) {
+          $scope.courses = courses;
+        }
+
+        console.log($scope.courses);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    httpService
       .get("eduexam/examtype/")
       .then((r) => {
         exams = r.data;
@@ -20,6 +35,28 @@ myApp.controller("qPaperController", [
       .catch((e) => {
         console.log(e);
       });
+
+    $scope.getSubject = (course) => {
+      httpService
+        .get("eduexam/subject_year/", { dept_id: course })
+        .then((r) => {
+          subjects = r.data;
+
+          if (subjects) {
+            $scope.subjects = subjects;
+          }
+
+          console.log($scope.subjects);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    $scope.selectedSub = (subject) => {
+      $scope.selectedSubject = subject;
+      console.log($scope.selectedSubject);
+    };
 
     $scope.getExam = (selectedExam) => {
       httpService
@@ -43,10 +80,6 @@ myApp.controller("qPaperController", [
 
     $scope.toggleMcqDisplay = () => {
       $scope.mcqDisplay = !$scope.mcqDisplay;
-    };
-
-    $scope.toggleDateDisplay = () => {
-      $scope.dateDisplay = !$scope.dateDisplay;
     };
 
     $scope.addSubQ = () => {
@@ -85,17 +118,6 @@ myApp.controller("qPaperController", [
       }
     };
 
-    $scope.addDateTime = () => {
-      paperDate = `${$scope.date.getFullYear()}-${
-        $scope.date.getMonth() + 1
-      }-${$scope.date.getDate()}`;
-      const time = document.getElementById("time");
-      paperTime = time.value;
-      $scope.exam.examDate = paperDate;
-      $scope.exam.examTime = paperTime;
-      $scope.toggleDateDisplay();
-    };
-
     $scope.delQ = (index) => {
       $scope.questions.splice(index, 1);
     };
@@ -131,23 +153,25 @@ myApp.controller("qPaperController", [
         alertify.error(
           "Sum of all the questions provided is not equal to max marks of the paper"
         );
-      } else if (!("examDate" && "examTime" in $scope.exam)) {
-        alertify.error("Please add date and time in order to submit the paper");
       } else {
         $scope.exam.questions = $scope.questions;
+        $scope.exam.department = $scope.selectedCourse;
+        $scope.exam.subject = $scope.selectedSubject;
+        $scope.exam.exam_type = $scope.selectedExam;
         console.log($scope.exam);
-        // httpService
-        //   .post("eduexam/paper_details/", samplejson)
-        //   .then((r) => {
-          // alertify.success(r.data.message);
-
-        //     console.log(r);
-        //   })
-        //   .catch((e) => {
-        //     console.log(e);
-        // alertify.error(e.data.message);
-
-        //   });
+        httpService
+          .post("eduexam/question_paper/", $scope.exam)
+          .then((r) => {
+            alertify.success(r.data.message);
+            $scope.questions = [];
+            $scope.choices = [];
+            $scope.exam = {};
+            console.log(r);
+          })
+          .catch((e) => {
+            console.log(e);
+            alertify.error(e.data.message);
+          });
       }
     };
   },

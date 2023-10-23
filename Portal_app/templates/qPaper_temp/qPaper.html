@@ -6,8 +6,22 @@
         style="background-color: #252f3e"
       >
         <h1 class="text-center text-white pt-3">KIET Group Of Institutions</h1>
-       
-        <div class="d-flex justify-content-between p-3 w-100">
+
+        <div class="d-flex justify-content-center p-3 pb-0 w-100">
+          <div class="input-group my-2 w-50">
+            <label class="input-group-text" for="courses">Courses</label>
+            <select
+              class="form-select criteria-btn"
+              ng-change="getSubject(selectedCourse)"
+              ng-model="selectedCourse"
+            >
+              <option value="" selected>Select Course (Branch)</option>
+              <option value="{{option.subject__department__pk}}" ng-repeat="option in courses">{{option.subject__department__course__name}}({{option.subject__department__department__name}})</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between p-3 pt-0 w-100">
           <div class="input-group p-2 w-25">
             <div class="row d-flex justify-content-start">
               <div class="col-sm-2">
@@ -28,6 +42,17 @@
               </div>
             </div>
           </div>
+          <div class="input-group p-2 w-50">
+            <label class="input-group-text" for="courses">Subject</label>
+            <select
+              class="form-select criteria-btn"
+              ng-change="selectedSub(subject)"
+              ng-model="subject"
+            >
+              <option value="" selected>Select Subject (Year)</option>
+              <option value="{{option.subject__pk}}" ng-repeat="option in subjects">{{option.subject__subject_name}}-{{option.subject__subject_code}} ({{option.year}})</option>
+            </select>
+          </div>
           <div class="input-group my-2 w-50">
             <label class="input-group-text" for="courses">Exam</label>
             <select
@@ -38,18 +63,6 @@
             >
               <option value="" selected>Select Exam</option>
             </select>
-          </div>
-          <div class="input-group p-2 w-50">
-            <label class="input-group-text" for="courses">Subject</label>
-            <select
-              class="form-select criteria-btn"
-              ng-change="getChild(selectedParent)"
-              ng-model="selectedParent"
-              ng-options="option.id as option.name for option in options"
-            >
-              <option value="" selected>Select Subject</option>
-            </select>
-            
           </div>
 
           <div class="input-group p-2 w-25">
@@ -85,7 +98,7 @@
                 class="d-flex flex-row justify-content-around"
                 ng-show="!subDisplay && !mcqDisplay && !dateDisplay"
               >
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center my-3">
                   <button
                     type="button"
                     class="btn btn-primary btn-lg btn-dark"
@@ -94,7 +107,7 @@
                     Add Subjective question
                   </button>
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center my-3">
                   <button
                     type="button"
                     class="btn btn-primary btn-lg btn-dark"
@@ -103,91 +116,90 @@
                     Add Mcq
                   </button>
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-lg btn-dark"
-                    ng-click="toggleDateDisplay()"
-                  >
-                    Add date
-                  </button>
-                </div>
               </div>
               <div
                 class="d-flex flex-row justify-content-around"
                 ng-show="subDisplay"
               >
                 <form ng-submit="addSubQ()" name="register">
-                  
                   <div class="row g-2">
                     <div class="col-md">
                       <div class="form-floating">
                         <input
-                        type="text"
-                        name="question"
-                        id="question"
-                        class="form-control nofocus"
-                        ng-model="question"
-                        placeholder="Q."
-                        required
-                      /> 
-                      <label for="floatingInputGroup1" style="color: #14181f;" >Question</label>
+                          type="text"
+                          name="question"
+                          id="question"
+                          class="form-control nofocus"
+                          ng-model="question"
+                          placeholder="Q."
+                          required
+                        />
+                        <label for="floatingInputGroup1" style="color: #14181f"
+                          >Question</label
+                        >
                       </div>
                       <div
-                      class="text-danger"
-                      ng-if="register.question.$dirty && register.question.$invalid"
-                      style="font-size: 14px"
-                    >
-                      <span ng-if="register.question.$error.required">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp;
-                        Question is required.
-                      </span>
-                      
-                    </div>
+                        class="text-danger"
+                        ng-if="register.question.$dirty && register.question.$invalid"
+                        style="font-size: 14px"
+                      >
+                        <span ng-if="register.question.$error.required">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp;
+                          Question is required.
+                        </span>
+                      </div>
                     </div>
                     <div class="col-md">
                       <div class="form-floating">
-                  
-                  
-                  <input
-                    type="number"
-                    name="marks"
-                    id="marks"
-                    class="form-control nofocus"
-                    ng-model="marks"
-                    placeholder="Max marks"
-                    min="1"
-                    required
-                  /> <label for="floatingInputGrid"  style="color: #181d24;">Marks</label></div>
-                  <div
-                  class="text-danger"
-                  ng-if="register.marks.$dirty && register.marks.$invalid"
-                  style="font-size: 14px"
-                >
-                  <span ng-if="register.marks.$error.required">
-                    <i class="bi bi-exclamation-circle"></i> &nbsp;
-                    Marks is required.
-                  </span>
-                  <span ng-if="register.marks.$error.min">
-                    <i class="bi bi-exclamation-circle"></i> &nbsp;
-                    Invalid Marks format.
-                  </span>
-                  <span ng-if="register.marks.$error.number">
-                    <i class="bi bi-exclamation-circle"></i> &nbsp;
-                    Invalid Marks format.
-                  </span>
-                </div>
-                </div>
-                  <button type="submit" class="btn btn-primary btn-dark">Add</button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-dark"
-                    ng-click="toggleSubDisplay()"
-                  >
-                    Cancel
-                  </button>
-                </div>
-                  
+                        <input
+                          type="number"
+                          name="marks"
+                          id="marks"
+                          class="form-control nofocus"
+                          ng-model="marks"
+                          placeholder="Max marks"
+                          min="1"
+                          max="{{maxMarks}}"
+                          required
+                        />
+                        <label for="floatingInputGrid" style="color: #181d24"
+                          >Marks</label
+                        >
+                      </div>
+                      <div
+                        class="text-danger"
+                        ng-if="register.marks.$dirty && register.marks.$invalid"
+                        style="font-size: 14px"
+                      >
+                        <span ng-if="register.marks.$error.required">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp; Marks
+                          is required.
+                        </span>
+                        <span ng-if="register.marks.$error.min">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp;
+                          Marks should be greater than 0.
+                        </span>
+                        <span ng-if="register.marks.$error.max">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp;
+                          Marks cannot me more than max marks.
+                        </span>
+                        <span ng-if="register.marks.$error.number">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp;
+                          Invalid Marks format.
+                        </span>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-dark">
+                      Add
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-dark"
+                      ng-click="toggleSubDisplay()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               </div>
               <div
@@ -198,65 +210,71 @@
                   <div class="row g-2">
                     <div class="col-md">
                       <div class="form-floating">
-                  <input
-                    type="text"
-                    name="question"
-                    id="question"
-                    class="form-control nofocus"
-                    ng-model="question"
-                    placeholder="Q."
-                    required
-                  /> 
-                  <label for="floatingInputGroup1" style="color: #14181f;" >Question</label>
+                        <input
+                          type="text"
+                          name="question"
+                          id="question"
+                          class="form-control nofocus"
+                          ng-model="question"
+                          placeholder="Q."
+                          required
+                        />
+                        <label for="floatingInputGroup1" style="color: #14181f"
+                          >Question</label
+                        >
                       </div>
                       <div
-                      class="text-danger"
-                      ng-if="registerForm.question.$dirty && registerForm.question.$invalid"
-                      style="font-size: 14px"
-                    >
-                      <span ng-if="registerForm.question.$error.required">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp;
-                        Question is required.
-                      </span>
-                      
-                    </div>
+                        class="text-danger"
+                        ng-if="registerForm.question.$dirty && registerForm.question.$invalid"
+                        style="font-size: 14px"
+                      >
+                        <span ng-if="registerForm.question.$error.required">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp;
+                          Question is required.
+                        </span>
+                      </div>
                     </div>
                     <div class="col-md">
                       <div class="form-floating">
-                  
-                  <input
-                    type="number"
-                    name="marks"
-                    id="marks"
-                    class="form-control nofocus"
-                    ng-model="marks"
-                    placeholder="Max marks"
-                    min="1"
-                    required
-                  /><label for="floatingInputGrid"  style="color: #181d24;">Marks</label></div>
-                  <div
-                  class="text-danger"
-                  ng-if="registerForm.marks.$dirty && registerForm.marks.$invalid"
-                  style="font-size: 14px"
-                >
-                  <span ng-if="registerForm.marks.$error.required">
-                    <i class="bi bi-exclamation-circle"></i> &nbsp;
-                    Marks is required.
-                  </span>
-                  <span ng-if="registerForm.marks.$error.min">
-                    <i class="bi bi-exclamation-circle"></i> &nbsp;
-                    Invalid Marks format.
-                  </span>
-                </div>
-                </div>
-                  <button type="submit" class="btn btn-primary btn-dark">Add</button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-dark"
-                    ng-click="toggleMcqDisplay()"
-                  >
-                    Cancel
-                  </button></div>
+                        <input
+                          type="number"
+                          name="marks"
+                          id="marks"
+                          class="form-control nofocus"
+                          ng-model="marks"
+                          placeholder="Max marks"
+                          min="1"
+                          required
+                        /><label for="floatingInputGrid" style="color: #181d24"
+                          >Marks</label
+                        >
+                      </div>
+                      <div
+                        class="text-danger"
+                        ng-if="registerForm.marks.$dirty && registerForm.marks.$invalid"
+                        style="font-size: 14px"
+                      >
+                        <span ng-if="registerForm.marks.$error.required">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp; Marks
+                          is required.
+                        </span>
+                        <span ng-if="registerForm.marks.$error.min">
+                          <i class="bi bi-exclamation-circle"></i> &nbsp;
+                          Invalid Marks format.
+                        </span>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-dark">
+                      Add
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-dark"
+                      ng-click="toggleMcqDisplay()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
                 <form ng-submit="addChoice()">
                   <div class="input-group mb-2">
@@ -268,7 +286,10 @@
                       ng-model="choice"
                       required
                     />
-                    <button class="btn btn-outline-secondary btn-dark" type="submit">
+                    <button
+                      class="btn btn-outline-secondary btn-dark"
+                      type="submit"
+                    >
                       Add choice
                     </button>
                   </div>
@@ -279,50 +300,9 @@
                   </li>
                 </ol>
               </div>
-              <div
-                class="d-flex flex-row justify-content-around"
-                ng-show="dateDisplay"
-              >
-                <form ng-submit="addDateTime()">
-                  <div class="row g-2">
-                    <div class="col-md">
-                      <div class="form-floating">
-                  <input
-                    type="date"
-                    name="date"
-                    id="date"
-                    class="form-control nofocus"
-                    ng-model="date"
-                    min="{{todaysDate}}"
-                    required
-                  />
-                  <label for="floatingInputGroup1" style="color: #14181f;" >Date</label>
-                </div></div>
-                <div class="col-md">
-                  <div class="form-floating">
-                  <input
-                    type="time"
-                    name="time"
-                    id="time"
-                    class="form-control nofocus"
-                    placeholder="hr:min"
-                    ng-model="time"
-                    required
-                  />
-                  <label for="floatingInputGroup1" style="color: #14181f;" >Time</label></div></div>
-                  <button type="submit" class="btn btn-primary btn-dark">Add</button>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-dark"
-                    ng-click="toggleDateDisplay()"
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
             </div>
             <div class="row" ng-show="questions.length">
-              <h3 class="text-center text-white pt-2 mt-4">Added questions</h3>
+              <h3 class="text-center text-white pt-2 mt-2">Added questions</h3>
               <table class="table table-dark table-responsive mt-3">
                 <thead>
                   <tr>
@@ -413,7 +393,7 @@
         <form ng-submit="editQ()" id="editFrom">
           <div
             class="input-group mb-3"
-            ng-show="selectedOption.type === 'subjective'"
+            ng-show=" edOption.type === 'subjective'"
           >
             <span class="input-group-text">Question</span>
             <input

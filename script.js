@@ -63,7 +63,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "/Portal_app/templates/dashboard/states/master_config.html",
       controller: "masterController",
     })
-
     .state("dashBoard.teacherregister", {
       url: "/EduSyncity/teacherregister",
       templateUrl: "/Portal_app/templates/register_temp/teacherregister.html",
@@ -131,3 +130,24 @@ const year = date.getFullYear();
 const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
   .toString()
   .padStart(2, "0")}`;
+
+goFullScreen = (elem) => {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  }
+};
+
+disableKey = () => {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" || event.key === "F11") {
+      // event.preventDefault();
+      return false;
+    }
+  });
+};
+
+enableKey = () => {
+  document.onkeydwon = (e) => {
+    return true;
+  };
+};

@@ -1,98 +1,209 @@
 <div class="container-fluid h-100">
-    <div class="container pt-3 h-100">
-      <div class="col h-100">
-        <div
-          class="row-3 d-flex flex-column justify-content-center align-items-center"
-          style="background-color: #252f3e"
-        >
-          <h1 class="text-center text-white pt-3">KIET Group Of Institutions</h1>
-         
-  
-          <div class="d-flex justify-content-between p-3 w-100">
-           
-            <div class="input-group p-2 w-50">
+  <div class="container py-4 h-100">
+    <div class="col h-100 w-100 d-flex flex-column">
+      <div
+        class="row-3 d-flex flex-column justify-content-center align-items-center"
+        style="background-color: #252f3e"
+      >
+        <h1 class="text-center text-white pt-3">KIET Group Of Institutions</h1>
+
+        <div class="row p-2 d-flex justify-content-center w-100">
+          <div class="col-md-6">
+            <div class="input-group p-2">
               <label class="input-group-text" for="courses">Exam</label>
               <select
                 class="form-select criteria-btn"
-                ng-change="getChild(selectedParent)"
-                ng-model="selectedParent"
-                ng-options="option.id as option.name for option in options"
+                ng-change="getExam(exam)"
+                ng-model="exam"
               >
                 <option value="" selected>Select Exam</option>
+                <option value="{{option.pk}}" ng-repeat="option in exams">
+                  {{option.name}}
+                </option>
               </select>
-              
             </div>
-            <div class="input-group p-2 w-45">
-
-                <label class="input-group-text" for="courses">Subject</label>
-                <select
-                  class="form-select criteria-btn"
-                  ng-change="getChild(selectedParent)"
-                  ng-model="selectedParent"
-                  ng-options="option.id as option.name for option in options"
-                >
-                  <option value="" selected>Select Subject</option>
-                </select>
-                
-              </div>
-
-
-             
+          </div>
+          <div class="col-md-6">
+            <div class="input-group p-2">
+              <label class="input-group-text" for="courses">Subject</label>
+              <select
+                class="form-select criteria-btn"
+                ng-change="getSubject(subject)"
+                ng-model="subject"
+              >
+                <option value="" selected>Select Subject</option>
+                <option value="{{option.pk}}" ng-repeat="option in subjects">
+                  {{option.subject__subject_name}}
+                </option>
+              </select>
             </div>
-            <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Start</button>
-               
-            </div>
-             
           </div>
         </div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3  id="staticBackdropLabel">Warning for the exam </h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-       
-        <div class="modal-body mx-3">
-        <div class="md-form mb-4">
-          <label data-error="wrong" data-success="right" >Time for your examination</label>
-          
-         
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
-      </div>
-      
-      
 
+        <div class="d-grid gap-2 d-md-block mt-2" ng-if="selectedSub && examId">
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#startModal"
+          >
+            Start
+          </button>
+        </div>
+      </div>
+      <div
+        class="row-7 flex-fill d-flex flex-column justify-content-center align-items-center w-100"
+        style="background-color: #252f3e"
+      ></div>
     </div>
   </div>
 </div>
-  
-  <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content row-3 d-flex flex-column justify-content-center align-items-center"
-      style="background-color: #252f3e">
-       
-        <div class="modal-header">
-          
-          <h1 class="modal-title fs-2 text-center text-white pt-2">KIET Group Of Institutions</h1>
 
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <p id="demo"></p>
+<div
+  class="modal fade"
+  id="startModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="startModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="startModalLabel">Read carefully!!</h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body mx-3">
+        <div class="md-form mb-4">
+          <ol type="1">
+            <li>Arrange for stable Internet connectivity.</li>
+            <li>
+              Giving examination on Laptop or Desktop is highly recommended.
+            </li>
+            <li>
+              Close all browsers/tabs before starting the online examination.
+            </li>
+            <li>
+              To avoid unwanted pop-ups, use of Ad Blocker is recommended.
+            </li>
+          </ol>
+          <label data-error="wrong" data-success="right">
+            <span>Note : </span>Time for your examination is {{hours}} hrs
+            {{min}} min</label
+          ><br />
         </div>
-        <div class="modal-body">
-         
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary"  data-bs-toggle="modal">Submit</button>
-        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#examModal"
+          ng-click="startExam()"
+        >
+          Start attempt
+        </button>
       </div>
     </div>
   </div>
+</div>
+
+<div
+  class="modal fade"
+  id="examModal"
+  aria-hidden="true"
+  aria-labelledby="examModalLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-fullscreen">
+    <div
+      class="modal-content row-3 d-flex flex-column justify-content-center align-items-center"
+      style="background-color: #252f3e"
+    >
+      <div class="modal-header d-flex justify-content-center">
+        <h1 class="modal-title fs-2 text-center text-white pt-2">
+          KIET Group Of Institutions
+        </h1>
+      </div>
+
+      <div class="modal-body w-100">
+        <div class="container-fliud">
+          <div class="container">
+            <div
+              class="col d-flex flex-column justify-content-center overflow-auto"
+            >
+              <form id="ansForm" ng-submit="submitExam()">
+                <div class="card my-3" ng-repeat="question in qPaper">
+                  <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                  >
+                    <div class="d-flex justify-content-center">
+                      Question {{$index +1}}
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      M.M. : {{question.marks}}
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                      <p>{{question.question}}</p>
+
+                      <div
+                        class="form-floating"
+                        ng-if="question.type === 'subjective'"
+                      >
+                        <textarea
+                          class="form-control"
+                          placeholder="Leave a comment here"
+                          id="floatingTextarea"
+                          ng-model="answer{{$index + 1}}"
+                        ></textarea>
+                        <label for="floatingTextarea">Answer</label>
+                      </div>
+                      <div
+                        class="form-floating"
+                        ng-if="question.type === 'multChoice'"
+                      >
+                        <div
+                          class="form-check"
+                          ng-repeat="choice in question.choices"
+                        >
+                          <input
+                            type="radio"
+                            class="form-check-input"
+                            id="choice{{$index}}"
+                            name="ansChoice"
+                            value="{{choice.choice}}"
+                          />
+                          <label class="form-check-label" for="choice{{$index}}"
+                            >{{choice.choice}}</label
+                          >
+                        </div>
+                      </div>
+                    </blockquote>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          form="ansForm"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
   </div>
+</div>

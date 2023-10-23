@@ -73,8 +73,6 @@ myApp.controller("dbController", [
           if (panelData) {
             $scope.panelData = panelData;
           }
-
-          console.log($scope.panelData);
         })
         .catch((e) => {
           console.log(e);
