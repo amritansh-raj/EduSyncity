@@ -80,7 +80,10 @@
   <header class="offcanvas-header" style="background-color: #252f3e">
     <a class="text-decoration-none" ui-sref="dashBoard">
       <h3 class="offcanvas-title" id="navCanvasLabel" style="color: #22d3ee">
-        <img src="https://tech.kiet.edu/StudentPortal/assets/images/logos/fuse.svg" alt="">
+        <img
+          src="https://tech.kiet.edu/StudentPortal/assets/images/logos/fuse.svg"
+          alt=""
+        />
         EduSyncity
       </h3>
     </a>
@@ -95,7 +98,7 @@
   </header>
   <div class="offcanvas-body">
     <ul class="list-group list-group-flush" ng-repeat="data in panelData">
-      <li class="list-group-item fs-4 p-0 my-2">
+      <li class="list-group-item fs-4 p-0 mt-2">
         <div ng-if="data.type === 'button'">
           <button
             class="btn nav-btn w-100 p-3 text-start"
@@ -134,6 +137,7 @@
                         ng-click="stateChange(child.state)"
                         data-bs-dismiss="offcanvas"
                       >
+                        <i class="{{child.icon}} me-2 fs-4"></i>
                         {{child.name}}
                       </button>
                     </li>

@@ -63,6 +63,21 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "Portal_app/templates/dashboard/adminDash/mappingstates/mapping.html",
       controller: "mappingController",
     })
+    .state("dashBoard.panel", {
+      url: "/EduSyncity/panel",
+      templateUrl: "Portal_app/templates/dashboard/adminDash/manage_panel/managePanel.html",
+      controller: "panelController",
+    })
+    .state("dashBoard.datesheet", {
+      url: "/EduSyncity/datesheet",
+      templateUrl: "Portal_app/templates/dashboard/adminDash/examination/datesheet/datesheet.html",
+      controller: "datesheetController",
+    })
+    .state("dashBoard.examMap", {
+      url: "/EduSyncity/examMap",
+      templateUrl: "Portal_app/templates/dashboard/adminDash/examination/exam_mapping/exam_mapping.html",
+      controller: "datesheetController",
+    })
     .state("dashBoard.studentregister", {
       url: "/EduSyncity/studentregister",
       templateUrl: "/Portal_app/templates/dashboard/adminDash/register/student/studentregister.html",
