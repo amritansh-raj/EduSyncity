@@ -3,7 +3,6 @@ myApp.controller("qPaperController", [
   "httpService",
   "$state",
   function ($scope, httpService, $state) {
-    $scope.todaysDate = formattedDate;
 
     $scope.questions = [];
     $scope.choices = [];
