@@ -160,9 +160,8 @@
                       >
                         <textarea
                           class="form-control"
-                          placeholder="Leave a comment here"
                           id="floatingTextarea"
-                          ng-model="answer{{$index + 1}}"
+                          ng-model="answer"
                         ></textarea>
                         <label for="floatingTextarea">Answer</label>
                       </div>
@@ -177,8 +176,8 @@
                           <input
                             type="radio"
                             class="form-check-input"
-                            id="choice{{$index}}"
                             name="ansChoice"
+                            ng-model="ansChoice"
                             value="{{choice.choice}}"
                           />
                           <label class="form-check-label" for="choice{{$index}}"

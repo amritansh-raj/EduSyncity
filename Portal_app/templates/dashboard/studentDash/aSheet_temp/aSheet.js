@@ -72,8 +72,12 @@ myApp.controller("aSheetController", [
     };
 
     $scope.submitExam = () => {
-      console.log("AS");
-      hideModal("examModal");
+      subAns = $scope.answer
+      multAns = $scope.ansChoice
+
+      console.log("AS", subAns, multAns);
+      exitFullScreen(modal)
+      // hideModal("examModal");
     };
   },
 ]);
