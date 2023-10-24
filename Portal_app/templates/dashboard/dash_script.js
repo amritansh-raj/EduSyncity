@@ -91,7 +91,6 @@ myApp.controller("dbController", [
         .get("eduadmin/logout/")
         .then((r) => {
           $state.go("login");
-          console.log(r);
           alertify.success("logged out succesfully!!");
         })
         .catch((e) => {

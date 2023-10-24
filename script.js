@@ -55,22 +55,26 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("dashBoard.masterConfig", {
       url: "/EduSyncity/config",
-      templateUrl: "/Portal_app/templates/dashboard/adminDash/parent-child/master_config.html",
+      templateUrl:
+        "/Portal_app/templates/dashboard/adminDash/parent-child/master_config.html",
       controller: "masterController",
     })
     .state("dashBoard.mapping", {
       url: "/EduSyncity/mapping",
-      templateUrl: "Portal_app/templates/dashboard/adminDash/mappingstates/mapping.html",
+      templateUrl:
+        "Portal_app/templates/dashboard/adminDash/mappingstates/mapping.html",
       controller: "mappingController",
     })
     .state("dashBoard.panel", {
       url: "/EduSyncity/panel",
-      templateUrl: "Portal_app/templates/dashboard/adminDash/manage_panel/managePanel.html",
+      templateUrl:
+        "Portal_app/templates/dashboard/adminDash/manage_panel/managePanel.html",
       controller: "panelController",
     })
     .state("dashBoard.datesheet", {
       url: "/EduSyncity/datesheet",
-      templateUrl: "Portal_app/templates/dashboard/adminDash/examination/datesheet/datesheet.html",
+      templateUrl:
+        "Portal_app/templates/dashboard/adminDash/examination/datesheet/datesheet.html",
       controller: "datesheetController",
     })
     .state("dashBoard.examMap", {
@@ -80,32 +84,38 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("dashBoard.studentregister", {
       url: "/EduSyncity/studentregister",
-      templateUrl: "/Portal_app/templates/dashboard/adminDash/register/student/studentregister.html",
+      templateUrl:
+        "/Portal_app/templates/dashboard/adminDash/register/student/studentregister.html",
       controller: "studentregisterController",
     })
     .state("dashBoard.teacherregister", {
       url: "/EduSyncity/teacherregister",
-      templateUrl: "/Portal_app/templates/dashboard/adminDash/register/teacher/teacherregister.html",
+      templateUrl:
+        "/Portal_app/templates/dashboard/adminDash/register/teacher/teacherregister.html",
       controller: "teacherregisterController",
     })
     .state("dashBoard.qPaper", {
       url: "/EduSyncity/qPaper",
-      templateUrl: "/Portal_app/templates/dashboard/teacherDash/qPaper_temp/qPaper.html",
+      templateUrl:
+        "/Portal_app/templates/dashboard/teacherDash/qPaper_temp/qPaper.html",
       controller: "qPaperController",
     })
     .state("dashBoard.aSheet", {
       url: "/EduSyncity/aSheet",
-      templateUrl: "/Portal_app/templates/dashboard/studentDash/aSheet_temp/aSheet.html",
+      templateUrl:
+        "/Portal_app/templates/dashboard/studentDash/aSheet_temp/aSheet.html",
       controller: "aSheetController",
     })
     .state("dashBoard.eval", {
       url: "/EduSyncity/eval",
-      templateUrl: "/Portal_app/templates/dashboard/teacherDash/evaluation/evaluate.html",
+      templateUrl:
+        "/Portal_app/templates/dashboard/teacherDash/evaluation/evaluate.html",
       controller: "evalController",
     })
     .state("dashBoard.studentmarks", {
       url: "/EduSyncity/studentmarks",
-      templateUrl: "/Portal_app/templates/dashboard/studentDash/studentmarks_temp/studentmarks.html",
+      templateUrl:
+        "/Portal_app/templates/dashboard/studentDash/studentmarks_temp/studentmarks.html",
       controller: "studentmarksController",
     });
 });
@@ -136,9 +146,16 @@ validatePhoneNumber = (phoneNumber) => {
 };
 
 hideModal = (modalId) => {
+  console.log("hideModal");
   const getModal = document.getElementById(modalId);
   const modal = bootstrap.Modal.getInstance(getModal);
   modal.hide();
+};
+
+showModal = (modalId) => {
+  const getModal = document.getElementById(modalId);
+  const modal = bootstrap.Modal.getInstance(getModal);
+  modal.show();
 };
 
 const date = new Date();
@@ -151,29 +168,20 @@ const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
   .toString()
   .padStart(2, "0")}`;
 
+const count = 3;
+
 goFullScreen = (elem) => {
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
   }
 };
 
-exitFullScreen = (elem) => {
-  if (elem.exitFullscreen) {
-    elem.exitFullscreen();
+exitFullScreen = () => {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
   }
-};
-
-disableKey = () => {
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" || event.key === "F11") {
-      // event.preventDefault();
-      return false;
-    }
-  });
-};
-
-enableKey = () => {
-  document.onkeydwon = (e) => {
-    return true;
-  };
 };
