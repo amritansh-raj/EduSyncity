@@ -5,7 +5,7 @@ myApp.controller("datesheetController", [
     $scope.todaysDate = formattedDate;
 
     httpService
-      .get("eduexam/department_course/")
+      .get("eduexam/course_dept_mapping/")
       .then((r) => {
         courses = r.data;
 
@@ -17,39 +17,26 @@ myApp.controller("datesheetController", [
         console.log(e);
       });
 
+    httpService
+      .get("", { id: exam })
+      .then((r) => {
+        console.log(r);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     $scope.getCourses = (course) => {
       $scope.selectedCourse = course;
 
       httpService
-        .get("", { id: course })
+        .get("educore/get_years/", { dept_mapped_id: course })
         .then((r) => {
-          console.log(r);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    };
+          years = r.data;
 
-    $scope.getYear = (year) => {
-      $scope.selectedYear = year;
-
-      httpService
-        .get("", { id: year })
-        .then((r) => {
-          console.log(r);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    };
-
-    $scope.getExam = (exam) => {
-      $scope.selectedExam = exam;
-
-      httpService
-        .get("", { id: exam })
-        .then((r) => {
-          console.log(r);
+          if (years) {
+            $scope.years = years;
+          }
         })
         .catch((e) => {
           console.log(e);

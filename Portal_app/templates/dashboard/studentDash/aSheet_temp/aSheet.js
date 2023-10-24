@@ -2,7 +2,8 @@ myApp.controller("aSheetController", [
   "$scope",
   "$state",
   "httpService",
-  function ($scope, $state, httpService) {
+  "$window",
+  function ($scope, $state, httpService, $window) {
     modal = document.getElementById("examModal");
 
     httpService
@@ -30,15 +31,35 @@ myApp.controller("aSheetController", [
         console.log(e);
       });
 
+    $scope.examState = (elem) => {
+      goFullScreen(elem);
+
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "F5" ||
+          (e.ctrlKey && e.key === "r") ||
+          (e.ctrlKey && e.shiftKey && e.key === "R") ||
+          (e.ctrlKey && e.shiftKey && e.key === "I")
+        ) {
+          e.preventDefault();
+          return false;
+        }
+
+        if (e.key === "Escape" || e.key === "F11") {
+          showModal("staticBackdrop");
+          e.preventDefault();
+          return false;
+        }
+      });
+    };
+
     $scope.getExam = (selectedExam) => {
       $scope.examId = selectedExam;
       httpService
         .get("eduexam/examinfo/", { id: selectedExam })
         .then((r) => {
-          console.log(r.data);
           $scope.maxMarks = r.data[0].marks__name;
           $scope.time = r.data[0].duration__name;
-          console.log($scope.time);
           $scope.hours = Math.floor($scope.time / 60);
           $scope.min = $scope.time % 60;
         })
@@ -49,35 +70,27 @@ myApp.controller("aSheetController", [
 
     $scope.getSubject = (subject) => {
       $scope.selectedSub = subject;
-    };
-
-    $scope.startExam = () => {
       httpService
         .get("eduexam/get_question_paper/", { id: $scope.selectedSub })
         .then((r) => {
-          console.log(r.data);
           qPaper = r.data[0].questions;
 
           if (qPaper) {
             $scope.qPaper = qPaper;
           }
-
-          console.log($scope.qPaper);
         })
         .catch((e) => {
           console.log(e.data);
         });
-      goFullScreen(modal);
-      disableKey();
     };
 
-    $scope.submitExam = () => {
-      subAns = $scope.answer
-      multAns = $scope.ansChoice
+    $scope.startExam = () => {
+      $scope.examState(modal, 2);
 
-      console.log("AS", subAns, multAns);
-      exitFullScreen(modal)
-      // hideModal("examModal");
+      // if (!$window.fullScreen) {
+      //   $window.alert("SAdad")
+      // }
     };
+
   },
 ]);

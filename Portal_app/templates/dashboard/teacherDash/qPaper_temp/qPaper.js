@@ -3,7 +3,6 @@ myApp.controller("qPaperController", [
   "httpService",
   "$state",
   function ($scope, httpService, $state) {
-
     $scope.questions = [];
     $scope.choices = [];
     $scope.exam = {};
@@ -16,8 +15,6 @@ myApp.controller("qPaperController", [
         if (courses) {
           $scope.courses = courses;
         }
-
-        console.log($scope.courses);
       })
       .catch((e) => {
         console.log(e);
@@ -44,8 +41,6 @@ myApp.controller("qPaperController", [
           if (subjects) {
             $scope.subjects = subjects;
           }
-
-          console.log($scope.subjects);
         })
         .catch((e) => {
           console.log(e);
@@ -54,17 +49,15 @@ myApp.controller("qPaperController", [
 
     $scope.selectedSub = (subject) => {
       $scope.selectedSubject = subject;
-      console.log($scope.selectedSubject);
     };
 
     $scope.getExam = (selectedExam) => {
+      $scope.selectedExam = selectedExam;
       httpService
         .get("eduexam/examinfo/", { id: selectedExam })
         .then((r) => {
-          console.log(r.data);
           $scope.maxMarks = r.data[0].marks__name;
           $scope.time = r.data[0].duration__name;
-          console.log($scope.time);
           $scope.hours = Math.floor($scope.time / 60);
           $scope.min = $scope.time % 60;
         })
@@ -95,6 +88,7 @@ myApp.controller("qPaperController", [
     $scope.addChoice = () => {
       $scope.choices.push({
         choice: $scope.choice,
+        choosen: false,
       });
       console.log($scope.choices);
       $scope.choice = "";
@@ -158,19 +152,19 @@ myApp.controller("qPaperController", [
         $scope.exam.subject = $scope.selectedSubject;
         $scope.exam.exam_type = $scope.selectedExam;
         console.log($scope.exam);
-        httpService
-          .post("eduexam/question_paper/", $scope.exam)
-          .then((r) => {
-            alertify.success(r.data.message);
-            $scope.questions = [];
-            $scope.choices = [];
-            $scope.exam = {};
-            console.log(r);
-          })
-          .catch((e) => {
-            console.log(e);
-            alertify.error(e.data.message);
-          });
+        // httpService
+        //   .post("eduexam/question_paper/", $scope.exam)
+        //   .then((r) => {
+        //     alertify.success(r.data.message);
+        //     $scope.questions = [];
+        //     $scope.choices = [];
+        //     $scope.exam = {};
+        //     console.log(r);
+        //   })
+        //   .catch((e) => {
+        //     console.log(e);
+        //     alertify.error(e.data.message);
+        //   });
       }
     };
   },

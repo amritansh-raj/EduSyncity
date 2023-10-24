@@ -16,7 +16,7 @@
               >
                 <option value="" selected>Select Course</option>
                 <option value="{{option.id}}" ng-repeat="option in courses">
-                  {{option.name}}
+                  {{option.course_id__name}}({{option.department_id__name}})
                 </option>
               </select>
             </div>
@@ -30,8 +30,8 @@
                 ng-model="year"
               >
                 <option value="" selected>Select Year</option>
-                <option value="{{option.pk}}" ng-repeat="option in years">
-                  {{option.name}}
+                <option value="{{option}}" ng-repeat="option in years">
+                  {{option}}
                 </option>
               </select>
             </div>
