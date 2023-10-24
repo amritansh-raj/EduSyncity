@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.66.247:8000/");
+myApp.constant("apiUrl", "https://192.168.43.3:8000/");
 
 myApp.service("httpService", [
   "$http",
@@ -76,7 +76,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     .state("dashBoard.examMap", {
       url: "/EduSyncity/examMap",
       templateUrl: "Portal_app/templates/dashboard/adminDash/examination/exam_mapping/exam_mapping.html",
-      controller: "datesheetController",
+      controller: "examMappingController",
     })
     .state("dashBoard.studentregister", {
       url: "/EduSyncity/studentregister",
