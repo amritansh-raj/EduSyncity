@@ -3,6 +3,21 @@ myApp.controller("datesheetController", [
   "httpService",
   function ($scope, httpService) {
     $scope.todaysDate = formattedDate;
+    mapping = () => {
+      httpService
+      .get("eduexam/get_exam_mapping/")
+      .then((r) => {
+        console.log(r);
+        get_exam_mapping = r.data;
+        if (get_exam_mapping) {
+          $scope.get_exam_mapping = get_exam_mapping;
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    }
+    mapping();
     httpService
       .get("educore/courses")
       .then((r) => {
@@ -56,7 +71,7 @@ myApp.controller("datesheetController", [
       $scope.exam = exam;
       console.log(exam)
       httpService
-        .get("educore/examtype")
+        .get("eduexam/show_exam_type/")
         .then((r) => {
           console.log(r);
           exams = r.data;
@@ -118,6 +133,7 @@ myApp.controller("datesheetController", [
         .post("eduexam/conduct_datesheet/", sendData)
         .then((r) => {
           console.log(r.data)
+          mapping()
         })
         .catch((e) => {
           alertify.set("notifier", "position", "bottom-right");
@@ -125,6 +141,6 @@ myApp.controller("datesheetController", [
 
         });
     }
-
+   
   },
 ]);

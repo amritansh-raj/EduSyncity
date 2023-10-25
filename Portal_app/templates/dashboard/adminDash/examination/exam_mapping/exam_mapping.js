@@ -80,8 +80,9 @@ myApp.controller("examMappingController", [
           console.log(e);
           alertify.error(e.data.message);
               });
-          }
-          mapped();
+          } 
+           mapped();
+         
     },
   ]);
   
