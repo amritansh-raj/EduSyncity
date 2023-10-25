@@ -71,13 +71,14 @@ myApp.controller("aSheetController", [
     $scope.getSubject = (subject) => {
       $scope.selectedSub = subject;
       httpService
-        .get("eduexam/get_question_paper/", { id: $scope.selectedSub })
+        .get("eduexam/get_question_paper/", { id: 10 })
         .then((r) => {
           qPaper = r.data[0].questions;
 
           if (qPaper) {
             $scope.qPaper = qPaper;
           }
+          console.log($scope.qPaper);
         })
         .catch((e) => {
           console.log(e.data);
@@ -91,6 +92,5 @@ myApp.controller("aSheetController", [
       //   $window.alert("SAdad")
       // }
     };
-
   },
 ]);

@@ -1,14 +1,21 @@
 <div class="container-fluid h-100">
   <div class="container py-4 h-100">
     <div class="col h-100 w-100 d-flex flex-column">
-      <div class="row-3 d-flex flex-column justify-content-center align-items-center" style="background-color: #252f3e">
+      <div
+        class="row-3 d-flex flex-column justify-content-center align-items-center"
+        style="background-color: #252f3e"
+      >
         <h1 class="text-center text-white pt-3">KIET Group Of Institutions</h1>
 
         <div class="row p-2 d-flex justify-content-center w-100">
           <div class="col-md-6">
             <div class="input-group p-2">
               <label class="input-group-text" for="courses">Exam</label>
-              <select class="form-select criteria-btn" ng-change="getExam(exam)" ng-model="exam">
+              <select
+                class="form-select criteria-btn"
+                ng-change="getExam(exam)"
+                ng-model="exam"
+              >
                 <option value="" selected>Select Exam</option>
                 <option value="{{option.pk}}" ng-repeat="option in exams">
                   {{option.name}}
@@ -19,7 +26,11 @@
           <div class="col-md-6">
             <div class="input-group p-2">
               <label class="input-group-text" for="courses">Subject</label>
-              <select class="form-select criteria-btn" ng-change="getSubject(subject)" ng-model="subject">
+              <select
+                class="form-select criteria-btn"
+                ng-change="getSubject(subject)"
+                ng-model="subject"
+              >
                 <option value="" selected>Select Subject</option>
                 <option value="{{option.pk}}" ng-repeat="option in subjects">
                   {{option.subject__subject_name}}
@@ -30,24 +41,43 @@
         </div>
 
         <div class="d-grid gap-2 d-md-block mt-2" ng-if="selectedSub && examId">
-          <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#startModal">
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#startModal"
+          >
             Start
           </button>
         </div>
       </div>
-      <div class="row-7 flex-fill d-flex flex-column justify-content-center align-items-center w-100"
-        style="background-color: #252f3e"></div>
+      <div
+        class="row-7 flex-fill d-flex flex-column justify-content-center align-items-center w-100"
+        style="background-color: #252f3e"
+      ></div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="startModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="startModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="startModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h3 id="startModalLabel">Read carefully!!</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
 
       <div class="modal-body mx-3">
@@ -66,11 +96,17 @@
           </ol>
           <label data-error="wrong" data-success="right">
             <span>Note : </span>Time for your examination is {{hours}} hrs
-            {{min}} min</label><br />
+            {{min}} min</label
+          ><br />
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#examModal" ng-click="startExam()">
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#examModal"
+          ng-click="startExam()"
+        >
           Start attempt
         </button>
       </div>
@@ -78,11 +114,20 @@
   </div>
 </div>
 
-<div class="modal fade" id="examModal" aria-hidden="true" aria-labelledby="examModalLabel" tabindex="-1"
-  data-bs-keyboard="false" ng-controller="ansModalContoller">
+<div
+  class="modal fade"
+  id="examModal"
+  aria-hidden="true"
+  aria-labelledby="examModalLabel"
+  tabindex="-1"
+  data-bs-keyboard="false"
+  ng-controller="ansModalContoller"
+>
   <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content row-3 d-flex flex-column justify-content-center align-items-center"
-      style="background-color: #252f3e">
+    <div
+      class="modal-content row-3 d-flex flex-column justify-content-center align-items-center"
+      style="background-color: #252f3e"
+    >
       <div class="modal-header d-flex justify-content-center">
         <h1 class="modal-title fs-2 text-center text-white pt-2">
           KIET Group Of Institutions
@@ -94,12 +139,16 @@
       <div class="modal-body w-100">
         <div class="container-fliud">
           <div class="container">
-            <div class="col d-flex flex-column justify-content-center overflow-auto">
+            <div
+              class="col d-flex flex-column justify-content-center overflow-auto"
+            >
               <form ng-submit="submitExam()">
                 <div class="card my-3" ng-repeat="question in qPaper">
-                  <div class="card-header d-flex justify-content-between align-items-center">
+                  <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                  >
                     <div class="d-flex justify-content-center">
-                      Question {{$index +1}}
+                      Question {{$index + 1}}
                     </div>
                     <div class="d-flex justify-content-center">
                       M.M. : {{question.marks}}
@@ -109,16 +158,41 @@
                     <blockquote class="blockquote mb-0">
                       <p>{{question.question}}</p>
 
-                      <div class="form-floating" ng-show="question.type === 'subjective'">
-                        <input type="text" class="form-control" id="answer" ng-change="getAns(answer)"
-                          ng-model="answer" />
+                      <div
+                        class="form-floating"
+                        ng-show="question.type === 'subjective'"
+                      >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="answer"
+                          ng-change="getAns(answer)"
+                          ng-model="question.answer"
+                        />
                         <label for="answer">Answer</label>
                       </div>
-                      <div class="form-floating" ng-show="question.type === 'multChoice'">
-                        <div class="form-check" ng-repeat="choice in question.choices">
-                          <input type="radio" class="form-check-input" id="selected{{$index}}" name="selected{{$index}}"
-                            ng-change="getMult(chooosen)" ng-model="chooosen" value="{{choice.choice}}" />
-                          <label class="form-check-label" for="selected{{$index}}">{{choice.choice}}</label>
+
+                      <div
+                        class="form-floating"
+                        ng-show="question.type === 'multChoice'"
+                      >
+                        <div
+                          class="form-check"
+                          ng-repeat="choice in question.choices"
+                        >
+                          <input
+                            type="checkbox"
+                            class="form-check-input"
+                            id="selected{{$index}}"
+                            ng-model="choice.isSelected"
+                            ng-true-value="'true'"
+                            ng-false-value="'false'"
+                          />
+                          <label
+                            class="form-check-label"
+                            for="selected{{$index}}"
+                            >{{choice.choice}}</label
+                          >
                         </div>
                       </div>
                     </blockquote>
@@ -140,13 +214,25 @@
   </div>
 </div>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">...</div>
       <div class="modal-footer">
