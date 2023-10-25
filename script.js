@@ -77,6 +77,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         "Portal_app/templates/dashboard/adminDash/examination/datesheet/datesheet.html",
       controller: "datesheetController",
     })
+    .state("dashBoard.viewdatesheet", {
+      url: "/EduSyncity/viewdatesheet",
+      templateUrl:
+        "Portal_app/templates/dashboard/adminDash/examination/viewdatesheet/viewdatesheet.html",
+      controller: "viewdatesheetContoller",
+    })
     .state("dashBoard.examMap", {
       url: "/EduSyncity/examMap",
       templateUrl: "Portal_app/templates/dashboard/adminDash/examination/exam_mapping/exam_mapping.html",
