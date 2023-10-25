@@ -5,120 +5,164 @@
         class="row-3 h-100 d-flex flex-column"
         style="background-color: #252f3e"
       >
-      <form action="" ng-submit="submitted()">
-        
-        <div class="row my-4 mx-2 g-2 w-100">
-          <div class="col-md-4">
-            <div class="input-group p-2">
-              <label class="input-group-text" for="courses">Course</label>
-              <select
-                class="form-select criteria-btn"
-                ng-change="getCourse"
-                ng-model="course"
-               
-              >
-                <option value="" disabled>Select Course</option>
-                <option value="{{option.id}}" ng-repeat="option in courses"  ng-click="getdept(option)">
-                {{option.name}}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="input-group p-2">
-              <label class="input-group-text" for="departments">Department</label>
-              <select
-                class="form-select criteria-btn"
-                ng-change="getDepartments"
-                ng-model="department"
-              >
-                <option value="" disabled>Select Department</option>
-                <option value="{{option.id}}" ng-repeat="option in departments"  ng-click="getdepartment(option)">
-                  {{option.department__name}}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="input-group p-2">
-              <label class="input-group-text" for="courses">Exam</label>
-              <select
-                class="form-select criteria-btn"
-                ng-model="exam"
-                ng-click="clickexam(exam)"
-               
-              >
-                <option value="" disabled>Select Exam</option>
-                <option value="{{option.id}}" ng-repeat="option in exams">
-                  {{option.name}}
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-      
-      
-        <div class="row g-2 h-100 w-100">
-          <div class="col-md-4">
-            <div class="card mx-3 my-4 bg-dark">
+        <h1 class="text-center text-white pt-3">
+          Conduct Exam<i class="bi bi-file-earmark-text"></i>
+        </h1>
+        <form action="" ng-submit="submitted()">
+          <div class="row my-4 mx-2 g-2 w-100">
+            <div class="col-md-4">
               <div class="input-group p-2">
-                <label class="input-group-text" for="sub">Year</label>
+                <label class="input-group-text" for="courses">Course</label>
                 <select
-                  id="year"
                   class="form-select criteria-btn"
-                  ng-model="year"
-                  ng-change="getyear"
+                  ng-change="getCourse"
+                  ng-model="course"
                 >
-                  <option value="" disabled>Select Year</option>
-                  <option value="{{option}}" ng-repeat="option in years" ng-click="Years(option)">
-                    {{option}}
+                  <option value="" disabled>Select Course</option>
+                  <option
+                    value="{{option.id}}"
+                    ng-repeat="option in courses"
+                    ng-click="getdept(option)"
+                  >
+                    {{option.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group p-2">
+                <label class="input-group-text" for="departments"
+                  >Department</label
+                >
+                <select
+                  class="form-select criteria-btn"
+                  ng-change="getDepartments"
+                  ng-model="department"
+                >
+                  <option value="" disabled>Select Department</option>
+                  <option
+                    value="{{option.id}}"
+                    ng-repeat="option in departments"
+                    ng-click="getdepartment(option)"
+                  >
+                    {{option.department__name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group p-2">
+                <label class="input-group-text" for="courses">Exam</label>
+                <select
+                  class="form-select criteria-btn"
+                  ng-model="exam"
+                  ng-click="clickexam(exam)"
+                >
+                  <option value="" disabled>Select Exam</option>
+                  <option value="{{option.id}}" ng-repeat="option in exams">
+                    {{option.exam_id__name}}&nbsp;&nbsp;({{option.duration_id__name}}min)&nbsp;-&nbsp;{{option.marks_id__name}}&nbsp;M.M
                   </option>
                 </select>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card mx-3 my-4 bg-dark">
-              <div class="input-group p-2">
-                <label class="input-group-text" for="examDate">Start Date</label>
-                <input
-                  type="date"
-                  ui-date-format="mm-dd-yyyy" 
-                  id="start"
-                  class="form-select criteria-btn"
-                  min="{{todaysDate}}"
-                  ng-click="getStart(date)"
-                  ng-model="date"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mx-3 my-4 bg-dark">
-              <div class="input-group p-2">
-                <label class="input-group-text" for="examDate">End Date</label>
-                <input
-                  type="date"
-                  id="end"
-                  class="form-select criteria-btn"
-                  min="{{todaysDate}}"
-                  ng-click="getEnd(examDates)"
-                  ng-model="examDates"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="d-grid gap-6 col-3 mx-auto">
-              <button type="submit" class="btn btn-dark btn-lg btn-block">
-                Add Exam
-               </button>
-            </div>
-          </div>
 
-         
-        </div>
+          <div class="row g-2 h-100 w-100">
+            <div class="col-md-4">
+              <div class="card mx-3 my-4 bg-dark">
+                <div class="input-group p-2">
+                  <label class="input-group-text" for="sub">Year</label>
+                  <select
+                    id="year"
+                    class="form-select criteria-btn"
+                    ng-model="year"
+                    ng-change="getyear"
+                  >
+                    <option value="" disabled>Select Year</option>
+                    <option
+                      value="{{option}}"
+                      ng-repeat="option in years"
+                      ng-click="Years(option)"
+                    >
+                      {{option}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mx-3 my-4 bg-dark">
+                <div class="input-group p-2">
+                  <label class="input-group-text" for="examDate"
+                    >Start Date</label
+                  >
+                  <input
+                    type="date"
+                    ui-date-format="mm-dd-yyyy"
+                    id="start"
+                    class="form-select criteria-btn"
+                    min="{{todaysDate}}"
+                    ng-click="getStart(date)"
+                    ng-model="date"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mx-3 my-4 bg-dark">
+                <div class="input-group p-2">
+                  <label class="input-group-text" for="examDate"
+                    >End Date</label
+                  >
+                  <input
+                    type="date"
+                    id="end"
+                    class="form-select criteria-btn"
+                    min="{{todaysDate}}"
+                    ng-click="getEnd(examDates)"
+                    ng-model="examDates"
+                  />
+                </div>
+              </div>
+             
+              <div class="pt-1 d-flex justify-content-center">
+                <button
+                type="submit"
+                class="btn btn-dark btn-lg btn-block justify-content-center"
+              >
+                Add Exam
+              </button>
+              </div>
+            </div>
+          </div>
+          
+        </form>
       
-      </form></div>
-    </div></div></div>
- 
+        <table class="table">
+          <thead>
+            <tr>
+             
+              <th scope="col">Course</th>
+              <th scope="col">Departments</th>
+              <th scope="col">Exam Type</th>
+              <th scope="col">Year</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+            </tr>
+          </thead>
+          <tbody ng-model="mappedexam">
+            <tr ng-repeat="option in get_exam_mapping">
+              
+              <td>{{option.course_department__course_id__name}}</td>
+              <td>{{option.course_department__department_id__name}}</td>
+              <td>  {{option.exam_mapping__exam_id__name}}&nbsp;({{option.exam_mapping__duration_id__name}} &nbsp;min)&nbsp;-&nbsp;{{option.exam_mapping__marks_id__name}}&nbsp;M.M</td>
+              <td>{{option.year }}</td>
+              <td>{{option.start_date }}</td>
+              <td>{{option.end_date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
