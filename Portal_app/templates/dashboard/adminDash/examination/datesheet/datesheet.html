@@ -2,36 +2,39 @@
   <div class="container py-3 h-100">
     <div class="col h-100 w-100 d-flex flex-column">
       <div
-        class="row-3 d-flex justify-content-center align-items-center"
+        class="row-3 h-100 d-flex flex-column"
         style="background-color: #252f3e"
       >
+      <form action="" ng-submit="submitted()">
+        
         <div class="row my-4 mx-2 g-2 w-100">
           <div class="col-md-4">
             <div class="input-group p-2">
               <label class="input-group-text" for="courses">Course</label>
               <select
                 class="form-select criteria-btn"
-                ng-change="getCourses(course)"
+                ng-change="getCourse"
                 ng-model="course"
+               
               >
-                <option value="" selected>Select Course</option>
-                <option value="{{option.id}}" ng-repeat="option in courses">
-                  {{option.course_id__name}}({{option.department_id__name}})
+                <option value="" disabled>Select Course</option>
+                <option value="{{option.id}}" ng-repeat="option in courses"  ng-click="getdept(option)">
+                {{option.name}}
                 </option>
               </select>
             </div>
           </div>
           <div class="col-md-4">
             <div class="input-group p-2">
-              <label class="input-group-text" for="courses">Year</label>
+              <label class="input-group-text" for="departments">Department</label>
               <select
                 class="form-select criteria-btn"
-                ng-change="getYear(year)"
-                ng-model="year"
+                ng-change="getDepartments"
+                ng-model="department"
               >
-                <option value="" selected>Select Year</option>
-                <option value="{{option}}" ng-repeat="option in years">
-                  {{option}}
+                <option value="" disabled>Select Department</option>
+                <option value="{{option.id}}" ng-repeat="option in departments"  ng-click="getdepartment(option)">
+                  {{option.department__name}}
                 </option>
               </select>
             </div>
@@ -41,34 +44,51 @@
               <label class="input-group-text" for="courses">Exam</label>
               <select
                 class="form-select criteria-btn"
-                ng-change="getExam(exam)"
                 ng-model="exam"
+                ng-click="clickexam(exam)"
+               
               >
-                <option value="" selected>Select Exam</option>
-                <option value="{{option.pk}}" ng-repeat="option in exams">
+                <option value="" disabled>Select Exam</option>
+                <option value="{{option.id}}" ng-repeat="option in exams">
                   {{option.name}}
                 </option>
               </select>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        class="row-7 flex-fill d-flex justify-content-center align-items-center w-100 overflow-auto"
-        style="background-color: #252f3e"
-      >
+      
+      
         <div class="row g-2 h-100 w-100">
           <div class="col-md-4">
             <div class="card mx-3 my-4 bg-dark">
               <div class="input-group p-2">
-                <label class="input-group-text" for="examDate">Date</label>
+                <label class="input-group-text" for="sub">Year</label>
+                <select
+                  id="year"
+                  class="form-select criteria-btn"
+                  ng-model="year"
+                  ng-change="getyear"
+                >
+                  <option value="" disabled>Select Year</option>
+                  <option value="{{option}}" ng-repeat="option in years" ng-click="Years(option)">
+                    {{option}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mx-3 my-4 bg-dark">
+              <div class="input-group p-2">
+                <label class="input-group-text" for="examDate">Start Date</label>
                 <input
                   type="date"
-                  id="examDate"
+                  ui-date-format="mm-dd-yyyy" 
+                  id="start"
                   class="form-select criteria-btn"
                   min="{{todaysDate}}"
-                  ng-click="getDate(examDate)"
-                  ng-model="examDate"
+                  ng-click="getStart(date)"
+                  ng-model="date"
                 />
               </div>
             </div>
@@ -76,41 +96,29 @@
           <div class="col-md-4">
             <div class="card mx-3 my-4 bg-dark">
               <div class="input-group p-2">
-                <label class="input-group-text" for="sub">Subject</label>
-                <select
-                  id="sub"
+                <label class="input-group-text" for="examDate">End Date</label>
+                <input
+                  type="date"
+                  id="end"
                   class="form-select criteria-btn"
-                  ng-change="getSub(sub)"
-                  ng-model="sub"
-                >
-                  <option value="" selected>Select Subject</option>
-                  <option value="{{option.pk}}" ng-repeat="option in subjects">
-                    {{option.name}}
-                  </option>
-                </select>
+                  min="{{todaysDate}}"
+                  ng-click="getEnd(examDates)"
+                  ng-model="examDates"
+                />
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card mx-3 my-4 bg-dark">
-              <div class="input-group p-2">
-                <label class="input-group-text" for="shift">Shift</label>
-                <select
-                  id="shift"
-                  class="form-select criteria-btn"
-                  ng-change="getShift(shift)"
-                  ng-model="shift"
-                >
-                  <option value="" selected>Select Shift</option>
-                  <option value="{{option.pk}}" ng-repeat="option in shift">
-                    {{option.name}}
-                  </option>
-                </select>
-              </div>
+          <div class="row mt-4">
+            <div class="d-grid gap-6 col-3 mx-auto">
+              <button type="submit" class="btn btn-dark btn-lg btn-block">
+                Add Exam
+               </button>
             </div>
           </div>
+
+         
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+      
+      </form></div>
+    </div></div></div>
+ 
