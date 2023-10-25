@@ -4,28 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduSyncity</title>
-    <link rel="icon" type="image/x-icon" href="https://tech.kiet.edu/StudentPortal/assets/images/logos/fuse.svg">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://tech.kiet.edu/StudentPortal/assets/images/logos/fuse.svg"
+    />
     <link
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.min.css"
-    />    
+    />
     <link
       rel="stylesheet"
       href="node_modules/bootstrap-icons/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="node_modules/alertifyjs/build/css/alertify.css">
-    <link rel="stylesheet" href="node_modules/alertifyjs/build/css/themes/bootstrap.css">
+    <link
+      rel="stylesheet"
+      href="node_modules/alertifyjs/build/css/alertify.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/alertifyjs/build/css/themes/bootstrap.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="vh-100" id="loader" style="display: none" style="background-color: #121212;">
+    <div
+      class="vh-100"
+      id="loader"
+      style="display: none"
+      style="background-color: #121212"
+    >
       <div class="h-100 d-flex justify-content-center align-items-center">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
     </div>
-    <div class="h-100"  id="mainContent">
+    <div class="h-100" id="mainContent">
       <div ui-view></div>
     </div>
 
@@ -35,11 +50,11 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="node_modules/alertifyjs/build/alertify.js"></script>
     <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
-    <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+    <script src="./node_modules/chart.js/dist/chart.umd.js"></script>
     <script src="script.js"></script>
     <script src="/Portal_app/templates/login_temp/login_script.js"></script>
     <script src="/Portal_app/templates/dashboard/dash_script.js"></script>
-    <script src="/Portal_app/templates/dashboard/adminDash/parent-child/master_config.js"></script> 
+    <script src="/Portal_app/templates/dashboard/adminDash/parent-child/master_config.js"></script>
     <script src="Portal_app/templates/dashboard/adminDash/mappingstates/mapping.js"></script>
     <script src="Portal_app/templates/dashboard/adminDash/examination/datesheet/datesheet.js"></script>
     <script src="Portal_app/templates/dashboard/adminDash/examination/exam_mapping/exam_mapping.js"></script>
@@ -47,7 +62,6 @@
     <script src="/Portal_app/templates/dashboard/adminDash/register/teacher/teacherregister_script.js"></script>
     <script src="/Portal_app/templates/dashboard/teacherDash/qPaper_temp/qPaper.js"></script>
     <script src="/Portal_app/templates/dashboard/studentDash/aSheet_temp/aSheet.js"></script>
-    <script src="Portal_app/templates/dashboard/studentDash/aSheet_temp/ansModal.js"></script>
     <script src="/Portal_app/templates/dashboard/teacherDash/evaluation/evaluate.js"></script>
     <script src="/Portal_app/templates/dashboard/studentDash/studentmarks_temp/studentmarks.js"></script>
   </body>

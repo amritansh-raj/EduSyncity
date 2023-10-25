@@ -3,53 +3,6 @@ myApp.controller("dbController", [
   "httpService",
   "$state",
   function ($scope, httpService, $state) {
-    // const ctx = document.getElementById("myChart");
-    // console.log(ctx);
-
-    // new Chart(ctx, {
-    //   type: "bar",
-    //   data: {
-    //     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    //     datasets: [
-    //       {
-    //         label: "# of Votes",
-    //         data: [12, 19, 3, 5, 2, 3],
-    //         borderWidth: 1,
-    //       },
-    //     ],
-    //   },
-    //   options: {
-    //     scales: {
-    //       y: {
-    //         beginAtZero: true,
-    //       },
-    //     },
-    //   },
-    // });
-
-    // const data = [
-    //   { year: 2010, count: 10 },
-    //   { year: 2011, count: 20 },
-    //   { year: 2012, count: 15 },
-    //   { year: 2013, count: 25 },
-    //   { year: 2014, count: 22 },
-    //   { year: 2015, count: 30 },
-    //   { year: 2016, count: 28 },
-    // ];
-
-    // new Chart(ctx, {
-    //   type: "bar",
-    //   data: {
-    //     labels: data.map((row) => row.year),
-    //     datasets: [
-    //       {
-    //         label: "Acquisitions by year",
-    //         data: data.map((row) => row.count),
-    //       },
-    //     ],
-    //   },
-    // });
-
     httpService
       .get("educore/loggedin/")
       .then((r) => {
@@ -69,7 +22,6 @@ myApp.controller("dbController", [
         .get("educore/sidebar/")
         .then((r) => {
           panelData = r.data;
-
           if (panelData) {
             $scope.panelData = panelData;
           }
@@ -77,6 +29,29 @@ myApp.controller("dbController", [
         .catch((e) => {
           console.log(e);
         });
+      const ctx = document.getElementById("myChart").getContext("2d");
+      console.log(ctx);
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          datasets: [
+            {
+              label: "# of Votes",
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
     };
 
     display();

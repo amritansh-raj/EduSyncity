@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://1e2a-125-21-249-98.ngrok-free.app/");
+myApp.constant("apiUrl", "https://d866-125-21-249-98.ngrok-free.app/");
 
 myApp.service("httpService", [
   "$http",
@@ -79,7 +79,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("dashBoard.examMap", {
       url: "/EduSyncity/examMap",
-      templateUrl: "Portal_app/templates/dashboard/adminDash/examination/exam_mapping/exam_mapping.html",
+      templateUrl:
+        "Portal_app/templates/dashboard/adminDash/examination/exam_mapping/exam_mapping.html",
       controller: "examMappingController",
     })
     .state("dashBoard.studentregister", {
@@ -146,7 +147,6 @@ validatePhoneNumber = (phoneNumber) => {
 };
 
 hideModal = (modalId) => {
-  console.log("hideModal");
   const getModal = document.getElementById(modalId);
   const modal = bootstrap.Modal.getInstance(getModal);
   modal.hide();

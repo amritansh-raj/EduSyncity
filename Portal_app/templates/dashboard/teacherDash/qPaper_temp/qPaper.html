@@ -16,7 +16,12 @@
               ng-model="selectedCourse"
             >
               <option value="" selected>Select Course (Branch)</option>
-              <option value="{{option.subject__department__pk}}" ng-repeat="option in courses">{{option.subject__department__course__name}}({{option.subject__department__department__name}})</option>
+              <option
+                value="{{option.subject__department__pk}}"
+                ng-repeat="option in courses"
+              >
+                {{option.subject__department__course__name}}({{option.subject__department__department__name}})
+              </option>
             </select>
           </div>
         </div>
@@ -44,336 +49,368 @@
           </div>
           <div class="row g-2">
             <div class="col-md">
-          <div class="input-group p-2 w-100">
-            
-            <label class="input-group-text" for="courses">Subject</label>
-            <select
-              class="form-select criteria-btn"
-              ng-change="selectedSub(subject)"
-              ng-model="subject"
-            >
-              <option value="" selected>Select Subject (Year)</option>
-              <option value="{{option.subject__pk}}" ng-repeat="option in subjects">{{option.subject__subject_name}}-{{option.subject__subject_code}} ({{option.year}})</option>
-            </select>
-          </div></div>
-          <div class="col-md">
-          <div class="input-group p-2 w-100">
-            <label class="input-group-text" for="courses">Exam</label>
-            <select
-              class="form-select criteria-btn"
-              ng-change="getExam(selectedExam)"
-              ng-model="selectedExam"
-              ng-options="option.pk as option.name for option in exams"
-            >
-              <option value="" selected>Select Exam</option>
-            </select>
+              <div class="input-group p-2 w-100">
+                <label class="input-group-text" for="courses">Subject</label>
+                <select
+                  class="form-select criteria-btn"
+                  ng-change="selectedSub(subject)"
+                  ng-model="subject"
+                >
+                  <option value="" selected>Select Subject (Year)</option>
+                  <option
+                    value="{{option.subject__pk}}"
+                    ng-repeat="option in subjects"
+                  >
+                    {{option.subject__subject_name}}-{{option.subject__subject_code}}
+                    ({{option.year}})
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="input-group p-2 w-100">
+                <label class="input-group-text" for="courses">Exam</label>
+                <select
+                  class="form-select criteria-btn"
+                  ng-change="getExam(selectedExam)"
+                  ng-model="selectedExam"
+                  ng-options="option.pk as option.name for option in exams"
+                >
+                  <option value="" selected>Select Exam</option>
+                </select>
+              </div>
+            </div>
           </div>
-          </div></div>
           <div class="input-group w-25">
             <div class="row d-flex justify-content-end">
               <div class="row g-1">
-              <div class="col-md">
-                <label
-                  for="staticEmail text-white"
-                  class="col-form-label text-white"
-                  >Time</label
-                >
-              </div>
-              <div class="col-md">
-                <input
-                  type="text"
-                  readonly
-                  class="form-control-plaintext text-white"
-                  id="staticEmail"
-                  value="{{hours}}h {{min}}m"
-                />
+                <div class="col-md">
+                  <label
+                    for="staticEmail text-white"
+                    class="col-form-label text-white"
+                    >Time</label
+                  >
+                </div>
+                <div class="col-md">
+                  <input
+                    type="text"
+                    readonly
+                    class="form-control-plaintext text-white"
+                    id="staticEmail"
+                    value="{{hours}}h {{min}}m"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div></div>
+      </div>
       <div
         class="row-7 h-75 d-flex flex-fill overflow-auto"
         style="background-color: #252f3e"
       >
         <div class="container d-flex justify-content-center text-white">
-          <div class="col h-100 w-100" ng-show="courses &&  selectedExam && selectedSubject">
+          <div
+            class="col h-100 w-100"
+            ng-show="courses &&  selectedExam && selectedSubject"
+          >
             <div class="row d-flex flex-row justify-content-around">
               <div
-                class="d-flex flex-row justify-content-around"
+                class="d-flex flex-row justify-content-evenly"
                 ng-show="!subDisplay && !mcqDisplay && !dateDisplay"
               >
-              <div class="row g-2 w-50">
-                <div class="col-md">
-              
-                <div class="d-flex justify-content-center my-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-lg btn-dark "
-                    ng-click="toggleSubDisplay()"
-                  >
-                    Add Subjective question
-                  </button>
-                </div></div>
-                <div class="col-md">
-                
-                <div class="d-flex justify-content-center my-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-lg btn-dark"
-                    ng-click="toggleMcqDisplay()"
-                  >
-                    Add Mcq
-                  </button>
-                </div></div>
-              </div>
-            </div>
-            
-              <div
-                class="d-flex flex-row justify-content-around"
-                ng-show="subDisplay"
-              >
-                <form ng-submit="addSubQ()" name="register">
-                  <div class="row g-2">
-                    <div class="col-md">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          name="question"
-                          id="question"
-                          class="form-control nofocus"
-                          ng-model="question"
-                          placeholder="Q."
-                          required
-                        />
-                        <label for="floatingInputGroup1" style="color: #14181f"
-                          >Question</label
-                        >
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="register.question.$dirty && register.question.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="register.question.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Question is required.
-                        </span>
-                      </div>
-                    </div>
-                    <div class="col-md">
-                      <div class="form-floating">
-                        <input
-                          type="number"
-                          name="marks"
-                          id="marks"
-                          class="form-control nofocus"
-                          ng-model="marks"
-                          placeholder="Max marks"
-                          min="1"
-                          max="{{maxMarks}}"
-                          required
-                        />
-                        <label for="floatingInputGrid" style="color: #181d24"
-                          >Marks</label
-                        >
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="register.marks.$dirty && register.marks.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="register.marks.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp; Marks
-                          is required.
-                        </span>
-                        <span ng-if="register.marks.$error.min">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Marks should be greater than 0.
-                        </span>
-                        <span ng-if="register.marks.$error.max">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Marks cannot me more than max marks.
-                        </span>
-                        <span ng-if="register.marks.$error.number">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid Marks format.
-                        </span>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-dark">
-                      Add
-                    </button>
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-dark"
-                      ng-click="toggleSubDisplay()"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div
-                class="d-flex flex-row justify-content-around"
-                ng-show="mcqDisplay"
-              >
-                <form ng-submit="addMcqQ()" name="registerForm">
-                  <div class="row g-2">
-                    <div class="col-md">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          name="question"
-                          id="question"
-                          class="form-control nofocus"
-                          ng-model="question"
-                          placeholder="Q."
-                          required
-                        />
-                        <label for="floatingInputGroup1" style="color: #14181f"
-                          >Question</label
-                        >
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.question.$dirty && registerForm.question.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.question.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Question is required.
-                        </span>
-                      </div>
-                    </div>
-                    <div class="col-md">
-                      <div class="form-floating">
-                        <input
-                          type="number"
-                          name="marks"
-                          id="marks"
-                          class="form-control nofocus"
-                          ng-model="marks"
-                          placeholder="Max marks"
-                          min="1"
-                          required
-                        /><label for="floatingInputGrid" style="color: #181d24"
-                          >Marks</label
-                        >
-                      </div>
-                      <div
-                        class="text-danger"
-                        ng-if="registerForm.marks.$dirty && registerForm.marks.$invalid"
-                        style="font-size: 14px"
-                      >
-                        <span ng-if="registerForm.marks.$error.required">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp; Marks
-                          is required.
-                        </span>
-                        <span ng-if="registerForm.marks.$error.min">
-                          <i class="bi bi-exclamation-circle"></i> &nbsp;
-                          Invalid Marks format.
-                        </span>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-dark">
-                      Add
-                    </button>
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-dark"
-                      ng-click="toggleMcqDisplay()"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-                <form ng-submit="addChoice()">
-                  <div class="input-group mb-2">
-                    <input
-                      type="text"
-                      class="form-control nofocus"
-                      placeholder="Choice"
-                      name="choice"
-                      ng-model="choice"
-                      required
-                    />
-                    <button
-                      class="btn btn-outline-secondary btn-dark"
-                      type="submit"
-                    >
-                      Add choice
-                    </button>
-                  </div>
-                </form>
-                <ol class="list-group list-group-numbered">
-                  <li class="list-group-item" ng-repeat="choice in choices">
-                    {{choice.choice}}
-                  </li>
-                </ol>
-              </div>
-            </div>
-            <div class="row" ng-show="questions.length">
-              <h3 class="text-center text-white pt-2 mt-2">Added questions</h3>
-              <table class="table table-dark table-responsive mt-3">
-                <thead>
-                  <tr>
-                    <th scope="col text-center" style="width: 5%">Index</th>
-                    <th scope="col text-center" style="width: 50%">Question</th>
-                    <th scope="col text-center" style="width: 10%">
-                      Max Marks
-                    </th>
-                    <th scope="col text-center" style="width: 25%">Choices</th>
-                    <th scope="col" style="width: 5%">Edit</th>
-                    <th scope="col" style="width: 5%">Del</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="question in questions">
-                    <td>{{$index + 1}}</td>
-                    <td>{{question.question}}</td>
-                    <td>{{question.marks}}</td>
-                    <td class="p-0">
-                      <table
-                        class="table table-dark table-responsive m-0"
-                        ng-if="question.type === 'multChoice'"
-                      >
-                        <tbody>
-                          <tr ng-repeat="choice in question.choices">
-                            <td scope="col">{{choice.choice}}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                    <td>
+                <div class="row g-2 w-100">
+                  <div class="col-md">
+                    <div class="d-flex justify-content-center my-2">
                       <button
-                        class="btn"
                         type="button"
-                        ng-click="openModal(question, $index)"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editModal"
+                        class="btn btn-primary btn-lg btn-dark"
+                        ng-click="toggleSubDisplay()"
                       >
-                        <i class="bi bi-pencil-square text-white"></i>
+                        Add Subjective question
                       </button>
-                    </td>
-                    <td>
-                      <button class="btn" type="button" ng-click="delQ($index)">
-                        <i class="bi bi-trash text-white"></i>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="d-flex justify-content-center my-2">
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-lg btn-dark"
+                        ng-click="toggleMcqDisplay()"
+                      >
+                        Add Mcq
                       </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="row" ng-show="questions.length">
-              <div class="d-grid gap-2">
-                <button
-                  class="btn btn-primary btn-light"
-                  type="button"
-                  ng-click="createExam()"
-                >
-                  Submit paper
-                </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row d-flex flex-row justify-content-around">
+                <div class="col-lg-6" ng-show="subDisplay">
+                  <form ng-submit="addSubQ()" name="register">
+                    <div class="row g-2">
+                      <div class="col-md">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            name="question"
+                            id="question"
+                            class="form-control nofocus"
+                            ng-model="question"
+                            placeholder="Q."
+                            required
+                          />
+                          <label
+                            for="floatingInputGroup1"
+                            style="color: #14181f"
+                            >Question</label
+                          >
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="register.question.$dirty && register.question.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="register.question.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Question is required.
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md">
+                        <div class="form-floating">
+                          <input
+                            type="number"
+                            name="marks"
+                            id="marks"
+                            class="form-control nofocus"
+                            ng-model="marks"
+                            placeholder="Max marks"
+                            min="1"
+                            max="{{maxMarks}}"
+                            required
+                          />
+                          <label for="floatingInputGrid" style="color: #181d24"
+                            >Marks</label
+                          >
+                        </div>
+                        <div
+                          class="text-danger"
+                          ng-if="register.marks.$dirty && register.marks.$invalid"
+                          style="font-size: 14px"
+                        >
+                          <span ng-if="register.marks.$error.required">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Marks is required.
+                          </span>
+                          <span ng-if="register.marks.$error.min">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Marks should be greater than 0.
+                          </span>
+                          <span ng-if="register.marks.$error.max">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Marks cannot me more than max marks.
+                          </span>
+                          <span ng-if="register.marks.$error.number">
+                            <i class="bi bi-exclamation-circle"></i> &nbsp;
+                            Invalid Marks format.
+                          </span>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-dark">
+                        Add
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-primary btn-dark"
+                        ng-click="toggleSubDisplay()"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-lg-6 w-75 d-flex flex-row" ng-show="mcqDisplay">
+                  <div class="col-md-6 flex-item p-2">
+                    <form ng-submit="addMcqQ()" name="registerForm">
+                      <div class="row g-2">
+                        <div class="col-md">
+                          <div class="form-floating">
+                            <input
+                              type="text"
+                              name="question"
+                              id="question"
+                              class="form-control nofocus"
+                              ng-model="question"
+                              placeholder="Q."
+                              required
+                            />
+                            <label
+                              for="floatingInputGroup1"
+                              style="color: #14181f"
+                              >Question</label
+                            >
+                          </div>
+                          <div
+                            class="text-danger"
+                            ng-if="registerForm.question.$dirty && registerForm.question.$invalid"
+                            style="font-size: 14px"
+                          >
+                            <span ng-if="registerForm.question.$error.required">
+                              <i class="bi bi-exclamation-circle"></i> &nbsp;
+                              Question is required.
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-md">
+                          <div class="form-floating">
+                            <input
+                              type="number"
+                              name="marks"
+                              id="marks"
+                              class="form-control nofocus"
+                              ng-model="marks"
+                              placeholder="Max marks"
+                              min="1"
+                              required
+                            /><label
+                              for="floatingInputGrid"
+                              style="color: #181d24"
+                              >Marks</label
+                            >
+                          </div>
+                          <div
+                            class="text-danger"
+                            ng-if="registerForm.marks.$dirty && registerForm.marks.$invalid"
+                            style="font-size: 14px"
+                          >
+                            <span ng-if="registerForm.marks.$error.required">
+                              <i class="bi bi-exclamation-circle"></i> &nbsp;
+                              Marks is required.
+                            </span>
+                            <span ng-if="registerForm.marks.$error.min">
+                              <i class="bi bi-exclamation-circle"></i> &nbsp;
+                              Invalid Marks format.
+                            </span>
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-dark">
+                          Add
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-dark"
+                          ng-click="toggleMcqDisplay()"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6 flex-item p-2">
+                    <form ng-submit="addChoice()">
+                      <div class="input-group mb-2">
+                        <input
+                          type="text"
+                          class="form-control nofocus"
+                          placeholder="Choice"
+                          name="choice"
+                          ng-model="choice"
+                          required
+                        />
+                        <button
+                          class="btn btn-outline-secondary btn-dark"
+                          type="submit"
+                        >
+                          Add choice
+                        </button>
+                      </div>
+                    </form>
+                    <div class="d-flex flex-row justify-content-around">
+                      <ol class="list-group list-group-numbered">
+                        <li
+                          class="list-group-item"
+                          ng-repeat="choice in choices"
+                        >
+                          {{choice.choice}}
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" ng-show="questions.length">
+                <h3 class="text-center text-white pt-2 mt-2">
+                  Added questions
+                </h3>
+                <table class="table table-dark table-responsive mt-3">
+                  <thead>
+                    <tr>
+                      <th scope="col text-center" style="width: 5%">Index</th>
+                      <th scope="col text-center" style="width: 50%">
+                        Question
+                      </th>
+                      <th scope="col text-center" style="width: 10%">
+                        Max Marks
+                      </th>
+                      <th scope="col text-center" style="width: 25%">
+                        Choices
+                      </th>
+                      <th scope="col" style="width: 5%">Edit</th>
+                      <th scope="col" style="width: 5%">Del</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="question in questions">
+                      <td>{{$index + 1}}</td>
+                      <td>{{question.question}}</td>
+                      <td>{{question.marks}}</td>
+                      <td class="p-0">
+                        <table
+                          class="table table-dark table-responsive m-0"
+                          ng-if="question.type === 'multChoice'"
+                        >
+                          <tbody>
+                            <tr ng-repeat="choice in question.choices">
+                              <td scope="col">{{choice.choice}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td>
+                        <button
+                          class="btn"
+                          type="button"
+                          ng-click="openModal(question, $index)"
+                          data-bs-toggle="modal"
+                          data-bs-target="#editModal"
+                        >
+                          <i class="bi bi-pencil-square text-white"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          class="btn"
+                          type="button"
+                          ng-click="delQ($index)"
+                        >
+                          <i class="bi bi-trash text-white"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row" ng-show="questions.length">
+                <div class="d-grid gap-2">
+                  <button
+                    class="btn btn-primary btn-light"
+                    type="button"
+                    ng-click="createExam()"
+                  >
+                    Submit paper
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -381,106 +418,126 @@
       </div>
     </div>
   </div>
-</div>
 
-<div
-  class="modal fade"
-  id="editModal"
-  tabindex="-1"
-  aria-labelledby="editModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="background-color: #252f3e">
-      <div class="modal-header" >
-        <h1  class="modal-title fs-2 text-light pt-2" style="text-align: center;" id="editModalLabel">Edit question</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form ng-submit="editQ()" id="editFrom">
-          <div
-            class="input-group mb-3"
-            ng-show=" edOption.type === 'subjective'"
+  <div
+    class="modal fade"
+    id="editModal"
+    tabindex="-1"
+    aria-labelledby="editModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background-color: #252f3e">
+        <div class="modal-header">
+          <h1
+            class="modal-title fs-2 text-light pt-2"
+            style="text-align: center"
+            id="editModalLabel"
           >
-            <span class="input-group-text">Question</span>
-            <input
-              type="text"
-              name="question"
-              id="question"
-              class="form-control nofocus"
-              ng-model="selectedQ"
-              required
-            />
-            <span class="input-group-text">Marks</span>
-            <input
-              type="number"
-              name="marks"
-              id="marks"
-              class="form-control w-25 nofocus"
-              ng-model="selectedM"
-              min="1"
-              required
-            />
-          </div>
-          <div
-            class="input-group mb-3"
-            ng-show="selectedOption.type === 'multChoice'"
-          >
-            <span class="input-group-text"
-              ><i class="bi bi-question-circle"></i
-            ></span>
-            <input
-              type="text"
-              name="question"
-              id="question"
-              class="form-control nofocus"
-              ng-model="selectedQ"
-              required
-            />
-            <span class="input-group-text">@</span>
-            <input
-              type="number"
-              name="marks"
-              id="marks"
-              class="form-control w-25 nofocus"
-              ng-model="selectedM"
-              min="1"
-              required
-            />
+            Edit question
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form ng-submit="editQ()" id="editFrom">
             <div
-              class="input-group"
-              ng-repeat="choices in selectedOption.choices"
+              class="input-group mb-3"
+              ng-show=" edOption.type === 'subjective'"
             >
+              <span class="input-group-text">Question</span>
               <input
                 type="text"
                 name="question"
                 id="question"
                 class="form-control nofocus"
-                ng-model="choices.choice"
+                ng-model="selectedQ"
                 required
               />
-              <button class="btn btn-dark nofocus" ng-click="delChoice($index)">Del</button>
+              <span class="input-group-text">Marks</span>
+              <input
+                type="number"
+                name="marks"
+                id="marks"
+                class="form-control w-25 nofocus"
+                ng-model="selectedM"
+                min="1"
+                required
+              />
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button
-          type="submit"
-          class="btn btn-dark nofocus"
-          form="editFrom"
-          data-bs-dismiss="modal"
-        >
-          Edit
-        </button>
+            <div
+              class="container"
+              ng-show="selectedOption.type === 'multChoice'"
+            >
+              <div class="input-group mb-3">
+                <span class="input-group-text"
+                  ><i class="bi bi-question-circle"></i
+                ></span>
+                <input
+                  type="text"
+                  name="question"
+                  id="question"
+                  class="form-control nofocus"
+                  ng-model="selectedQ"
+                  required
+                />
+                <span class="input-group-text">@</span>
+                <input
+                  type="number"
+                  name="marks"
+                  id="marks"
+                  class="form-control w-25 nofocus"
+                  ng-model="selectedM"
+                  min="1"
+                  required
+                />
+              </div>
+              <div>
+                <div
+                  class="input-group my-2"
+                  ng-repeat="choices in selectedOption.choices"
+                >
+                  <span class="input-group-text">{{$index + 1}}</span>
+                  <input
+                    type="text"
+                    name="question"
+                    id="question"
+                    class="form-control nofocus"
+                    ng-model="choices.choice"
+                    required
+                  />
+                  <button
+                    class="btn btn-dark nofocus"
+                    ng-click="delChoice($index)"
+                  >
+                    Del
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-dark nofocus"
+            form="editFrom"
+            data-bs-dismiss="modal"
+          >
+            Edit
+          </button>
+        </div>
       </div>
     </div>
   </div>
