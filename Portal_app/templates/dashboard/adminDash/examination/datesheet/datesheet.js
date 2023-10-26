@@ -47,14 +47,8 @@ myApp.controller("datesheetController", [
         .catch((e) => {
           console.log(e);
         });
-    };
-
-
-    $scope.getdepartment = (department) => {
-      $scope.getDepartments = department;
-      console.log(department)
-      httpService
-        .get("educore/get_years/", { dept_mapped_id: department.id })
+        httpService
+        .get("educore/years/", { course_id: course.id })
         .then((r) => {
           console.log(r);
           years = r.data;
@@ -65,7 +59,25 @@ myApp.controller("datesheetController", [
         .catch((e) => {
           console.log(e);
         });
-    }
+    };
+
+
+    // $scope.getdepartment = (department) => {
+    //   $scope.getDepartments = department;
+    //   console.log(department)
+    //   httpService
+    //     .get("educore/get_years/", { dept_mapped_id: department.id })
+    //     .then((r) => {
+    //       console.log(r);
+    //       years = r.data;
+    //       if (years) {
+    //         $scope.years = years;
+    //       }
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // }
 
     $scope.clickexam = (exam) => {
       $scope.exam = exam;
@@ -114,18 +126,19 @@ myApp.controller("datesheetController", [
 
     $scope.submitted = () => {
       var date = new Date($scope.date);
-    var formattedDate =
+    var formatDate =
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-      console.log(formattedDate)
+      console.log(formatDate)
+      $scope.startD=formatDate;
       var examDates = new Date($scope.examDates);
       var formatted =
       examDates.getFullYear() + "-" + (examDates.getMonth() + 1) + "-" + examDates.getDate();
         console.log(formatted)
       var sendData = {
         exam_mapping_id: $scope.exam ,
-        course_dept_id: $scope.getDepartments.id,
+        course_dept_id: $scope.getCourse.id,
         year: $scope.year,
-        start_date:formattedDate,
+        start_date:formatDate,
         end_date: formatted,
       }
       console.log(sendData);
