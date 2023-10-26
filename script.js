@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://d866-125-21-249-98.ngrok-free.app/");
+myApp.constant("apiUrl", "https://10.42.0.182:8000/");
 
 myApp.service("httpService", [
   "$http",

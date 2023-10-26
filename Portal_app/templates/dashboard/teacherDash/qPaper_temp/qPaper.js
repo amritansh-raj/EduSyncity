@@ -32,6 +32,19 @@ myApp.controller("qPaperController", [
         console.log(e);
       });
 
+    httpService
+      .get("educore/Set")
+      .then((r) => {
+        sets = r.data;
+        if (sets) {
+          $scope.sets = sets;
+        }
+        console.log($scope.sets);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     $scope.getSubject = (course) => {
       httpService
         .get("eduexam/subject_year/", { dept_id: course })
@@ -51,6 +64,10 @@ myApp.controller("qPaperController", [
       $scope.selectedSubject = subject;
     };
 
+    $scope.getSet = (selectedSet) => {
+      $scope.selectedSet = selectedSet;
+    };
+
     $scope.getExam = (selectedExam) => {
       $scope.selectedExam = selectedExam;
       httpService
@@ -68,10 +85,15 @@ myApp.controller("qPaperController", [
 
     $scope.toggleSubDisplay = () => {
       $scope.subDisplay = !$scope.subDisplay;
+      $scope.question = "";
+      $scope.marks = "";
     };
 
     $scope.toggleMcqDisplay = () => {
       $scope.mcqDisplay = !$scope.mcqDisplay;
+      $scope.question = "";
+      $scope.marks = "";
+      $scope.choices = [];
     };
 
     $scope.addSubQ = () => {
@@ -116,6 +138,7 @@ myApp.controller("qPaperController", [
     };
 
     $scope.openModal = (option, index) => {
+      console.log(option, index);
       $scope.selectedOption = option;
       $scope.selectedQ = $scope.selectedOption.question;
       $scope.selectedM = $scope.selectedOption.marks;
@@ -151,6 +174,7 @@ myApp.controller("qPaperController", [
         $scope.exam.department = $scope.selectedCourse;
         $scope.exam.subject = $scope.selectedSubject;
         $scope.exam.exam_type = $scope.selectedExam;
+        $scope.exam.set = $scope.selectedSet;
         console.log($scope.exam);
         // httpService
         //   .post("eduexam/question_paper/", $scope.exam)
@@ -159,10 +183,25 @@ myApp.controller("qPaperController", [
         //     $scope.questions = [];
         //     $scope.choices = [];
         //     $scope.exam = {};
+        //     $scope.selectedCourse = "";
+        //     $scope.subject = "";
+        //     $scope.selectedSet = "";
+        //     $scope.selectedExam = "";
+        //     $scope.hours = "";
+        //     $scope.min = "";
         //     console.log(r);
         //   })
         //   .catch((e) => {
         //     console.log(e);
+        //     $scope.questions = [];
+        //     $scope.choices = [];
+        //     $scope.exam = {};
+        //     $scope.selectedCourse = "";
+        //     $scope.subject = "";
+        //     $scope.selectedSet = "";
+        //     $scope.selectedExam = "";
+        //     $scope.hours = "";
+        //     $scope.min = "";
         //     alertify.error(e.data.message);
         //   });
       }

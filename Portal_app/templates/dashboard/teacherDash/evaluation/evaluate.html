@@ -8,6 +8,24 @@
         <div class="row p-2 my-4 d-flex justify-content-center w-100">
           <div class="col-md-6">
             <div class="input-group p-2">
+              <label class="input-group-text" for="courses">Courses</label>
+              <select
+                class="form-select criteria-btn"
+                ng-change="getCourse(selectedCourse)"
+                ng-model="selectedCourse"
+              >
+                <option value="" selected>Select Course (Branch)</option>
+                <option
+                  value="{{option.subject__department__pk}}"
+                  ng-repeat="option in courses"
+                >
+                  {{option.subject__department__course__name}}({{option.subject__department__department__name}})
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group p-2">
               <label class="input-group-text" for="courses">Exam</label>
               <select
                 class="form-select criteria-btn"
@@ -54,7 +72,45 @@
       <div
         class="row-7 flex-fill d-flex flex-column justify-content-center align-items-center w-100"
         style="background-color: #252f3e"
-      ></div>
+      >
+        <div class="container">
+          <div class="row">
+            <div class="list-group">
+              <button
+                type="button"
+                class="list-group-item list-group-item-action active"
+              >
+                The current button
+              </button>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+              >
+                A second button item
+              </button>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+              >
+                A third button item
+              </button>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+              >
+                A fourth button item
+              </button>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                disabled
+              >
+                A disabled button item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -101,7 +157,7 @@
 
                       <div
                         class="form-floating"
-                        ng-show="question.type === 'subjective'"
+                        ng-if="question.type === 'subjective'"
                       >
                         <textarea
                           type="text"
@@ -110,14 +166,28 @@
                           ng-change="getAns(answer)"
                           ng-model="question.answer"
                           disabled
-                        >
-                        </textarea>
+                        ></textarea>
                         <label for="answer">Answer</label>
+
+                        <div class="form-floating">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="marksObtainedSubjective{{$index}}"
+                            ng-model="question.marksObtainedSubjective"
+                            max="{{question.marks}}"
+                            min="0"
+                            required
+                          />
+                          <label for="marksObtainedSubjective{{$index}}"
+                            >Marks Obtained (Max: {{question.marks}})</label
+                          >
+                        </div>
                       </div>
 
                       <div
                         class="form-floating"
-                        ng-show="question.type === 'multChoice'"
+                        ng-if="question.type === 'multChoice'"
                       >
                         <div>
                           <ul>
@@ -128,6 +198,21 @@
                               {{choice.choice}}
                             </li>
                           </ul>
+                        </div>
+
+                        <div class="form-floating">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="marksObtainedMultChoice{{$index}}"
+                            ng-model="question.marksObtainedMultChoice"
+                            max="{{question.marks}}"
+                            min="0"
+                            required
+                          />
+                          <label for="marksObtainedMultChoice{{$index}}"
+                            >Marks Obtained (Max: {{question.marks}})</label
+                          >
                         </div>
                       </div>
                     </blockquote>

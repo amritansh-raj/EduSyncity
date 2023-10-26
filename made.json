@@ -4,7 +4,7 @@
       "question": "What is your name?",
       "marks": 10,
       "type": "subjective",
-      "$$hashKey": "object:13"
+      "answer" : "sadklasmdkmlkasdas"
     },
     {
       "question": "Your name is?",
@@ -13,24 +13,21 @@
       "choices": [
         {
           "choice": "Amritansh",
-          "$$hashKey": "object:18"
+          "isCorrect": true
         },
         {
           "choice": "Sukriti",
-          "$$hashKey": "object:19"
+          "isCorrect": true
         },
         {
           "choice": "Nikhil",
-          "$$hashKey": "object:20"
+          "isCorrect": true
         },
         {
           "choice": "Swapnil",
-          "$$hashKey": "object:21"
+          "isCorrect": true
         }
-      ],
-      "$$hashKey": "object:15"
+      ]
     }
-  ],
-  "subject": 1,
-  "exam_type": 65
+  ]
 }

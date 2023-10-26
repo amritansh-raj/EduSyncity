@@ -62,6 +62,7 @@ myApp.controller("aSheetController", [
           $scope.time = r.data[0].duration__name;
           $scope.hours = Math.floor($scope.time / 60);
           $scope.min = $scope.time % 60;
+          $scope.seconds = ($scope.hours * 3600 + $scope.min * 60) * 100;
         })
         .catch((e) => {
           console.log(e);
@@ -88,10 +89,20 @@ myApp.controller("aSheetController", [
 
     $scope.startExam = () => {
       $scope.examState(modal, 2);
+      setTimeout(submitForm, $scope.seconds);
+    };
 
-      // if (!$window.fullScreen) {
-      //   $window.alert("SAdad")
-      // }
+    submitForm = (examAnswers) => {
+      httpService
+        .post("eduexam/paper_response/", examAnswers)
+        .then((r) => {
+          console.log(r);
+          hideModal("examModal");
+          exitFullScreen();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     };
 
     $scope.submitExam = () => {

@@ -80,6 +80,19 @@
                 </select>
               </div>
             </div>
+            <div class="col-md">
+              <div class="input-group p-2 w-100">
+                <label class="input-group-text" for="set">Set</label>
+                <select
+                  class="form-select criteria-btn"
+                  ng-change="getSet(selectedSet)"
+                  ng-model="selectedSet"
+                  ng-options="option.id as option.name for option in sets"
+                >
+                  <option value="" selected>Select Set</option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="input-group w-25">
             <div class="row d-flex justify-content-end">
@@ -117,7 +130,7 @@
             <div class="row d-flex flex-row justify-content-around">
               <div
                 class="d-flex flex-row justify-content-evenly"
-                ng-show="!subDisplay && !mcqDisplay && !dateDisplay"
+                ng-show="!subDisplay && !mcqDisplay && !dateDisplay && selectedSet"
               >
                 <div class="row g-2 w-100">
                   <div class="col-md">
@@ -221,7 +234,7 @@
                         Add
                       </button>
                       <button
-                        type="submit"
+                        type="button"
                         class="btn btn-primary btn-dark"
                         ng-click="toggleSubDisplay()"
                       >
@@ -298,7 +311,7 @@
                           Add
                         </button>
                         <button
-                          type="submit"
+                          type="button"
                           class="btn btn-primary btn-dark"
                           ng-click="toggleMcqDisplay()"
                         >
@@ -447,7 +460,7 @@
           <form ng-submit="editQ()" id="editFrom">
             <div
               class="input-group mb-3"
-              ng-show=" edOption.type === 'subjective'"
+              ng-show="selectedOption.type === 'subjective'"
             >
               <span class="input-group-text">Question</span>
               <input
