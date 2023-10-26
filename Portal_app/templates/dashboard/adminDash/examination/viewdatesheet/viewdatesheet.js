@@ -31,9 +31,9 @@ myApp.controller("viewdatesheetContoller", [
         .get("eduexam/selectdept/", { id: course.course_id__id })
         .then((r) => {
           console.log(r);
-          get_exam_mapping = r.data;
-          if (get_exam_mapping) {
-            $scope.get_exam_mapping = get_exam_mapping;
+          get = r.data;
+          if (get) {
+            $scope.get = get;
           }
         })
         .catch((e) => {
