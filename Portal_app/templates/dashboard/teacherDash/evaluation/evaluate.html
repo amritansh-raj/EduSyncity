@@ -29,15 +29,12 @@
               <label class="input-group-text" for="courses">Exam</label>
               <select
                 class="form-select criteria-btn"
-                ng-change="getStudent(student)"
-                ng-model="student"
+                ng-change="getExam(selectedExam)"
+                ng-model="selectedExam"
               >
                 <option value="" selected>Select Exam</option>
-                <option
-                  value="{{option.added_by}}"
-                  ng-repeat="option in students"
-                >
-                  {{option.added_by__first_name}} {{option.added_by__last_name}}
+                <option value="{{option.pk}}" ng-repeat="option in exams">
+                  {{option.name}}
                 </option>
               </select>
             </div>
@@ -51,61 +48,60 @@
                 ng-model="subject"
               >
                 <option value="" selected>Select Subject</option>
-                <option value="{{option.pk}}" ng-repeat="option in subjects">
-                  {{option.subject__subject_name}}
+                <option
+                  value="{{option.subject__pk}}"
+                  ng-repeat="option in subjects"
+                >
+                  {{option.subject__subject_name}}-{{option.subject__subject_code}}
+                  ({{option.year}})
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group p-2">
+              <label class="input-group-text" for="Sets">Sets</label>
+              <select
+                class="form-select criteria-btn"
+                ng-change="getSet(selectedSet)"
+                ng-model="selectedSet"
+                ng-click="holahola()"
+              >
+                <option value="" selected>Select Set</option>
+                <option value="{{option.pk}}" ng-repeat="option in sets">
+                  {{option.set__name}}
                 </option>
               </select>
             </div>
           </div>
         </div>
         <div class="d-grid gap-2 d-md-block mt-2">
-          <button
+          <!-- <button
             class="btn btn-primary"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#evalModal"
           >
             Start
-          </button>
+          </button> -->
         </div>
       </div>
       <div
-        class="row-7 flex-fill d-flex flex-column justify-content-center align-items-center w-100"
+        class="row-7 flex-fill d-flex flex-column w-100"
         style="background-color: #252f3e"
       >
-        <div class="container">
-          <div class="row">
-            <div class="list-group">
-              <button
-                type="button"
-                class="list-group-item list-group-item-action active"
-              >
-                The current button
-              </button>
+        <div
+          class="container my-4 d-flex justify-content-center align-items-center"
+        >
+          <div class="row w-100">
+            <div class="list-group p-0">
               <button
                 type="button"
                 class="list-group-item list-group-item-action"
+                ng-repeat="option in students"
+                ng-click="getAsheet(option , 'evalModal')"
               >
-                A second button item
-              </button>
-              <button
-                type="button"
-                class="list-group-item list-group-item-action"
-              >
-                A third button item
-              </button>
-              <button
-                type="button"
-                class="list-group-item list-group-item-action"
-              >
-                A fourth button item
-              </button>
-              <button
-                type="button"
-                class="list-group-item list-group-item-action"
-                disabled
-              >
-                A disabled button item
+                {{option.added_by__first_name}} {{option.added_by__last_name}}
               </button>
             </div>
           </div>
@@ -139,7 +135,7 @@
             <div
               class="col d-flex flex-column justify-content-center overflow-auto"
             >
-              <form id="evalForm" ng-submit="evalExam()">
+              <form id="evalForm" ng-submit="evalExam('evalModal')">
                 <div class="card my-3" ng-repeat="question in data">
                   <div
                     class="card-header d-flex justify-content-between align-items-center"

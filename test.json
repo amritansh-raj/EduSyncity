@@ -1,15 +1,6 @@
-{
-  "questions": [
-    { "question": "What are limitations of Valence bond theory?", "marks": 10 },
-    {
-      "question": "State lyotropic liquid crystal.",
-      "choices": [
-        { "choice": "A", "$$hashKey": "object:48", "isSelected": true },
-        { "choice": "B", "$$hashKey": "object:49", "isSelected": false },
-        { "choice": "C", "$$hashKey": "object:50", "isSelected": false },
-        { "choice": "D", "$$hashKey": "object:51", "isSelected": false }
-      ],
-      "marks": 10
-    }
-  ]
-}
+[
+  { "course_name": 2010, "department_count": 10 },
+  { "course_name": 2010, "department_count": 10 },
+  { "course_name": 2010, "department_count": 10 },
+  { "course_name": 2010, "department_count": 10 }
+]

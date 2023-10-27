@@ -38,6 +38,21 @@
               </select>
             </div>
           </div>
+          <div class="col-md-6">
+            <div class="input-group p-2">
+              <label class="input-group-text" for="sets">Sets</label>
+              <select
+                class="form-select criteria-btn"
+                ng-change="getSet(selectedSet)"
+                ng-model="selectedSet"
+              >
+                <option value="" selected>Select Set</option>
+                <option value="{{option.pk}}" ng-repeat="option in sets">
+                  {{option.subject__subject_name}}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="d-grid gap-2 d-md-block mt-2" ng-if="selectedSub && examId">

@@ -16,13 +16,11 @@ myApp.controller("evalController", [
       });
 
     httpService
-      .get("eduexam/get_students_answer/")
+      .get("eduexam/examtype/")
       .then((r) => {
-        console.log(r.data);
-        students = r.data;
-
-        if (students) {
-          $scope.students = students;
+        exams = r.data;
+        if (exams) {
+          $scope.exams = exams;
         }
       })
       .catch((e) => {
@@ -33,12 +31,12 @@ myApp.controller("evalController", [
       $scope.selectedCourse = selectedCourse;
 
       httpService
-        .get("", { course_id: selectedCourse })
+        .get("eduexam/subject_year/", { dept_id: selectedCourse })
         .then((r) => {
-          exams = r.data;
+          subjects = r.data;
 
-          if (exams) {
-            $scope.exams = exams;
+          if (subjects) {
+            $scope.subjects = subjects;
           }
         })
         .catch((e) => {
@@ -46,64 +44,114 @@ myApp.controller("evalController", [
         });
     };
 
-    var eval = [];
+    $scope.getExam = (selectedExam) => {
+      $scope.selectedExam = selectedExam;
+    };
 
-    httpService
-      .get("eduexam/get_student_response/")
-      .then((r) => {
-        students = r.data;
+    $scope.getSubject = (selectedSubject) => {
+      $scope.selectedSubject = selectedSubject;
+    };
 
-        if (students) {
-          $scope.students = students;
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    $scope.holahola = () => {
+      if (
+        $scope.selectedSubject &&
+        $scope.selectedExam &&
+        $scope.selectedCourse
+      ) {
+        httpService
+          .get("eduexam/paper_set/", {
+            dept_id: $scope.selectedCourse,
+            sub_id: $scope.selectedSubject,
+            exam_id: $scope.selectedExam,
+          })
+          .then((r) => {
+            sets = r.data;
+            if (sets) {
+              $scope.sets = sets;
+            }
+          })
+          .catch((e) => {
+            console.log(e.data);
+          });
+      }
+    };
 
-    $scope.getStudent = (student) => {
+    $scope.getSet = (selectedSet) => {
+      $scope.selectedSet = selectedSet;
       httpService
-        .get("eduexam/get_question_answer/", { student_id: student })
+        .get("eduexam/get_students_answer/", { paper_id: selectedSet })
         .then((r) => {
-          console.log(r.data);
-          data = r.data[0].answer;
+          students = r.data;
+          if (students) {
+            $scope.students = students;
+          }
+        })
+        .catch((e) => {
+          console.log(e.data);
+        });
+    };
 
+    $scope.getAsheet = (ansSheet, modal) => {
+      $scope.selectedAnsSheet = ansSheet;
+      showModal(String(modal));
+      httpService
+        .get("eduexam/get_question_answer/", {
+          student_id: ansSheet.added_by,
+          subject_id: $scope.selectedSubject,
+        })
+        .then((r) => {
+          data = r.data[0].answer;
           if (data) {
             $scope.data = data;
           }
-          console.log($scope.data);
         })
         .catch((e) => {
-          console.log(e);
+          console.log(e.data);
         });
     };
 
-    $scope.evalExam = () => {
+    $scope.evalExam = (modal) => {
+      $scope.eval = [];
       for (var i = 0; i < $scope.data.length; i++) {
         var question = $scope.data[i];
 
         if ("marksObtained" in question) {
           question.marksObtained = parseInt(question.marksObtained);
         }
-        eval.push(question);
+        $scope.eval.push(question);
       }
 
       totalMarks = 0;
+
       $scope.eval.forEach((element) => {
-        totalMarks += element.marksObtainedSubjective;
+        if (element.marksObtainedSubjective) {
+          totalMarks += element.marksObtainedSubjective;
+        } else if (element.marksObtainedMultChoice) {
+          totalMarks += element.marksObtainedMultChoice;
+        }
       });
 
-      console.log(eval);
-      console.log(totalMarks);
+      var evaluation = {};
+      Object.assign(evaluation, { evaluation: $scope.eval });
+      Object.assign(evaluation, { marks_obtained: totalMarks });
+      Object.assign(evaluation, {
+        student_id: $scope.selectedAnsSheet.added_by,
+      });
 
-      //   httpService
-      //     .post("")
-      //     .then((r) => {
-      //       console.log(r);
-      //     })
-      //     .catch((e) => {
-      //       console.log(e);
-      //     });
+      console.log(evaluation);
+
+      httpService
+        .post("eduexam/paper_evaluation/", evaluation)
+        .then((r) => {
+          alertify.success(r.data.message);
+          if ((r.status = 204)) {
+            hideModal(String(modal));
+          }
+          console.log(r);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     };
   },
 ]);

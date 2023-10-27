@@ -88,7 +88,7 @@ myApp.controller("aSheetController", [
     };
 
     $scope.startExam = () => {
-      $scope.examState(modal, 2);
+      $scope.examState(modal);
       setTimeout(submitForm, $scope.seconds);
     };
 

@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.42.0.182:8000/");
+myApp.constant("apiUrl", "https://10.21.67.24:8000/");
 
 myApp.service("httpService", [
   "$http",
@@ -159,8 +159,9 @@ hideModal = (modalId) => {
 };
 
 showModal = (modalId) => {
+  console.log(modalId);
   const getModal = document.getElementById(modalId);
-  const modal = bootstrap.Modal.getInstance(getModal);
+  const modal = new bootstrap.Modal(getModal);
   modal.show();
 };
 
