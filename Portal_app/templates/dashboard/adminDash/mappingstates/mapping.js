@@ -197,9 +197,6 @@ myApp.controller("mappingController", [
         console.log(e);
       });
 
-   
-   
-   
-
+     
   }
 ])
