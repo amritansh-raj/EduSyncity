@@ -9,11 +9,9 @@
         <h1 class="text-center text-white pt-3">
          DateSheet <i class="bi bi-calendar3"></i>
         </h1>
-       
-        <form action="" ng-submit="mapping()">
-  <div class="row my-4 mx-2 g-2 w-100">
-    <div class="col-md-4">
-      <div class="input-group p-2">
+        <form action="" ng-submit="datesheet()">
+  <div class="pt-1 d-flex justify-content-center">
+      <div class="input-group p-4 w-50">
         <label class="input-group-text" for="courses">Course</label>
         <select
           class="form-select criteria-btn"
@@ -23,29 +21,27 @@
           <option value="" disabled>Select Course</option>
           <option
             value="{{option.id}}"
-            ng-repeat="option in get"
+            ng-repeat="option in get_exam_mapping"
             ng-click="getdept(option)"
           >
             {{option.course_id__name}}
           </option>
         </select>
       </div>
-    </div>
-    <div class="col-md-4">
+  </div>
+    <!-- <div class="col-md-4">
       <div class="list-group">
         <div class="form-floating">
           <select
             class="form-select"
-           
             aria-label="Floating label select example"
-           
             ng-model="choice"
           >
             <option value="" disabled>
               Select Departments for mapping
             </option>
             <option
-              ng-repeat="option in get_exam_mapping"
+              ng-repeat="option in get"
               value="{{option.id}}"
               ng-click="Dept(option)"
 
@@ -70,16 +66,92 @@
        
      
       </div>
-        </div></div>
-        
+        </div> -->
+    
+        <div class="row g-2 ">
+          <div class="col-md">
+            <div class="input-group p-2">
+              <label class="input-group-text">Subjects</label>
+              <select
+                class="form-select criteria-btn"
+               ng-model="choice"
+            
+              >
+                <option value="" disabled>Select subjects</option>
+                <option
+                value="{{option.subject_id__id}}"
+                ng-repeat="option in gets"
+                  ng-click="Sub(option)"
+                >
+                  {{option.subject_id__subject_name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="input-group p-2">
+              <label class="input-group-text" for="courses">Date</label>
+              <select
+                class="form-select criteria-btn"
+                ng-model="date"
+              >
+                <option value="" disabled>Select Date</option>
+                <option
+                  value="{{option}}"
+                  ng-repeat="option in dates "
+                  ng-click="getdate(option)"
+                >
+                  {{option}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="input-group p-2">
+              <label class="input-group-text" for="courses">Shifts</label>
+              <select
+                class="form-select criteria-btn"
+                ng-model="shift"
+                ng-change="getShift"
+              >
+                <option value="" disabled>Select Shifts</option>
+                <option
+                  value="{{option.id}}"
+                  ng-repeat="option in shifts"
+                  ng-click="gettime(option)"
+                >
+                  {{option.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="input-group p-2">
+              <label class="input-group-text" for="courses">Time</label>
+              <select
+                class="form-select criteria-btn"
+                ng-change="getShift"
+                ng-model="time"
+              >
+                <option value="" disabled>Select Times</option>
+                <option
+                  value="{{option.id}}"
+                  ng-repeat="option in times"
+                >
+                  {{option.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="pt-1 d-flex justify-content-center">
+          <button type="submit" class="btn btn-dark btn-lg btn-block">
+           Add Mapping
+          </button>
+        </div>
+      </form>
+      </div>
        
-      </div>
-      <div class="pt-1 d-flex justify-content-center">
-        <button type="submit" class="btn btn-dark btn-lg btn-block">
-         Add Mapping
-        </button>
-      </div>
-        </form>
       </div>
       </div>
     </div>
