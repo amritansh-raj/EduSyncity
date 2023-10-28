@@ -31,6 +31,62 @@ myApp.controller("aSheetController", [
         console.log(e);
       });
 
+    $scope.getExam = (selectedExam) => {
+      $scope.examId = selectedExam;
+      httpService
+        .get("eduexam/examinfo/", { id: selectedExam })
+        .then((r) => {
+          console.log(r.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    $scope.getSubject = (subject) => {
+      $scope.selectedSub = subject;
+
+      httpService
+        .get("eduexam/select_paper_set/", {
+          sub_id: $scope.selectedSub,
+          exam_id: $scope.examId,
+        })
+        .then((r) => {
+          sets = r.data;
+
+          if (sets) {
+            $scope.sets = sets;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    $scope.getSet = (selectedSet) => {
+      $scope.selectedSet = selectedSet;
+      httpService
+        .get("eduexam/get_question_paper/", { paper_id: selectedSet })
+        .then((r) => {
+          console.log(r.data);
+          qPaper = r.data[0].questions;
+          $scope.qPaperId = r.data[0].pk;
+
+          if (qPaper) {
+            $scope.qPaper = qPaper;
+          }
+
+          $scope.time = r.data[0].exam_type__duration__name;
+          $scope.hours = Math.floor($scope.time / 60);
+          $scope.min = $scope.time % 60;
+          $scope.seconds = ($scope.hours * 3600 + $scope.min * 60) * 100;
+          s;
+        })
+        .catch((e) => {
+          console.log(e.data);
+        });
+    };
+
     $scope.examState = (elem) => {
       goFullScreen(elem);
 
@@ -51,40 +107,6 @@ myApp.controller("aSheetController", [
           return false;
         }
       });
-    };
-
-    $scope.getExam = (selectedExam) => {
-      $scope.examId = selectedExam;
-      httpService
-        .get("eduexam/examinfo/", { id: selectedExam })
-        .then((r) => {
-          $scope.maxMarks = r.data[0].marks__name;
-          $scope.time = r.data[0].duration__name;
-          $scope.hours = Math.floor($scope.time / 60);
-          $scope.min = $scope.time % 60;
-          $scope.seconds = ($scope.hours * 3600 + $scope.min * 60) * 100;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    };
-
-    $scope.getSubject = (subject) => {
-      $scope.selectedSub = subject;
-      httpService
-        .get("eduexam/get_question_paper/", { id: 10 })
-        .then((r) => {
-          qPaper = r.data[0].questions;
-          $scope.qPaperId = r.data[0].id;
-          console.log($scope.qPaperId);
-          if (qPaper) {
-            $scope.qPaper = qPaper;
-          }
-          console.log($scope.qPaper);
-        })
-        .catch((e) => {
-          console.log(e.data);
-        });
     };
 
     $scope.startExam = () => {
@@ -118,12 +140,10 @@ myApp.controller("aSheetController", [
         if (question.type === "subjective") {
           answerObj.answer = question.answer;
         } else if (question.type === "multChoice") {
-          // answerObj.selectedChoices = question.selectedChoices;
           answerObj.choices = question.choices.map(function (choice) {
             return {
               choice: choice.choice,
               isCorrect: choice.isSelected,
-              // isSelected: question.selectedChoices.includes(choice.choice),
             };
           });
         }

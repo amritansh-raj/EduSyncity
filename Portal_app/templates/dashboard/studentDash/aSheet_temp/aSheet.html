@@ -48,14 +48,17 @@
               >
                 <option value="" selected>Select Set</option>
                 <option value="{{option.pk}}" ng-repeat="option in sets">
-                  {{option.subject__subject_name}}
+                  {{option.set__name}}
                 </option>
               </select>
             </div>
           </div>
         </div>
 
-        <div class="d-grid gap-2 d-md-block mt-2" ng-if="selectedSub && examId">
+        <div
+          class="d-grid gap-2 d-md-block mt-2"
+          ng-if="selectedSub && examId && selectedSet"
+        >
           <button
             class="btn btn-primary"
             type="button"
@@ -156,7 +159,7 @@
             <div
               class="col d-flex flex-column justify-content-center overflow-auto"
             >
-              <form ng-submit="submitExam()">
+              <form id="ansForm" ng-submit="submitExam()">
                 <div class="card my-3" ng-repeat="question in qPaper">
                   <div
                     class="card-header d-flex justify-content-between align-items-center"
@@ -212,7 +215,7 @@
                     </blockquote>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
               </form>
             </div>
           </div>
@@ -220,9 +223,9 @@
       </div>
 
       <div class="modal-footer">
-        <!-- <button class="btn btn-primary" type="submit" form="ansForm">
+        <button class="btn btn-primary" type="submit" form="ansForm">
           Submit
-        </button> -->
+        </button>
       </div>
     </div>
   </div>
@@ -240,7 +243,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Warning!!</h1>
         <button
           type="button"
           class="btn-close"
@@ -248,12 +251,11 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">...</div>
+      <div class="modal-body">Go back to the paper</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Understood
         </button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
