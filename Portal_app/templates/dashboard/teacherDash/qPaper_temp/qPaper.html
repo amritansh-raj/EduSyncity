@@ -66,7 +66,7 @@
                   </option>
                 </select>
               </div>
-            </div>
+            </div> 
             <div class="col-md">
               <div class="input-group p-2 w-100">
                 <label class="input-group-text" for="courses">Exam</label>
@@ -488,8 +488,7 @@
             >
               <div class="input-group mb-3">
                 <span class="input-group-text"
-                  ><i class="bi bi-question-circle"></i
-                ></span>
+                >Question</span>
                 <input
                   type="text"
                   name="question"
@@ -498,12 +497,12 @@
                   ng-model="selectedQ"
                   required
                 />
-                <span class="input-group-text">@</span>
+                <span class="input-group-text">Marks</span>
                 <input
                   type="number"
                   name="marks"
                   id="marks"
-                  class="form-control w-25 nofocus"
+                  class="form-control nofocus"
                   ng-model="selectedM"
                   min="1"
                   required

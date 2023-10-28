@@ -37,8 +37,9 @@ myApp.controller("dbController", [
               labels: data.map((row) => row.course),
               datasets: [
                 {
-                  label: "Acquisitions by year",
+                  label: "Number of departments",
                   data: data.map((row) => row.department),
+                  backgroundColor: '#22d3ee',
                 },
               ],
             },

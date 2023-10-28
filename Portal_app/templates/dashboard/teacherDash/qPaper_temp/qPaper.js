@@ -142,21 +142,23 @@ myApp.controller("qPaperController", [
       $scope.selectedOption = option;
       $scope.selectedQ = $scope.selectedOption.question;
       $scope.selectedM = $scope.selectedOption.marks;
-      if ($scope.selectedOption.choices) {
+      if ($scope.selectedOption.choices.length) {
         $scope.selectedChoices = $scope.selectedOption.choices;
       }
-      console.log($scope.selectedChoices);
       $scope.index = index;
     };
 
     $scope.editQ = () => {
       $scope.questions[$scope.index].question = $scope.selectedQ;
       $scope.questions[$scope.index].marks = $scope.selectedM;
-      console.log($scope.questions);
     };
 
     $scope.delChoice = (index) => {
-      $scope.selectedChoices.splice(index, 1);
+      if ($scope.selectedChoices.length > 2) {
+        $scope.selectedChoices.splice(index, 1);
+      } else {
+        alertify.error("Choices cannot be less than two");
+      }
     };
 
     $scope.createExam = () => {
@@ -176,34 +178,34 @@ myApp.controller("qPaperController", [
         $scope.exam.exam_type = $scope.selectedExam;
         $scope.exam.set = $scope.selectedSet;
         console.log($scope.exam);
-        // httpService
-        //   .post("eduexam/question_paper/", $scope.exam)
-        //   .then((r) => {
-        //     alertify.success(r.data.message);
-        //     $scope.questions = [];
-        //     $scope.choices = [];
-        //     $scope.exam = {};
-        //     $scope.selectedCourse = "";
-        //     $scope.subject = "";
-        //     $scope.selectedSet = "";
-        //     $scope.selectedExam = "";
-        //     $scope.hours = "";
-        //     $scope.min = "";
-        //     console.log(r);
-        //   })
-        //   .catch((e) => {
-        //     console.log(e);
-        //     $scope.questions = [];
-        //     $scope.choices = [];
-        //     $scope.exam = {};
-        //     $scope.selectedCourse = "";
-        //     $scope.subject = "";
-        //     $scope.selectedSet = "";
-        //     $scope.selectedExam = "";
-        //     $scope.hours = "";
-        //     $scope.min = "";
-        //     alertify.error(e.data.message);
-        //   });
+        httpService
+          .post("eduexam/question_paper/", $scope.exam)
+          .then((r) => {
+            alertify.success(r.data.message);
+            $scope.questions = [];
+            $scope.choices = [];
+            $scope.exam = {};
+            $scope.selectedCourse = "";
+            $scope.subject = "";
+            $scope.selectedSet = "";
+            $scope.selectedExam = "";
+            $scope.hours = "";
+            $scope.min = "";
+            console.log(r);
+          })
+          .catch((e) => {
+            console.log(e);
+            $scope.questions = [];
+            $scope.choices = [];
+            $scope.exam = {};
+            $scope.selectedCourse = "";
+            $scope.subject = "";
+            $scope.selectedSet = "";
+            $scope.selectedExam = "";
+            $scope.hours = "";
+            $scope.min = "";
+            alertify.error(e.data.message);
+          });
       }
     };
   },

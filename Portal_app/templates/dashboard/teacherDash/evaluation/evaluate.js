@@ -139,8 +139,6 @@ myApp.controller("evalController", [
         student_id: $scope.selectedAnsSheet.added_by,
       });
 
-      console.log(evaluation);
-
       httpService
         .post("eduexam/paper_evaluation/", evaluation)
         .then((r) => {

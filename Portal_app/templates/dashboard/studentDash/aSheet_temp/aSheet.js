@@ -80,7 +80,6 @@ myApp.controller("aSheetController", [
           $scope.hours = Math.floor($scope.time / 60);
           $scope.min = $scope.time % 60;
           $scope.seconds = ($scope.hours * 3600 + $scope.min * 60) * 100;
-          s;
         })
         .catch((e) => {
           console.log(e.data);
