@@ -16,6 +16,41 @@ myApp.controller("dbController", [
         }
       });
 
+    $scope.disChart = (stateName) => {
+      $state.go(stateName);
+
+      httpService
+        .get("eduexam/graph_course_dept/")
+        .then((r) => {
+          courses = r.data.course_name;
+          deptCount = r.data.department_count;
+
+          const data = [];
+
+          for (i = 0; i < courses.length; i++) {
+            data.push({ course: courses[i], department: deptCount[i] });
+          }
+
+          new Chart(document.getElementById("chart_div"), {
+            type: "bar",
+            data: {
+              labels: data.map((row) => row.course),
+              datasets: [
+                {
+                  label: "Acquisitions by year",
+                  data: data.map((row) => row.department),
+                },
+              ],
+            },
+          });
+        })
+        .catch((e) => {
+          console.log(e.data);
+        });
+    };
+
+    $scope.disChart();
+
     display = () => {
       showLoader();
       httpService
@@ -29,30 +64,6 @@ myApp.controller("dbController", [
         .catch((e) => {
           console.log(e);
         });
-        
-      // const ctx = document.getElementById("myChart").getContext("2d");
-      // console.log(ctx);
-
-      // new Chart(ctx, {
-      //   type: "bar",
-      //   data: {
-      //     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      //     datasets: [
-      //       {
-      //         label: "# of Votes",
-      //         data: [12, 19, 3, 5, 2, 3],
-      //         borderWidth: 1,
-      //       },
-      //     ],
-      //   },
-      //   options: {
-      //     scales: {
-      //       y: {
-      //         beginAtZero: true,
-      //       },
-      //     },
-      //   },
-      // });
     };
 
     display();

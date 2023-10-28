@@ -58,15 +58,18 @@
         </div>
       </div>
     </div>
+    <!-- <div id="chart_div" style="width: 400; height: 300"></div> -->
   </nav>
   <div
     class="d-flex justify-content-center align-items-center"
     style="background-color: #121212; height: calc(100% - 60px) !important"
     ui-view
   >
-    lkdsajdkaslksa
-    <div class="container h-100 w-100">
-      <canvas id="myChart" width="400" height="400"></canvas>
+    <div
+      class="container h-100 w-100 d-flex justify-content-center align-items-center"
+    >
+      <canvas id="chart_div"></canvas>
+      <div id="chart_div" style="width: 1500; height: 800"></div>
     </div>
   </div>
 </div>
@@ -79,7 +82,11 @@
   style="background-color: #1e2125"
 >
   <header class="offcanvas-header" style="background-color: #252f3e">
-    <a class="text-decoration-none" ui-sref="dashBoard">
+    <a
+      type="button"
+      class="text-decoration-none"
+      ng-click="disChart('dashBoard')"
+    >
       <h3 class="offcanvas-title" id="navCanvasLabel" style="color: #22d3ee">
         <img
           src="https://tech.kiet.edu/StudentPortal/assets/images/logos/fuse.svg"

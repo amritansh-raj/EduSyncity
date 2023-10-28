@@ -193,12 +193,5 @@ myApp.controller("mappingController", [
       .catch((e) => {
         console.log(e);
       });
-<<<<<<< HEAD
   },
 ]);
-=======
-
-     
-  }
-])
->>>>>>> c07b0faa4218571ac6e1a1bb3dae8ac5c7fc58d3

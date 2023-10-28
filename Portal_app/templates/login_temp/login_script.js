@@ -21,11 +21,11 @@ myApp.controller("loginController", [
         return;
       }
 
-      // if (pass === "Kiet@123") {
-      //   alertify.error("Kindly click on forgot password to reset password");
-      //   hideLoader();
-      //   return;
-      // }
+      if (pass === "Kiet@123") {
+        alertify.error("Kindly click on forgot password to reset password");
+        hideLoader();
+        return;
+      }
 
       httpService
         .post("eduadmin/login/", postData)
