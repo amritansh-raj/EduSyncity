@@ -35,7 +35,7 @@
             >
               <div class="card-body text-center">Department</div>
             </div>
-            <div class="card mt-3 mx-3"ng-if="selctedCourse">
+            <div class="card mt-3 mx-3" ng-if="selctedCourse">
               <div class="list-group">
                 <div class="form-floating">
                   <select
@@ -61,12 +61,10 @@
                   class="list-group-item list-group-item-action"
                   ng-model="selectedDepartment"
                   ng-repeat="department in departments"
-                  
-                  data-bs-toggle="modal" 
+                  data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   ng-click="openYearModal(department)"
                   value="{{ department.department_id }}"
-                 
                 >
                   {{department.department__name}}
                 </a>
@@ -79,24 +77,34 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-xl">
     <div class="modal-content" style="background-color: #252f3e">
       <div class="modal-header">
-        <h1 class="modal-title fs-2 text-light pt-2" style="text-align: center;">Year</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-2 text-light pt-2" style="text-align: center">
+          Year
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="form-floating">
           <select
             class="form-select"
             ng-model="selectedyear"
-           
             aria-label="Floating label select example"
           >
-            <option value="" disabled>
-              Select Years for mapping
-            </option>
+            <option value="" disabled>Select Years for mapping</option>
             <option
               ng-repeat="year in years"
               value="{{year}}"
@@ -108,93 +116,99 @@
           <label for="floatingSelect">Years</label>
         </div>
         <div class="row">
-        <div class="col-lg-6 p-0">
-          <div
-            class="card mx-3 mb-4 mt-4 bg-dark text-white text-uppercase fs-4"
-          >
-            <div class="card-body text-center">Subjects</div>
-          </div>
-          <div class="card mt-3 mx-3" ng-if="selectedYear">
-            <div class="list-group">
-              <div class="form-floating">
-                <select
-                  class="form-select"
-                  ng-model="selectedsubject"
-                  aria-label="Floating label select example"
-                >
-                  <option value="" disabled>
-                    Select subjects for mapping
-                  </option>
-                  <option
-                    ng-repeat="subj in subjs"
-                    value="{{ subj.id }}"
-                    ng-click="Sub(subj)"
+          <div class="col-lg-6 p-0">
+            <div
+              class="card mx-3 mb-4 mt-4 bg-dark text-white text-uppercase fs-4"
+            >
+              <div class="card-body text-center">Subjects</div>
+            </div>
+            <div class="card mt-3 mx-3" ng-if="selectedYear">
+              <div class="list-group">
+                <div class="form-floating">
+                  <select
+                    class="form-select"
+                    ng-model="selectedsubject"
+                    aria-label="Floating label select example"
                   >
-                    {{subj.subject_name }}({{subj.subject_code}})
-                  </option>
-                </select>
-                <label for="floatingSelect">Subjects</label>
+                    <option value="" disabled>
+                      Select subjects for mapping
+                    </option>
+                    <option
+                      ng-repeat="subj in subjs"
+                      value="{{ subj.id }}"
+                      ng-click="Sub(subj)"
+                    >
+                      {{subj.subject_name }}({{subj.subject_code}})
+                    </option>
+                  </select>
+                  <label for="floatingSelect">Subjects</label>
+                </div>
+                <a
+                  type="button"
+                  class="list-group-item list-group-item-action"
+                  ng-model="selectedcourse"
+                  value="{{subject.id}}"
+                  ng-click="getTeacher(subject)"
+                  ng-repeat="subject in subjects"
+                  >{{subject. subject_id__subject_name}}({{subject.
+                  subject_id__subject_code}})
+                </a>
               </div>
-              <a
-                type="button"
-                class="list-group-item list-group-item-action"
-                ng-model="selectedcourse"
-                value="{{subject.id}}"
-                ng-click="getTeacher(subject)"
-                ng-repeat="subject in subjects"
-               
-                >{{subject. subject_id__subject_name}}({{subject. subject_id__subject_code}})
-              </a>
+            </div>
+          </div>
+          <div class="col-lg-6 p-0" ng-if="ngsubject">
+            <div
+              class="card mx-3 mb-4 mt-4 bg-dark text-white text-uppercase fs-4"
+            >
+              <div class="card-body text-center">Teacher</div>
+            </div>
+            <div class="card mt-3 mx-3">
+              <div class="list-group">
+                <div class="form-floating">
+                  <select
+                    class="form-select"
+                    ng-model="selectedteacher"
+                    aria-label="Floating label select example"
+                  >
+                    <option value="" disabled>
+                      Select Teachers for mapping
+                    </option>
+                    <option
+                      ng-repeat="teacher in teachers"
+                      value="{{ teacher.id }}"
+                      ng-click="Tech(teacher)"
+                    >
+                      {{teacher.title_id__name}}
+                      &nbsp;{{teacher.user_id__first_name }}
+                      &nbsp;{{teacher.user_id__last_name}}
+                    </option>
+                  </select>
+                  <label for="floatingSelect">Teacher</label>
+                </div>
+                <a
+                  type="button"
+                  class="list-group-item list-group-item-action"
+                  ng-model="selectedTeacher"
+                  ng-repeat="  teach in teachs"
+                  value="{{teach}}"
+                >
+                  {{teach.faculty_id__user_id__first_name}}
+                  &nbsp;{{teach.faculty_id__user_id__last_name}}
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 p-0" ng-if="ngsubject">
-          <div
-            class="card mx-3 mb-4 mt-4 bg-dark text-white text-uppercase fs-4"
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
           >
-            <div class="card-body text-center">Teacher</div>
-          </div>
-          <div class="card mt-3 mx-3" >
-            <div class="list-group">
-              <div class="form-floating">
-                <select
-                  class="form-select"
-                  ng-model="selectedteacher"
-                  aria-label="Floating label select example"
-                >
-                  <option value="" disabled>
-                    Select Teachers for mapping
-                  </option>
-                  <option
-                    ng-repeat="teacher in teachers"
-                    value="{{ teacher.id }}"
-                    ng-click="Tech(teacher)"
-                  >
-                   {{teacher.title_id__name}} &nbsp;{{teacher.user_id__first_name }} &nbsp;{{teacher.user_id__last_name}}
-                  </option>
-                </select>
-                <label for="floatingSelect">Teacher</label>
-              </div>
-              <a
-                type="button"
-                class="list-group-item list-group-item-action"
-                ng-model="selectedTeacher"
-                ng-repeat="  teach in teachs"
-                
-                value="{{teach}}"
-               
-              >
-                {{teach.faculty_id__user_id__first_name}} &nbsp;{{teach.faculty_id__user_id__last_name}}
-              </a>
-            </div>
-          </div>
+            Close
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-</div>
-

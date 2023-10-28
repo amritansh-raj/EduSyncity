@@ -26,19 +26,19 @@
                   required
                 />
                 <div
-                class="text-danger"
-                ng-if="master.parent.$dirty && master.parent.$invalid"
-                style="font-size: 12px"
-              >
-                <span ng-if="master.parent.$error.required">
-                  <i class="bi bi-exclamation-circle"></i> &nbsp;
-                  Parent is required.
-                </span>
-                <span ng-if="master.parent.$error.text">
-                  <i class="bi bi-exclamation-circle"></i> &nbsp;
-                  Invalid parent format.
-                </span>
-              </div>
+                  class="text-danger"
+                  ng-if="master.parent.$dirty && master.parent.$invalid"
+                  style="font-size: 12px"
+                >
+                  <span ng-if="master.parent.$error.required">
+                    <i class="bi bi-exclamation-circle"></i> &nbsp; Parent is
+                    required.
+                  </span>
+                  <span ng-if="master.parent.$error.text">
+                    <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                    parent format.
+                  </span>
+                </div>
                 <span class="input-group-text">Depth</span>
                 <input
                   type="number"
