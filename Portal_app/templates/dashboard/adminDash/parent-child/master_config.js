@@ -73,6 +73,7 @@ myApp.controller("masterController", [
         })
         .catch((e) => {
           console.log(e);
+          alertify.error(e.data.message);
         });
     };
 

@@ -24,7 +24,7 @@ myApp.controller("mappingController", [
       $scope.selctedCourse = course
       console.log($scope.selctedCourse)
       httpService
-        .get("educore/departments/", { id: course.id })
+        .get("educore/departments/", { course_id: course.id })
         .then((response) => {
           departments = response.data;
 
@@ -74,6 +74,7 @@ myApp.controller("mappingController", [
         });
     }
     $scope.openYearModal = (department) => {
+      $scope.selectedsubjects=''
       $scope.seldepartment = department
       console.log($scope.seldepartment)
       httpService
@@ -105,6 +106,7 @@ myApp.controller("mappingController", [
             .catch((error) => {
               console.log(error);
             });
+           
         };
         $scope.Sub = (subj) => {
           console.log(subj.id)
@@ -135,6 +137,7 @@ myApp.controller("mappingController", [
           httpService
             .get("educore/mapped_faculty/", { id: subject.id })
             .then((r) => {
+              
               teachs = r.data;
     
               if (teachers) {
@@ -172,8 +175,8 @@ myApp.controller("mappingController", [
     
             });
         }
+        $scope.selectedyear='';
     }
-    
     httpService
       .get("educore/subjects/")
       .then((r) => {

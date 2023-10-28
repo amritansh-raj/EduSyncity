@@ -14,7 +14,7 @@
             </button>
           </div>
           <div class="formDiv" ng-show="showParentForm">
-            <form ng-submit="addParent()">
+            <form ng-submit="addParent()" name="master">
               <div class="input-group">
                 <span class="input-group-text">Parent name</span>
                 <input
@@ -25,6 +25,20 @@
                   ng-model="parent"
                   required
                 />
+                <div
+                class="text-danger"
+                ng-if="master.parent.$dirty && master.parent.$invalid"
+                style="font-size: 12px"
+              >
+                <span ng-if="master.parent.$error.required">
+                  <i class="bi bi-exclamation-circle"></i> &nbsp;
+                  Parent is required.
+                </span>
+                <span ng-if="master.parent.$error.text">
+                  <i class="bi bi-exclamation-circle"></i> &nbsp;
+                  Invalid parent format.
+                </span>
+              </div>
                 <span class="input-group-text">Depth</span>
                 <input
                   type="number"
@@ -117,7 +131,7 @@
                           name="child"
                           required
                         />
-                        <div class="form-check form-check-inline">
+                        <!-- <div class="form-check form-check-inline">
                           <input
                             class="form-check-input"
                             type="checkbox"
@@ -138,7 +152,7 @@
                           <label class="form-check-label" for="inlineCheckbox2"
                             >Deletable
                           </label>
-                        </div>
+                        </div> -->
                         <button
                           class="btn btn-outline-secondary custom-button"
                           type="submit"

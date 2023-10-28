@@ -2,7 +2,7 @@ myApp.controller("viewdatesheetContoller", [
   "$scope",
   "httpService",
   function ($scope, httpService) {
-    // $scope.options = []
+    $scope.gets = []
     // $scope.choose = [];
     // $scope.unique = []; 
     // $scope.unique_id=[]
@@ -58,67 +58,7 @@ myApp.controller("viewdatesheetContoller", [
           console.log(e);
         });
       }
-        // $scope.getdept = (course) => {
-        //   $scope.getCourse = course;
-        // httpService
-        // .get("eduexam/get_date/",{id: $scope.getCourse.course_id__id})
-        // .then((r) => {
-        //   console.log(r);
-        //   dates = r.data;
-        //   if (dates) {
-        //     $scope.dates = dates;
-        //   }
-        // })
-        // .catch((e) => {
-        //   console.log(e);
-        // });}
-    // $scope.Dept = (option) => {
-    //   console.log(option.id)
-    //   $scope.option = option
-    //   $scope.options.push(
-    //     $scope.option,
-    //   );
-    //   main=[];
-    //   main=$scope.options;
-    //   function removeDuplicates(main) { 
-       
-    //     main.forEach(element => { 
-    //         if (!$scope.unique.includes(element)) { 
-    //             $scope.unique.push(element); 
-    //         } 
-    //     }); 
-    //     return $scope.unique; 
-    // } 
-    // console.log($scope.unique)
-    // console.log(removeDuplicates(main));
-    //   $scope.choose.push(
-    //     $scope.option.id,
-    //   );
-      
-    //   console.log($scope.choice);
-    //   console.log($scope.choose);
-    // }
-
-    // $scope.Dept = (subject) => {
-    //   console.log(subject.id)
-    //   // id=$scope.choose.join(',');
-    //   httpService
-     
-    //     .get("eduexam/select_sub/", {id: id,year: $scope.getCourse.year })
-    //     .then((response) => {
-    //       subjects= response.data;
-
-    //       if (subjects) {
-    //         $scope.subjects = subjects;
-    //       }
-    //       console.log($scope.subjects);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }
-   
-
+    
     httpService
     .get("educore/shift")
     .then((r) => {
@@ -153,9 +93,9 @@ myApp.controller("viewdatesheetContoller", [
           var sendData={
               course_id:$scope.getCourse.id,
               shift:$scope.getShift.id,
-             subject:$scope.choice,
-             date:$scope.date,
-             time:$scope.time,
+              subject:$scope.choice,
+              date:$scope.date,
+              time:$scope.time,
 
           }
           console.log(sendData)
