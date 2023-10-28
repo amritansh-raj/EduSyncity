@@ -1,34 +1,16 @@
 <div class="container-fluid h-100">
   <div class="container py-3 h-100">
-    <div class="col h-100 w-100 d-flex flex-column">
-      <div
-        class="row-3 d-flex flex-column justify-content-center align-items-center"
+   <div
+        class="row-3 d-flex flex-column justify-content-center align-items-center h-100"
         style="background-color: #252f3e"
       >
-      <h1 class="text-center text-white pt-3">
+      <div class="col h-100 w-100 d-flex flex-column">
+      <h1 class="text-center text-white pt-3 my-2">
        Exam Mapping <i class="bi bi-link-45deg"></i>
       </h1>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">S.No</th>
-            <th scope="col">Exam Type</th>
-            <th scope="col">Duration</th>
-            <th scope="col">Marks</th>
-          </tr>
-        </thead>
-        <tbody ng-model="mappedexam">
-          <tr ng-repeat="option in mapped">
-            <th scope="row">{{option.id}}</th>
-            <td>{{option.exam_id__name}}</td>
-            <td>{{option.duration_id__name	}}</td>
-            <td>{{option.marks_id__name}}</td>
-          </tr>
-          
-        </tbody>
-      </table>
+        
       <form action="" ng-submit="mapping()">
-<div class="row my-4 mx-2 g-2 w-100">
+<div class="row my-4 mx-auto g-2 w-100">
   <div class="col-md-4">
       <div class="form-floating">
         <select
@@ -90,13 +72,33 @@
         <label for="floatingSelect">Marks</label>
       </div></div>
     </div>
-    <div class="pt-1 d-flex justify-content-center">
+    <div class="pt-1 d-flex justify-content-center my-2">
       <button type="submit" class="btn btn-dark btn-lg btn-block">
        Add Mapping
       </button>
     </div>
       </form>
+      <table class="table mx-auto g-2 my-4">
+        <thead>
+          <tr>
+            
+            <th scope="col">Exam Type</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Marks</th>
+          </tr>
+        </thead>
+        <tbody ng-model="mappedexam">
+          <tr ng-repeat="option in mapped">
+           
+            <td>{{option.exam_id__name}}</td>
+            <td>{{option.duration_id__name	}}</td>
+            <td>{{option.marks_id__name}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
     </div>
+   </div>
     </div>
   </div>
 </div>

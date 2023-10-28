@@ -1,6 +1,7 @@
 var myApp = angular.module("myApp", ["ui.router"]);
 myApp.constant("apiUrl", "https://10.21.67.136:8000/");
 
+
 google.charts.load("current", { packages: ["corechart"] });
 
 myApp.service("httpService", [
