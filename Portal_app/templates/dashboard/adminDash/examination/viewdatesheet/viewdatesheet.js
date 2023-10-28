@@ -77,6 +77,7 @@ myApp.controller("viewdatesheetContoller", [
       console.log($scope.getShift);
       httpService
         .get("eduexam/get_shift_time/", { id: shift.id })
+        .get("eduexam/get_shift_time/", { id: shift.id })
         .then((r) => {
           console.log(r);
           times = r.data;

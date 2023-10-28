@@ -69,6 +69,7 @@ myApp.controller("aSheetController", [
         .get("eduexam/get_question_paper/", { paper_id: selectedSet })
         .then((r) => {
           console.log(r.data);
+        
           qPaper = r.data[0].questions;
           $scope.qPaperId = r.data[0].pk;
 
@@ -83,6 +84,7 @@ myApp.controller("aSheetController", [
         })
         .catch((e) => {
           console.log(e.data);
+          alertify.error(e.data.message);
         });
     };
 
@@ -123,6 +125,7 @@ myApp.controller("aSheetController", [
         })
         .catch((e) => {
           console.log(e);
+          alertify.error(e.data.message);
         });
     };
 
@@ -156,11 +159,14 @@ myApp.controller("aSheetController", [
         .post("eduexam/paper_response/", examAnswers)
         .then((r) => {
           console.log(r);
+         
           hideModal("examModal");
           exitFullScreen();
+          alertify.success(r.data.message);
         })
         .catch((e) => {
           console.log(e);
+          alertify.error(e.data.message);
         });
     };
   },

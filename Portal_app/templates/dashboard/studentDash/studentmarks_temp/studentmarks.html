@@ -9,15 +9,17 @@
 
         <div class="d-flex justify-content-center p-3 w-100">
           <div class="input-group p-2 w-50">
-            <label class="input-group-text" for="courses">Exam</label>
+            <label class="input-group-text" for="exam">Exam</label>
             <select
-              class="form-select criteria-btn"
-              ng-change="getChild(selectedParent)"
-              ng-model="selectedParent"
-              ng-options="option.id as option.name for option in options"
-            >
-              <option value="" selected>Select Exam</option>
-            </select>
+            class="form-select criteria-btn"
+            ng-change="Exam(exam)"
+            ng-model="exam"
+          >
+            <option value="" selected>Select Exam</option>
+            <option value="{{option.pk}}" ng-repeat="option in exam">
+              {{option.name}}
+            </option>
+          </select>
           </div>
         </div>
         <hr style="width: 50%;">

@@ -93,7 +93,7 @@ myApp.controller("studentregisterController", [
         father_name: $scope.fathername,
         mother_name: $scope.mothername,
         course: $scope.selectedcourse,
-        department:$scope.selectedDepartment,
+        department: $scope.selectedDepartment,
         year: $scope.selectedYear,
         gender: $scope.selectedGender,
         religion: $scope.selectedReligion,
