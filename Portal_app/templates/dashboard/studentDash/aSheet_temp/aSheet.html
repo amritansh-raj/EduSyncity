@@ -55,10 +55,7 @@
           </div>
         </div>
 
-        <div
-          class="d-grid gap-2 d-md-block mt-2"
-          ng-if="selectedSub && examId && selectedSet"
-        >
+        <div class="d-grid gap-2 d-md-block mt-2" ng-if="qPaper">
           <button
             class="btn btn-primary"
             type="button"
@@ -149,8 +146,6 @@
         <h1 class="modal-title fs-2 text-center text-white pt-2">
           KIET Group Of Institutions
         </h1>
-
-        <timer interval="1000" />
       </div>
 
       <div class="modal-body w-100">
@@ -159,6 +154,13 @@
             <div
               class="col d-flex flex-column justify-content-center overflow-auto"
             >
+              <div
+                class="text-white"
+                ng-show="remainingHours >= 0"
+              >
+                Remaining Time: {{remainingHours}} hours, {{remainingMin}}
+                minutes, {{remainingSec}} seconds
+              </div>
               <form id="ansForm" ng-submit="submitExam()">
                 <div class="card my-3" ng-repeat="question in qPaper">
                   <div
@@ -182,11 +184,11 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="answer"
-                          ng-change="getAns(answer)"
+                          id="answer{{$index}}"
+                          ng-change="updateAnswers()"
                           ng-model="question.answer"
                         />
-                        <label for="answer">Answer</label>
+                        <label for="answer{{$index}}">Answer</label>
                       </div>
 
                       <div
@@ -200,14 +202,15 @@
                           <input
                             type="checkbox"
                             class="form-check-input"
-                            id="selected{{$index}}"
+                            id="selected{{$index}}{{$choice.choice}}"
                             ng-model="choice.isSelected"
                             ng-true-value="'true'"
                             ng-false-value="'false'"
+                            ng-change="updateAnswers()"
                           />
                           <label
                             class="form-check-label"
-                            for="selected{{$index}}"
+                            for="selected{{$index}}{{$choice.choice}}"
                             >{{choice.choice}}</label
                           >
                         </div>
@@ -215,7 +218,6 @@
                     </blockquote>
                   </div>
                 </div>
-                <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
               </form>
             </div>
           </div>

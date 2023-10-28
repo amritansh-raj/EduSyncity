@@ -15,55 +15,113 @@
           </div>
           <div class="formDiv" ng-show="showParentForm">
             <form ng-submit="addParent()" name="master">
-              <div class="input-group">
-                <span class="input-group-text">Parent name</span>
-                <input
-                  type="text"
-                  class="form-control form-control-lg nofocus"
-                  name="parent"
-                  id="parent"
-                  ng-model="parent"
-                  required
-                />
-                <div
-                  class="text-danger"
-                  ng-if="master.parent.$dirty && master.parent.$invalid"
-                  style="font-size: 12px"
-                >
-                  <span ng-if="master.parent.$error.required">
-                    <i class="bi bi-exclamation-circle"></i> &nbsp; Parent is
-                    required.
-                  </span>
-                  <span ng-if="master.parent.$error.text">
-                    <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                    parent format.
-                  </span>
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-md-4 p-2">
+                  <div class="col my-2 input-group">
+                    <span class="input-group-text">Parent name</span>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg nofocus"
+                      name="parent"
+                      id="parent"
+                      ng-model="parent"
+                      required
+                    />
+                    <div
+                      class="text-danger"
+                      ng-if="master.parent.$dirty && master.parent.$invalid"
+                      style="font-size: 12px"
+                    >
+                      <span ng-if="master.parent.$error.required">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Parent
+                        is required.
+                      </span>
+                      <span ng-if="master.parent.$error.text">
+                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                        parent format.
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col my-2 input-group">
+                    <span class="input-group-text">Depth</span>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg nofocus"
+                      name="depth"
+                      id="depth"
+                      ng-model="depth"
+                      min="1"
+                      required
+                    />
+                  </div>
                 </div>
-                <span class="input-group-text">Depth</span>
-                <input
-                  type="number"
-                  class="form-control form-control-lg nofocus"
-                  name="depth"
-                  id="depth"
-                  ng-model="depth"
-                  min="1"
-                  required
-                />
-                <button
-                  type="submit"
-                  class="btn"
-                  style="background-color: white; color: black"
-                >
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  class="btn"
-                  style="background-color: white; color: black"
-                  ng-click="toggleParentForm()"
-                >
-                  Cancel
-                </button>
+                <div class="col-md-4">
+                  <div
+                    class="col mb-3 input-group d-flex justify-content-center"
+                  >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ng-model="editable"
+                        id="flexCheckDefault"
+                        ng-true-value="true"
+                        ng-false-value="false"
+                      />
+                      <label
+                        class="form-check-label text-white fs-5"
+                        for="flexCheckDefault"
+                      >
+                        Default checkbox
+                      </label>
+                    </div>
+                  </div>
+                  <div
+                    class="col mt-3 input-group d-flex justify-content-center"
+                  >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ng-model="deleteable"
+                        id="flexCheckChecked"
+                        ng-true-value="true"
+                        ng-false-value="false"
+                      />
+                      <label
+                        class="form-check-label text-white fs-5"
+                        for="flexCheckChecked"
+                      >
+                        Checked checkbox
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="col my-2 input-group d-flex justify-content-center"
+                  >
+                    <button
+                      type="submit"
+                      class="btn"
+                      style="background-color: white; color: black"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                  <div
+                    class="col my-2 input-group d-flex justify-content-center"
+                  >
+                    <button
+                      type="button"
+                      class="btn"
+                      style="background-color: white; color: black"
+                      ng-click="toggleParentForm()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
@@ -89,10 +147,8 @@
                   class="form-select criteria-btn"
                   ng-change="getChild(selectedParent)"
                   ng-model="selectedParent"
-                  ng-options="option.id as option.name for option in options"
-                >
-                  <!-- <option value="" selected>Select Parent</option> -->
-                </select>
+                  ng-options="option.id as option.name for option in parents"
+                ></select>
               </div>
               <div
                 class="card m-2 mx-3 flex-fill"
@@ -131,28 +187,6 @@
                           name="child"
                           required
                         />
-                        <!-- <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="inlineCheckbox1"
-                            ng-model="myCheckbox.val1"
-                          />
-                          <label class="form-check-label" for="inlineCheckbox1"
-                            >Editable
-                          </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="inlineCheckbox2"
-                            ng-model="myCheckbox.val2"
-                          />
-                          <label class="form-check-label" for="inlineCheckbox2"
-                            >Deletable
-                          </label>
-                        </div> -->
                         <button
                           class="btn btn-outline-secondary custom-button"
                           type="submit"
@@ -185,7 +219,7 @@
                   <a
                     type="button"
                     class="list-group-item list-group-item-action"
-                    ng-repeat="option in options"
+                    ng-repeat="option in parents"
                     data-bs-toggle="modal"
                     data-bs-target="#editParentModal"
                     ng-click="openParentModal(option)"
@@ -230,8 +264,7 @@
             <input
               type="text"
               class="form-control"
-              ng-model="childName"
-              placeholder="{{selectedChild.name}}"
+              ng-model="selectedChild.name"
               aria-label="Example text with two button addons"
               id="addInputField"
               disabled
@@ -247,7 +280,7 @@
             <button
               class="btn btn-outline-secondary"
               type="submit"
-              ng-click=""
+              ng-click="editChild(selectedChild)"
               ng-if="editing"
             >
               Save
@@ -289,7 +322,7 @@
           class="modal-title fs-4 text-center text-black pt-2"
           id="editParentModalLabel"
         >
-          Manage Child
+          Manage Parent
         </h1>
         <button
           type="button"
@@ -312,7 +345,7 @@
             <button
               class="btn btn-outline-secondary"
               type="button"
-              ng-click="editParent()"
+              ng-click="editParent(selectedParent)"
               ng-if="addParent"
             >
               Edit
@@ -336,7 +369,7 @@
             <button
               class="btn btn-outline-secondary"
               type="button"
-              ng-click="delete(selectedParent, 'editParentModal')"
+              ng-click="delParent(selectedParent, 'editParentModal')"
               ng-if="addParent"
             >
               Delete

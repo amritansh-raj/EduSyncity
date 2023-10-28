@@ -9,10 +9,10 @@ myApp.controller("masterController", [
       httpService
         .get("educore/get_parents/")
         .then((r) => {
-          options = r.data;
+          parents = r.data;
 
-          if (options) {
-            $scope.options = options;
+          if (parents) {
+            $scope.parents = parents;
           }
         })
         .catch((e) => {
@@ -22,7 +22,6 @@ myApp.controller("masterController", [
 
     $scope.getChild = (id) => {
       $scope.parentId = id;
-      console.log($scope.parentId);
       showLoader();
       httpService
         .get("educore/get_childs/", { parent_id: id })
@@ -32,8 +31,6 @@ myApp.controller("masterController", [
           if (childs) {
             $scope.childs = childs;
           }
-
-          console.log($scope.childs);
         })
         .catch((e) => {
           console.log(e);
@@ -58,10 +55,16 @@ myApp.controller("masterController", [
       $scope.addParent = !$scope.addParent;
     };
 
+    $scope.editable = true;
+    $scope.deleteable = true;
+
     $scope.addParent = () => {
+      console.log($scope.editable, $scope.deleteable);
       data = {
         name: $scope.parent,
-        child: $scope.depth,
+        depth: $scope.depth,
+        editable: $scope.editable,
+        deleteable: $scope.deleteable,
       };
 
       httpService
@@ -79,25 +82,15 @@ myApp.controller("masterController", [
 
     $scope.addChild = () => {
       var childName = document.querySelector("input[name=child]").value;
-      var editOn = document.querySelector(
-        "input[ng-model='myCheckbox.val1']"
-      ).value;
-      var deleteOn = document.querySelector(
-        "input[ng-model='myCheckbox.val2']"
-      ).value;
-      console.log(editOn);
-      console.log(deleteOn);
+
       httpService
         .post("eduadmin/child/", {
           id: $scope.parentId,
           name: childName,
-          delete: deleteOn,
-          edit: editOn,
         })
         .then((r) => {
           $scope.getChild($scope.parentId);
           $scope.adding = false;
-          console.log(r);
           alertify.success(r.data.message);
         })
         .catch((e) => {
@@ -120,9 +113,14 @@ myApp.controller("masterController", [
       document.getElementById("addInputField").removeAttribute("disabled");
     };
 
-    $scope.editParent = () => {
-      $scope.toggleAddParent();
-      document.getElementById("parentName").removeAttribute("disabled");
+    $scope.editParent = (selectedParent) => {
+      console.log(selectedParent);
+      if (selectedParent.can_update) {
+        $scope.toggleAddParent();
+        document.getElementById("parentName").removeAttribute("disabled");
+      } else {
+        alertify.error("Cannot edit this parent");
+      }
     };
 
     $scope.cancelEditParent = () => {
@@ -135,26 +133,44 @@ myApp.controller("masterController", [
       document.getElementById("addInputField").setAttribute("disabled", "");
     };
 
-    $scope.save = (selectedChild) => {
-      showLoader();
-
-      childData = {
+    $scope.editChild = (selectedChild) => {
+      editData = {
         id: selectedChild.id,
-        new_name: $scope.childName,
+        new_name: selectedChild.name,
       };
 
       httpService
-        .put("eduadmin/child/", childData)
+        .put("eduadmin/child/", editData)
         .then((r) => {
-          console.log(r);
-          $scope.getChild($scope.parentId);
+          console.log(r.data);
           alertify.success(r.data.message);
         })
         .catch((e) => {
-          console.log(e);
-          alertify.error(e.data.message);
+          console.log(e.data);
+          alertify.error(r.data.message);
         });
     };
+
+    // $scope.save = (selectedChild) => {
+    //   showLoader();
+
+    //   childData = {
+    //     id: selectedChild.id,
+    //     new_name: $scope.childName,
+    //   };
+
+    //   httpService
+    //     .put("eduadmin/child/", childData)
+    //     .then((r) => {
+    //       console.log(r);
+    //       $scope.getChild($scope.parentId);
+    //       alertify.success(r.data.message);
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //       alertify.error(e.data.message);
+    //     });
+    // };
 
     $scope.saveParent = (selectedParent) => {
       showLoader();
@@ -180,34 +196,45 @@ myApp.controller("masterController", [
     $scope.delete = (selectedChild, modalId) => {
       showLoader();
 
-      httpService
-        .delete("eduadmin/child/", { id: selectedChild.id })
-        .then((r) => {
-          console.log(r);
-          $scope.getChild($scope.parentId);
-          hideModal(String(modalId));
-          alertify.success(r.data.message);
-        })
-        .catch((e) => {
-          console.log(e);
-          alertify.error(e.data.message);
-        });
+      if (selectedChild.can_delete) {
+        httpService
+          .delete("eduadmin/child/", { id: selectedChild.id })
+          .then((r) => {
+            console.log(r);
+            $scope.getChild($scope.parentId);
+            hideModal(String(modalId));
+            alertify.success(r.data.message);
+          })
+          .catch((e) => {
+            console.log(e);
+            alertify.error(e.data.message);
+          });
+      } else {
+        hideLoader();
+        alertify.error("This child cannot be deleted");
+      }
     };
 
     $scope.delParent = (selectedParent, modalId) => {
       showLoader();
 
-      httpService
-        .put("eduadmin/child/", parentData)
-        .then((r) => {
-          console.log(r);
-          display();
-          alertify.success(r.data.message);
-        })
-        .catch((e) => {
-          console.log(e);
-          alertify.error(e.data.message);
-        });
+      if (selectedParent.can_delete) {
+        httpService
+          .delete("eduadmin/parent/", { id: selectedParent.id })
+          .then((r) => {
+            console.log(r);
+            $scope.getChild($scope.parentId);
+            hideModal(String(modalId));
+            alertify.success(r.data.message);
+          })
+          .catch((e) => {
+            console.log(e);
+            alertify.error(e.data.message);
+          });
+      } else {
+        hideLoader();
+        alertify.error("This parent cannot be deleted");
+      }
     };
   },
 ]);

@@ -33,14 +33,6 @@ myApp.controller("aSheetController", [
 
     $scope.getExam = (selectedExam) => {
       $scope.examId = selectedExam;
-      httpService
-        .get("eduexam/examinfo/", { id: selectedExam })
-        .then((r) => {
-          console.log(r.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
     };
 
     $scope.getSubject = (subject) => {
@@ -69,7 +61,7 @@ myApp.controller("aSheetController", [
         .get("eduexam/get_question_paper/", { paper_id: selectedSet })
         .then((r) => {
           console.log(r.data);
-        
+
           qPaper = r.data[0].questions;
           $scope.qPaperId = r.data[0].pk;
 
@@ -88,6 +80,8 @@ myApp.controller("aSheetController", [
         });
     };
 
+    let count = 0;
+
     $scope.examState = (elem) => {
       goFullScreen(elem);
 
@@ -105,6 +99,13 @@ myApp.controller("aSheetController", [
         if (e.key === "Escape" || e.key === "F11") {
           showModal("staticBackdrop");
           e.preventDefault();
+
+          count++;
+          if (count === 3) {
+            submitForm();
+            hideModal("examModal");
+            exitFullScreen();
+          }
           return false;
         }
       });
@@ -112,12 +113,34 @@ myApp.controller("aSheetController", [
 
     $scope.startExam = () => {
       $scope.examState(modal);
-      setTimeout(submitForm, $scope.seconds);
+      startCountdown($scope.hours, $scope.min, 0);
     };
 
-    submitForm = (examAnswers) => {
+    function startCountdown(hours, minutes, seconds) {
+      let totalMilliseconds = (hours * 3600 + minutes * 60 + seconds) * 1000;
+
+      let countdownInterval = setInterval(() => {
+        if (totalMilliseconds <= 0) {
+          clearInterval(countdownInterval);
+          submitForm();
+        } else {
+          $scope.$apply(() => {
+            totalMilliseconds -= 1000;
+            $scope.remainingHours = Math.floor(totalMilliseconds / 3600000);
+            $scope.remainingMin = Math.floor(
+              (totalMilliseconds % 3600000) / 60000
+            );
+            $scope.remainingSec = Math.floor(
+              (totalMilliseconds % 60000) / 1000
+            );
+          });
+        }
+      }, 1000);
+    }
+
+    submitForm = () => {
       httpService
-        .post("eduexam/paper_response/", examAnswers)
+        .post("eduexam/paper_response/", $scope.examAnswers)
         .then((r) => {
           console.log(r);
           hideModal("examModal");
@@ -129,8 +152,8 @@ myApp.controller("aSheetController", [
         });
     };
 
-    $scope.submitExam = () => {
-      var examAnswers = { questions: [] };
+    $scope.updateAnswers = () => {
+      $scope.examAnswers = { questions: [] };
 
       for (var i = 0; i < $scope.qPaper.length; i++) {
         var question = $scope.qPaper[i];
@@ -149,25 +172,14 @@ myApp.controller("aSheetController", [
             };
           });
         }
-        examAnswers.questions.push(answerObj);
+        $scope.examAnswers.questions.push(answerObj);
       }
 
-      examAnswers.paper_id = $scope.qPaperId;
-      console.log(examAnswers);
+      $scope.examAnswers.paper_id = $scope.qPaperId;
+    };
 
-      httpService
-        .post("eduexam/paper_response/", examAnswers)
-        .then((r) => {
-          console.log(r);
-         
-          hideModal("examModal");
-          exitFullScreen();
-          alertify.success(r.data.message);
-        })
-        .catch((e) => {
-          console.log(e);
-          alertify.error(e.data.message);
-        });
+    $scope.submitExam = () => {
+      submitForm();
     };
   },
 ]);

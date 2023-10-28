@@ -13,7 +13,7 @@
             <select
             class="form-select criteria-btn"
             ng-change="Exam(exam)"
-            ng-model="exam"
+            ng-model="examtype"
           >
             <option value="" selected>Select Exam</option>
             <option value="{{option.pk}}" ng-repeat="option in exam">
@@ -28,7 +28,7 @@
         class="row-7 h-75 d-flex flex-fill justify-content-center overflow-auto"
         style="background-color: #252f3e"
       >
-        <div class="col-sm-6 mt-5 p-4">
+        <div class="col-sm-6 p-4">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
@@ -40,7 +40,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-6 mt-5 p-4">
+        <div class="col-sm-6 p-4">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>

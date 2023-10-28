@@ -77,7 +77,6 @@ myApp.controller("viewdatesheetContoller", [
       console.log($scope.getShift);
       httpService
         .get("eduexam/get_shift_time/", { id: shift.id })
-        .get("eduexam/get_shift_time/", { id: shift.id })
         .then((r) => {
           console.log(r);
           times = r.data;
@@ -90,6 +89,10 @@ myApp.controller("viewdatesheetContoller", [
         });
     };
 
+    $scope.Sub = (dept_id) => {
+      $scope.dept_id = dept_id.department_id;
+    };
+
     $scope.datesheet = () => {
       var sendData = {
         course_id: $scope.getCourse.id,
@@ -97,8 +100,9 @@ myApp.controller("viewdatesheetContoller", [
         subject: $scope.choice,
         date: $scope.date,
         time: $scope.time,
+        mapping_id: $scope.dept_id,
       };
-      
+
       httpService
         .post("eduexam/datesheet/", sendData)
         .then((r) => {
