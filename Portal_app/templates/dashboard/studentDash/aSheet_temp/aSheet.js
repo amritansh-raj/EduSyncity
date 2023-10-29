@@ -61,7 +61,7 @@ myApp.controller("aSheetController", [
         .get("eduexam/get_question_paper/", { paper_id: selectedSet })
         .then((r) => {
           console.log(r.data);
-
+          alertify.success(r.data.message);
           qPaper = r.data[0].questions;
           $scope.qPaperId = r.data[0].pk;
 
@@ -75,7 +75,7 @@ myApp.controller("aSheetController", [
           $scope.seconds = ($scope.hours * 3600 + $scope.min * 60) * 100;
         })
         .catch((e) => {
-          console.log(e.data);
+          console.log(e);
           alertify.error(e.data.message);
         });
     };

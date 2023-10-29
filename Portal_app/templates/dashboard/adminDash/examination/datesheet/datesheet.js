@@ -126,11 +126,11 @@ myApp.controller("datesheetController", [
         alertify.error("Please select examtype")
         return
       }
-      if (!$scope.formatDate) {
+      if (!$scope.date) {
         alertify.error("Please select startdate")
         return
       }
-      if (!$scope.formatted) {
+      if (!$scope.examDates) {
         alertify.error("Please select enddate")
         return
       }

@@ -28,7 +28,7 @@
                       ng-repeat="option in get_exam_mapping"
                       ng-click="getdept(option)"
                     >
-                      {{option.course_id__name}}
+                      {{option.course_id__name}}&nbsp;({{option.exam_mapping__exam_id__name}})&nbsp;&nbsp;year&nbsp;:&nbsp;{{option.year}}
                     </option>
                   </select>
                 </div>
