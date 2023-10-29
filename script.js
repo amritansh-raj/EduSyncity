@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://4be5-125-21-249-98.ngrok-free.app/");
+myApp.constant("apiUrl", "https://10.21.67.136:8000/");
 
 google.charts.load("current", { packages: ["corechart"] });
 
