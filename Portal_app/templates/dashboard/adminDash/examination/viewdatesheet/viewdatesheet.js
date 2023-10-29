@@ -21,8 +21,6 @@ myApp.controller("viewdatesheetContoller", [
 
     $scope.getdept = (course) => {
       $scope.getCourse = course;
-      console.log(course);
-      console.log($scope.getCourse);
       httpService
         .get("eduexam/select_sub/", {
           id: course.course_id__id,
@@ -33,9 +31,7 @@ myApp.controller("viewdatesheetContoller", [
           if (get) {
             $scope.get = get;
             $scope.main = [];
-            console.log($scope.get.length);
             $scope.gets = $scope.get.flat();
-            console.log($scope.gets);
           }
         })
         .catch((e) => {
@@ -45,7 +41,6 @@ myApp.controller("viewdatesheetContoller", [
       httpService
         .get("eduexam/get_date/", { id: $scope.getCourse.id })
         .then((r) => {
-          console.log(r);
           dates = r.data;
           if (dates) {
             $scope.dates = dates;
@@ -70,12 +65,9 @@ myApp.controller("viewdatesheetContoller", [
 
     $scope.gettime = (shift) => {
       $scope.getShift = shift;
-      console.log(shift);
-      console.log($scope.getShift);
       httpService
         .get("eduexam/get_shift_time/", { id: shift.id })
         .then((r) => {
-          console.log(r);
           times = r.data;
           if (times) {
             $scope.times = times;
@@ -103,7 +95,6 @@ myApp.controller("viewdatesheetContoller", [
       httpService
         .post("eduexam/datesheet/", sendData)
         .then((r) => {
-          console.log(r);
           exam_mapping = r.data;
 
           if (exam_mapping) {

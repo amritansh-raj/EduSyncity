@@ -107,10 +107,12 @@ myApp.controller("qPaperController", [
     };
 
     $scope.addChoice = () => {
-      $scope.choices.push({
-        choice: $scope.choice,
-        choosen: false,
-      });
+      if ($scope.choice) {
+        $scope.choices.push({
+          choice: $scope.choice,
+          choosen: false,
+        });
+      }
       console.log($scope.choices);
       $scope.choice = "";
     };
@@ -141,8 +143,10 @@ myApp.controller("qPaperController", [
       $scope.selectedOption = option;
       $scope.selectedQ = $scope.selectedOption.question;
       $scope.selectedM = $scope.selectedOption.marks;
-      if ($scope.selectedOption.choices.length) {
-        $scope.selectedChoices = $scope.selectedOption.choices;
+      if (option.type === "multChoice") {
+        if ($scope.selectedOption.choices.length) {
+          $scope.selectedChoices = $scope.selectedOption.choices;
+        }
       }
       $scope.index = index;
     };

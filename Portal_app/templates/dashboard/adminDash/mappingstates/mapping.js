@@ -21,7 +21,6 @@ myApp.controller("mappingController", [
 
     $scope.getDept = (course) => {
       $scope.selctedCourse = course;
-      console.log($scope.selctedCourse);
       httpService
         .get("educore/departments/", { course_id: course.id })
         .then((response) => {
@@ -30,8 +29,6 @@ myApp.controller("mappingController", [
           if (departments) {
             $scope.departments = departments;
           }
-
-          console.log($scope.departments);
         })
         .catch((error) => {
           console.log(error);
@@ -50,16 +47,13 @@ myApp.controller("mappingController", [
       });
 
     $scope.Dept = (depart) => {
-      console.log(depart.id);
       var sendData = {
         department_id: depart.id,
         course_id: $scope.selctedCourse.id,
       };
-      console.log(sendData);
       httpService
         .post("educore/assign_department_to_course/", sendData)
         .then((r) => {
-          console.log(r.data);
           $scope.getDept($scope.selctedCourse);
           alertify.set("notifier", "position", "top-right");
           alertify.success(r.data.message);
@@ -73,7 +67,6 @@ myApp.controller("mappingController", [
     $scope.openYearModal = (department) => {
       $scope.selectedsubjects = ''
       $scope.seldepartment = department
-      console.log($scope.seldepartment)
       httpService
         .get("educore/get_years/", { dept_mapped_id: department.id })
         .then((response) => {
@@ -83,7 +76,6 @@ myApp.controller("mappingController", [
             $scope.years = years;
           }
 
-          console.log($scope.years);
         })
         .catch((error) => {
           console.log(error);
@@ -98,7 +90,6 @@ myApp.controller("mappingController", [
             if (subjects) {
               $scope.subjects = subjects;
             }
-            console.log($scope.subjects);
           })
           .catch((error) => {
             console.log(error);
@@ -106,17 +97,14 @@ myApp.controller("mappingController", [
 
       };
       $scope.Sub = (subj) => {
-        console.log(subj.id)
         var sendData = {
           subject_id: subj.id,
           year: $scope.selectedYear,
           department_id: $scope.seldepartment.id,
         }
-        console.log(sendData)
         httpService
           .post("educore/subject_mapping/", sendData)
           .then((r) => {
-            console.log(r.data);
             $scope.selctedYear($scope.selectedYear)
             alertify.set("notifier", "position", "top-right");
             alertify.success(r.data.message);
@@ -130,7 +118,6 @@ myApp.controller("mappingController", [
       }
       $scope.getTeacher = (subject) => {
         $scope.ngsubject = subject
-        console.log($scope.ngsubject)
         httpService
           .get("educore/mapped_faculty/", { id: subject.id })
           .then((r) => {
@@ -141,7 +128,6 @@ myApp.controller("mappingController", [
               $scope.teachs = teachs;
             }
 
-            console.log($scope.teachs);
           })
           .catch((e) => {
             alertify.set("notifier", "position", "bottom-right");
@@ -150,17 +136,13 @@ myApp.controller("mappingController", [
           });
       }
       $scope.Tech = (teacher) => {
-        console.log($scope.ngsubject.id)
-        console.log(teacher.id)
         var sendData = {
           faculty_id: teacher.id,
           sub_mapping_id: $scope.ngsubject.id
         }
-        console.log(sendData)
         httpService
           .post("educore/subject_teacher_mapping/", sendData)
           .then((r) => {
-            console.log(r.data);
             $scope.getTeacher($scope.ngsubject)
             alertify.set("notifier", "position", "top-right");
             alertify.success(r.data.message);

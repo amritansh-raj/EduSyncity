@@ -77,11 +77,6 @@ myApp.controller("datesheetController", [
 
     $scope.getEndDate = (endDate) => {
       $scope.endDate = endDate;
-      // endDate.getFullYear() +
-      // "-" +
-      // (endDate.getMonth() + 1) +
-      // "-" +
-      // endDate.getDate();
     };
 
     $scope.getStartDate = (startDate) => {

@@ -24,6 +24,10 @@ body {
   color: white;
 }
 
+input[type="number"] {
+  appearance: textfield;
+}
+
 .custom-btn:hover,
 .list-group-item:hover,
 .accordion-button:hover {

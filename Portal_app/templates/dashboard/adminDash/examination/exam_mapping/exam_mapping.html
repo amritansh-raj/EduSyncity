@@ -77,52 +77,60 @@
             </button>
           </div>
         </form>
-        <table class="table mx-auto g-2 my-4 overflow-x-auto">
-          <thead>
-            <tr>
-              <th class="text-center" scope="col" style="width: 10%">Index</th>
-              <th class="text-center" scope="col" style="width: 25%">
-                Exam Type
-              </th>
-              <th class="text-center" scope="col" style="width: 25%">
-                Duration
-              </th>
-              <th class="text-center" scope="col" style="width: 10%">Marks</th>
-              <th class="text-center" scope="col" style="width: 10%">Edit</th>
-              <th class="text-center" scope="col" style="width: 10%">Delete</th>
-            </tr>
-          </thead>
-          <tbody ng-model="mappedexam">
-            <tr ng-repeat="option in mapped">
-              <td class="text-center" style="width: 10%">{{$index + 1}}</td>
-              <td class="text-center" style="width: 25%">
-                {{option.exam_id__name}}
-              </td>
-              <td class="text-center" style="width: 25%">
-                {{option.duration_id__name }}
-              </td>
-              <td class="text-center" style="width: 10%">
-                {{option.marks_id__name}}
-              </td>
-              <td class="text-center" style="width: 10%">
-                <button
-                  class="btn btn-outline-secondary"
-                  ng-click="editModal(option, 'editModal')"
-                >
-                  Edit
-                </button>
-              </td>
-              <td class="text-center" style="width: 10%">
-                <button
-                  class="btn btn-outline-secondary"
-                  ng-click="del(option)"
-                >
+        <div class="container overflow-x-auto">
+          <table class="table mx-auto g-2 my-4 overflow-x-auto">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col" style="width: 10%">
+                  Index
+                </th>
+                <th class="text-center" scope="col" style="width: 25%">
+                  Exam Type
+                </th>
+                <th class="text-center" scope="col" style="width: 25%">
+                  Duration
+                </th>
+                <th class="text-center" scope="col" style="width: 10%">
+                  Marks
+                </th>
+                <th class="text-center" scope="col" style="width: 10%">Edit</th>
+                <th class="text-center" scope="col" style="width: 10%">
                   Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                </th>
+              </tr>
+            </thead>
+            <tbody ng-model="mappedexam">
+              <tr ng-repeat="option in mapped">
+                <td class="text-center" style="width: 10%">{{$index + 1}}</td>
+                <td class="text-center" style="width: 25%">
+                  {{option.exam_id__name}}
+                </td>
+                <td class="text-center" style="width: 25%">
+                  {{option.duration_id__name }}
+                </td>
+                <td class="text-center" style="width: 10%">
+                  {{option.marks_id__name}}
+                </td>
+                <td class="text-center" style="width: 10%">
+                  <button
+                    class="btn btn-outline-secondary"
+                    ng-click="editModal(option, 'editModal')"
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td class="text-center" style="width: 10%">
+                  <button
+                    class="btn btn-outline-secondary"
+                    ng-click="del(option)"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

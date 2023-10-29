@@ -1,5 +1,5 @@
 var myApp = angular.module("myApp", ["ui.router"]);
-myApp.constant("apiUrl", "https://10.21.67.136:8000/");
+myApp.constant("apiUrl", "https://10.42.0.182:8000/");
 
 google.charts.load("current", { packages: ["corechart"] });
 
@@ -108,6 +108,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl:
         "/Portal_app/templates/dashboard/teacherDash/qPaper_temp/qPaper.html",
       controller: "qPaperController",
+    })
+    .state("dashBoard.viewPaper", {
+      url: "/EduSyncity/viewPaper",
+      templateUrl:
+        "/Portal_app/templates/dashboard/teacherDash/viewpaper/viewpaper.html",
+      controller: "viewPaperController",
     })
     .state("dashBoard.aSheet", {
       url: "/EduSyncity/aSheet",

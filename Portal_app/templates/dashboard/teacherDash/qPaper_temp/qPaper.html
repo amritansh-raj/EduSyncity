@@ -11,7 +11,7 @@
           <div class="input-group my-2 w-50">
             <label class="input-group-text" for="courses">Courses</label>
             <select
-              class="form-select criteria-btn"
+              class="form-select criteria-btn dropdown"
               ng-change="getSubject(selectedCourse)"
               ng-model="selectedCourse"
             >
@@ -52,13 +52,13 @@
               <div class="input-group p-2 w-100">
                 <label class="input-group-text" for="courses">Subject</label>
                 <select
-                  class="form-select criteria-btn"
+                  class="form-select criteria-btn dropdown"
                   ng-change="selectedSub(subject)"
                   ng-model="subject"
                 >
                   <option value="" selected>Select Subject (Year)</option>
                   <option
-                    value="{{option.subject__pk}}"
+                    value="{{option.pk}}"
                     ng-repeat="option in subjects"
                   >
                     {{option.subject__subject_name}}-{{option.subject__subject_code}}
@@ -66,12 +66,12 @@
                   </option>
                 </select>
               </div>
-            </div> 
+            </div>
             <div class="col-md">
               <div class="input-group p-2 w-100">
                 <label class="input-group-text" for="courses">Exam</label>
                 <select
-                  class="form-select criteria-btn"
+                  class="form-select criteria-btn dropdown"
                   ng-change="getExam(selectedExam)"
                   ng-model="selectedExam"
                   ng-options="option.pk as option.name for option in exams"
@@ -84,7 +84,7 @@
               <div class="input-group p-2 w-100">
                 <label class="input-group-text" for="set">Set</label>
                 <select
-                  class="form-select criteria-btn"
+                  class="form-select criteria-btn dropdown"
                   ng-change="getSet(selectedSet)"
                   ng-model="selectedSet"
                   ng-options="option.id as option.name for option in sets"
@@ -243,11 +243,11 @@
                     </div>
                   </form>
                 </div>
-                <div class="col-lg-6 w-75 d-flex flex-row" ng-show="mcqDisplay">
-                  <div class="col-md-6 flex-item p-2">
+                <div class="col-lg-6 w-100 d-flex" ng-show="mcqDisplay">
+                  <div class="col-md-4 p-2">
                     <form ng-submit="addMcqQ()" name="registerForm">
                       <div class="row g-2">
-                        <div class="col-md">
+                        <div class="col-md-8">
                           <div class="form-floating">
                             <input
                               type="text"
@@ -275,7 +275,7 @@
                             </span>
                           </div>
                         </div>
-                        <div class="col-md">
+                        <div class="col-md-4">
                           <div class="form-floating">
                             <input
                               type="number"
@@ -320,7 +320,7 @@
                       </div>
                     </form>
                   </div>
-                  <div class="col-md-6 flex-item p-2">
+                  <div class="col-md-4 p-2">
                     <form ng-submit="addChoice()">
                       <div class="input-group mb-2">
                         <input
@@ -339,7 +339,9 @@
                         </button>
                       </div>
                     </form>
-                    <div class="d-flex flex-row justify-content-around">
+                  </div>
+                  <div class="col-md-4 p-2">
+                    <div class="d-flex flex-row justify-content-center overflow-x-auto">
                       <ol class="list-group list-group-numbered">
                         <li
                           class="list-group-item"
@@ -356,63 +358,65 @@
                 <h3 class="text-center text-white pt-2 mt-2">
                   Added questions
                 </h3>
-                <table class="table table-dark table-responsive mt-3">
-                  <thead>
-                    <tr>
-                      <th scope="col text-center" style="width: 5%">Index</th>
-                      <th scope="col text-center" style="width: 50%">
-                        Question
-                      </th>
-                      <th scope="col text-center" style="width: 10%">
-                        Max Marks
-                      </th>
-                      <th scope="col text-center" style="width: 25%">
-                        Choices
-                      </th>
-                      <th scope="col" style="width: 5%">Edit</th>
-                      <th scope="col" style="width: 5%">Del</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="question in questions">
-                      <td>{{$index + 1}}</td>
-                      <td>{{question.question}}</td>
-                      <td>{{question.marks}}</td>
-                      <td class="p-0">
-                        <table
-                          class="table table-dark table-responsive m-0"
-                          ng-if="question.type === 'multChoice'"
-                        >
-                          <tbody>
-                            <tr ng-repeat="choice in question.choices">
-                              <td scope="col">{{choice.choice}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                      <td>
-                        <button
-                          class="btn"
-                          type="button"
-                          ng-click="openModal(question, $index)"
-                          data-bs-toggle="modal"
-                          data-bs-target="#editModal"
-                        >
-                          <i class="bi bi-pencil-square text-white"></i>
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          class="btn"
-                          type="button"
-                          ng-click="delQ($index)"
-                        >
-                          <i class="bi bi-trash text-white"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="container overflow-auto">
+                  <table class="table table-dark table-responsive mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col text-center" style="width: 5%">Index</th>
+                        <th scope="col text-center" style="width: 50%">
+                          Question
+                        </th>
+                        <th scope="col text-center" style="width: 10%">
+                          Max Marks
+                        </th>
+                        <th scope="col text-center" style="width: 25%">
+                          Choices
+                        </th>
+                        <th scope="col" style="width: 5%">Edit</th>
+                        <th scope="col" style="width: 5%">Del</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="question in questions">
+                        <td>{{$index + 1}}</td>
+                        <td>{{question.question}}</td>
+                        <td>{{question.marks}}</td>
+                        <td class="p-0">
+                          <table
+                            class="table table-dark table-responsive m-0"
+                            ng-if="question.type === 'multChoice'"
+                          >
+                            <tbody>
+                              <tr ng-repeat="choice in question.choices">
+                                <td scope="col">{{choice.choice}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                        <td>
+                          <button
+                            class="btn"
+                            type="button"
+                            ng-click="openModal(question, $index)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editModal"
+                          >
+                            <i class="bi bi-pencil-square text-white"></i>
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            class="btn"
+                            type="button"
+                            ng-click="delQ($index)"
+                          >
+                            <i class="bi bi-trash text-white"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <div class="row" ng-show="questions.length">
                 <div class="d-grid gap-2">
@@ -487,8 +491,7 @@
               ng-show="selectedOption.type === 'multChoice'"
             >
               <div class="input-group mb-3">
-                <span class="input-group-text"
-                >Question</span>
+                <span class="input-group-text">Question</span>
                 <input
                   type="text"
                   name="question"

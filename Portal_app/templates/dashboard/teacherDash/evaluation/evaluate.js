@@ -107,7 +107,6 @@ myApp.controller("evalController", [
         })
         .catch((e) => {
           console.log(e.data);
-          
         });
     };
 
@@ -150,6 +149,7 @@ myApp.controller("evalController", [
         })
         .catch((e) => {
           console.log(e);
+          $scope.students = "";
           alertify.error(e.data.message);
         });
     };

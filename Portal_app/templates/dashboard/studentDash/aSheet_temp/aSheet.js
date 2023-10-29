@@ -61,7 +61,6 @@ myApp.controller("aSheetController", [
         .get("eduexam/get_question_paper/", { paper_id: selectedSet })
         .then((r) => {
           console.log(r.data);
-          alertify.success(r.data.message);
           qPaper = r.data[0].questions;
           $scope.qPaperId = r.data[0].pk;
 
