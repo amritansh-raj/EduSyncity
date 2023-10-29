@@ -11,24 +11,38 @@
           <div class="input-group p-2 w-50">
             <label class="input-group-text" for="exam">Exam</label>
             <select
-            class="form-select criteria-btn"
-            ng-change="Exam(exam)"
-            ng-model="exam"
-          >
-            <option value="" selected>Select Exam</option>
-            <option value="{{option.pk}}" ng-repeat="option in exam">
-              {{option.name}}
-            </option>
-          </select>
+              class="form-select criteria-btn"
+              ng-change="Exam(examtype)"
+              ng-model="examtype"
+              aria-label="Floating label select example"
+            >
+              <option value="" disabled>Select Exam Type</option>
+              <option ng-repeat="option in exam" value="{{option.exam_type_id}}">
+                {{option.exam_type_id__exam_id__name}}
+              </option>
+            </select>
           </div>
+
         </div>
-        <hr style="width: 50%;">
+        <hr style="width: 50%" />
       </div>
       <div
         class="row-7 h-75 d-flex flex-fill justify-content-center overflow-auto"
         style="background-color: #252f3e"
       >
-        <div class="col-sm-6 mt-5 p-4">
+        <div class="col-sm-6 mt-5 p-4" ng-repeat="option in marks">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title ">{{option}}</h5>
+              <p class="card-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
+                quia consectetur earum commodi aut vero quaerat iusto odit
+                architecto eveniet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-sm-6 mt-5 p-4">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
@@ -39,19 +53,7 @@
               </p>
             </div>
           </div>
-        </div>
-        <div class="col-sm-6 mt-5 p-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-                quia consectetur earum commodi aut vero quaerat iusto odit
-                architecto eveniet.
-              </p>
-            </div>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
