@@ -11,6 +11,10 @@ body {
   --secondary-bg-color: #1e2125;
 }
 
+.dropdown {
+  color: white;
+}
+
 .custom-btn {
   border-radius: 25px;
   background-color: #1e2125;

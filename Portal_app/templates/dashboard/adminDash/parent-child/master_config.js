@@ -70,7 +70,7 @@ myApp.controller("masterController", [
         .post("educore/parents/", data)
         .then((r) => {
           console.log(r);
-          $scope.toggleAddParent();
+          $scope.toggleParentForm();
           $scope.parent = "";
           $scope.depth = "";
           alertify.success(r.data.message);
