@@ -27,20 +27,20 @@
                       ng-model="parent"
                       required
                     />
-                    <div
-                      class="text-danger"
-                      ng-if="master.parent.$dirty && master.parent.$invalid"
-                      style="font-size: 12px"
-                    >
-                      <span ng-if="master.parent.$error.required">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; Parent
-                        is required.
-                      </span>
-                      <span ng-if="master.parent.$error.text">
-                        <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
-                        parent format.
-                      </span>
-                    </div>
+                  </div>
+                  <div
+                    class="text-danger"
+                    ng-if="master.parent.$dirty && master.parent.$invalid"
+                    style="font-size: 12px"
+                  >
+                    <span ng-if="master.parent.$error.required">
+                      <i class="bi bi-exclamation-circle"></i> &nbsp; Parent is
+                      required.
+                    </span>
+                    <span ng-if="master.parent.$error.text">
+                      <i class="bi bi-exclamation-circle"></i> &nbsp; Invalid
+                      parent format.
+                    </span>
                   </div>
                   <div class="col my-2 input-group">
                     <span class="input-group-text">Depth</span>
@@ -72,7 +72,7 @@
                         class="form-check-label text-white fs-5"
                         for="flexCheckDefault"
                       >
-                        Default checkbox
+                        Editable
                       </label>
                     </div>
                   </div>
@@ -92,7 +92,7 @@
                         class="form-check-label text-white fs-5"
                         for="flexCheckChecked"
                       >
-                        Checked checkbox
+                        Deletable
                       </label>
                     </div>
                   </div>
@@ -280,7 +280,7 @@
             <button
               class="btn btn-outline-secondary"
               type="submit"
-              ng-click="editChild(selectedChild)"
+              ng-click="editChild(selectedChild, 'editChildModal')"
               ng-if="editing"
             >
               Save
@@ -337,8 +337,7 @@
             <input
               type="text"
               class="form-control"
-              ng-model="parentName"
-              placeholder="{{selectedParent.name}}"
+              ng-model="selectedParent.name"
               id="parentName"
               disabled
             />
@@ -346,7 +345,7 @@
               class="btn btn-outline-secondary"
               type="button"
               ng-click="editParent(selectedParent)"
-              ng-if="addParent"
+              ng-if="!showParent"
             >
               Edit
             </button>
@@ -354,7 +353,7 @@
               class="btn btn-outline-secondary"
               type="submit"
               ng-click="saveParent(selectedParent)"
-              ng-if="!addParent"
+              ng-if="showParent"
             >
               Save
             </button>
@@ -362,7 +361,7 @@
               class="btn btn-outline-secondary"
               type="button"
               ng-click="cancelEditParent()"
-              ng-if="!addParent"
+              ng-if="showParent"
             >
               Cancel
             </button>
@@ -370,7 +369,7 @@
               class="btn btn-outline-secondary"
               type="button"
               ng-click="delParent(selectedParent, 'editParentModal')"
-              ng-if="addParent"
+              ng-if="!showParent"
             >
               Delete
             </button>

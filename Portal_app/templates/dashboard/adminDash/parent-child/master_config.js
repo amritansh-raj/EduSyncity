@@ -52,25 +52,27 @@ myApp.controller("masterController", [
     };
 
     $scope.toggleAddParent = () => {
-      $scope.addParent = !$scope.addParent;
+      $scope.showParent = !$scope.showParent;
     };
 
     $scope.editable = true;
     $scope.deleteable = true;
 
     $scope.addParent = () => {
-      console.log($scope.editable, $scope.deleteable);
       data = {
         name: $scope.parent,
         depth: $scope.depth,
         editable: $scope.editable,
-        deleteable: $scope.deleteable,
+        deletable: $scope.deleteable,
       };
 
       httpService
         .post("educore/parents/", data)
         .then((r) => {
           console.log(r);
+          $scope.toggleAddParent();
+          $scope.parent = "";
+          $scope.depth = "";
           alertify.success(r.data.message);
           display();
         })
@@ -114,7 +116,6 @@ myApp.controller("masterController", [
     };
 
     $scope.editParent = (selectedParent) => {
-      console.log(selectedParent);
       if (selectedParent.can_update) {
         $scope.toggleAddParent();
         document.getElementById("parentName").removeAttribute("disabled");
@@ -133,7 +134,7 @@ myApp.controller("masterController", [
       document.getElementById("addInputField").setAttribute("disabled", "");
     };
 
-    $scope.editChild = (selectedChild) => {
+    $scope.editChild = (selectedChild, modalId) => {
       editData = {
         id: selectedChild.id,
         new_name: selectedChild.name,
@@ -143,6 +144,8 @@ myApp.controller("masterController", [
         .put("eduadmin/child/", editData)
         .then((r) => {
           console.log(r.data);
+          $scope.getChild($scope.parentId);
+          $scope.notEditing();
           alertify.success(r.data.message);
         })
         .catch((e) => {
@@ -150,27 +153,6 @@ myApp.controller("masterController", [
           alertify.error(r.data.message);
         });
     };
-
-    // $scope.save = (selectedChild) => {
-    //   showLoader();
-
-    //   childData = {
-    //     id: selectedChild.id,
-    //     new_name: $scope.childName,
-    //   };
-
-    //   httpService
-    //     .put("eduadmin/child/", childData)
-    //     .then((r) => {
-    //       console.log(r);
-    //       $scope.getChild($scope.parentId);
-    //       alertify.success(r.data.message);
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //       alertify.error(e.data.message);
-    //     });
-    // };
 
     $scope.saveParent = (selectedParent) => {
       showLoader();
@@ -181,10 +163,11 @@ myApp.controller("masterController", [
       };
 
       httpService
-        .put("eduadmin/child/", parentData)
+        .put("educore/parents/", parentData)
         .then((r) => {
           console.log(r);
           display();
+          $scope.cancelEditParent();
           alertify.success(r.data.message);
         })
         .catch((e) => {
@@ -220,10 +203,10 @@ myApp.controller("masterController", [
 
       if (selectedParent.can_delete) {
         httpService
-          .delete("eduadmin/parent/", { id: selectedParent.id })
+          .delete("educore/parents/", { id: selectedParent.id })
           .then((r) => {
             console.log(r);
-            $scope.getChild($scope.parentId);
+            display();
             hideModal(String(modalId));
             alertify.success(r.data.message);
           })

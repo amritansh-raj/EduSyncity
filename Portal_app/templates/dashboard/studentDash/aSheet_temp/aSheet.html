@@ -155,11 +155,11 @@
               class="col d-flex flex-column justify-content-center overflow-auto"
             >
               <div
-                class="text-white"
+                class="text-white align-self-end fw-bold"
                 ng-show="remainingHours >= 0"
               >
-                Remaining Time: {{remainingHours}} hours, {{remainingMin}}
-                minutes, {{remainingSec}} seconds
+                Remaining Time: {{remainingHours}} h, {{remainingMin}}
+                m, {{remainingSec}} s
               </div>
               <form id="ansForm" ng-submit="submitExam()">
                 <div class="card my-3" ng-repeat="question in qPaper">

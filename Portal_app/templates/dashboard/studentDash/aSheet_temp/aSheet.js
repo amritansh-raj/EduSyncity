@@ -145,6 +145,7 @@ myApp.controller("aSheetController", [
           console.log(r);
           hideModal("examModal");
           exitFullScreen();
+          alertify.success(r.data.message);
         })
         .catch((e) => {
           console.log(e);
@@ -154,7 +155,7 @@ myApp.controller("aSheetController", [
 
     $scope.updateAnswers = () => {
       $scope.examAnswers = { questions: [] };
-
+      
       for (var i = 0; i < $scope.qPaper.length; i++) {
         var question = $scope.qPaper[i];
         var answerObj = {};
