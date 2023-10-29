@@ -6,7 +6,7 @@
         style="background-color: #252f3e"
       >
         <h1 class="text-center text-white pt-3">
-          Conduct Exam<i class="bi bi-file-earmark-text"></i>
+          Manage Exam<i class="bi bi-file-earmark-text"></i>
         </h1>
         <form action="" ng-submit="submitted()">
           <div class="row my-4 mx-2 g-2 w-100">
@@ -76,10 +76,11 @@
                 <input
                   type="date"
                   id="start"
-                  class="form-select criteria-btn"
+                  class="form-select dropdown"
                   min="{{todaysDate}}"
-                  max="{{examDates}}"
+                  max="{{endDate | date:'yyyy-MM-dd'}}"
                   ng-click="getStart(date)"
+                  ng-change="getStartDate(date)"
                   ng-model="date"
                 />
               </div>
@@ -90,10 +91,11 @@
                 <input
                   type="date"
                   id="end"
-                  class="form-select criteria-btn"
-                  min="{{todaysDate}}"
+                  class="form-select dropdown"
+                  min="{{startDate | date:'yyyy-MM-dd'}}"
                   ng-click="getEnd(examDates)"
                   ng-disabled="!date"
+                  ng-change="getEndDate(examDates)"
                   ng-model="examDates"
                 />
               </div>

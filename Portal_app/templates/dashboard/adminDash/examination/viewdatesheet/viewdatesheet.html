@@ -16,7 +16,7 @@
             <form action="" ng-submit="datesheet()">
               <div class="pt-1 d-flex justify-content-center">
                 <div class="input-group p-4 w-50">
-                  <label class="input-group-text" for="courses">Course</label>
+                  <label class="input-group-text" for="courses">Course </label>
                   <select
                     class="form-select criteria-btn"
                     ng-change="getCourse"
@@ -28,7 +28,7 @@
                       ng-repeat="option in get_exam_mapping"
                       ng-click="getdept(option)"
                     >
-                      {{option.course_id__name}}&nbsp;({{option.exam_mapping__exam_id__name}})&nbsp;&nbsp;year&nbsp;:&nbsp;{{option.year}}
+                      {{option.course_id__name}}&nbsp;({{option.exam_mapping__exam_id__name}})&nbsp;&nbsp;year&nbsp;-&nbsp;{{option.year}}
                     </option>
                   </select>
                 </div>

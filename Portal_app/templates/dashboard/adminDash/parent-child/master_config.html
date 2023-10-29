@@ -147,8 +147,10 @@
                   class="form-select criteria-btn"
                   ng-change="getChild(selectedParent)"
                   ng-model="selectedParent"
-                  ng-options="option.id as option.name for option in parents"
-                ></select>
+                >
+                <option value="" disabled>Select Parent</option>
+                <option value="{{option.id}}" ng-repeat="option in parents">{{option.name}}</option>
+                </select>
               </div>
               <div
                 class="card m-2 mx-3 flex-fill"

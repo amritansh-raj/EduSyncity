@@ -39,7 +39,6 @@ myApp.controller("qPaperController", [
         if (sets) {
           $scope.sets = sets;
         }
-        console.log($scope.sets);
       })
       .catch((e) => {
         console.log(e);

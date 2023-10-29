@@ -3,11 +3,11 @@ myApp.controller("datesheetController", [
   "httpService",
   function ($scope, httpService) {
     $scope.todaysDate = formattedDate;
+
     mapping = () => {
       httpService
         .get("eduexam/get_exam_mapping/")
         .then((r) => {
-          console.log(r);
           get_exam_mapping = r.data;
           if (get_exam_mapping) {
             $scope.get_exam_mapping = get_exam_mapping;
@@ -16,8 +16,10 @@ myApp.controller("datesheetController", [
         .catch((e) => {
           console.log(e);
         });
-    }
+    };
+
     mapping();
+
     httpService
       .get("educore/courses")
       .then((r) => {
@@ -33,12 +35,9 @@ myApp.controller("datesheetController", [
 
     $scope.getdept = (course) => {
       $scope.getCourse = course;
-      console.log(course)
-      console.log($scope.getCourse)
       httpService
         .get("educore/departments/", { id: course.id })
         .then((r) => {
-          console.log(r);
           departments = r.data;
           if (departments) {
             $scope.departments = departments;
@@ -47,10 +46,10 @@ myApp.controller("datesheetController", [
         .catch((e) => {
           console.log(e);
         });
+
       httpService
         .get("educore/years/", { course_id: course.id })
         .then((r) => {
-          console.log(r);
           years = r.data;
           if (years) {
             $scope.years = years;
@@ -63,12 +62,10 @@ myApp.controller("datesheetController", [
 
     $scope.clickexam = (exam) => {
       $scope.exam = exam;
-      console.log(exam)
       httpService
         .get("eduexam/show_exam_type/")
         .then((r) => {
-          console.log(r);
-          exams = r.data;
+          var exams = r.data;
           if (exams) {
             $scope.exams = exams;
           }
@@ -76,84 +73,77 @@ myApp.controller("datesheetController", [
         .catch((e) => {
           console.log(e);
         });
-    }
-    // var start = document.getElementById('start');
-    // var end = document.getElementById('end');
+    };
 
-    // start.addEventListener('change', function() {
-    //   if (start.value)
-    //     end.min = start.value;
-    // }, false);
-    // end.addEventLiseter('change', function() {
-    //   if (end.value)
-    //     start.max = end.value;
-    // }, false);
-    // start.addEventListener('input', function(e){
-    //   var day = new Date(this.value).getUTCDay();
-    //   if([6,0].includes(day)){
-    //     e.preventDefault();
-    //     this.value = '';
-    //     alert('Weekends not allowed');
-    //   }
-    // });
-    // end.addEventListener('input', function(e){
-    //   var day = new Date(this.value).getUTCDay();
-    //   if([6,0].includes(day)){
-    //     e.preventDefault();
-    //     this.value = '';
-    //     alert('Weekends not allowed');
-    //   }
-    // });
+    $scope.getEndDate = (endDate) => {
+      $scope.endDate = endDate;
+      // endDate.getFullYear() +
+      // "-" +
+      // (endDate.getMonth() + 1) +
+      // "-" +
+      // endDate.getDate();
+    };
 
+    $scope.getStartDate = (startDate) => {
+      $scope.startDate = startDate;
+    };
 
     $scope.submitted = () => {
       var date = new Date($scope.date);
 
       var formatDate =
         date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-      console.log(formatDate)
       $scope.startD = formatDate;
 
       var examDates = new Date($scope.examDates);
       var formatted =
-        examDates.getFullYear() + "-" + (examDates.getMonth() + 1) + "-" + examDates.getDate();
-      console.log(formatted)
+        examDates.getFullYear() +
+        "-" +
+        (examDates.getMonth() + 1) +
+        "-" +
+        examDates.getDate();
+
+      if (!$scope.getCourse) {
+        alertify.error("Please select course");
+        return;
+      }
       if (!$scope.year) {
-        alertify.error("Please select year")
-        return
+        alertify.error("Please select year");
+        return;
       }
       if (!$scope.exam) {
-        alertify.error("Please select examtype")
-        return
+        alertify.error("Please select examtype");
+        return;
       }
       if (!$scope.date) {
-        alertify.error("Please select startdate")
-        return
+        alertify.error("Please select startdate");
+        return;
       }
       if (!$scope.examDates) {
-        alertify.error("Please select enddate")
-        return
+        alertify.error("Please select enddate");
+        return;
       }
+
       var sendData = {
         exam_mapping_id: $scope.exam,
         course_dept_id: $scope.getCourse.id,
         year: $scope.year,
         start_date: formatDate,
         end_date: formatted,
-      }
-      console.log(sendData);
+      };
+
       httpService
         .post("eduexam/conduct_datesheet/", sendData)
         .then((r) => {
-          console.log(r.data)
-          mapping()
+          console.log(r.data);
+          alertify.success(r.data.message);
+          mapping();
         })
         .catch((e) => {
           alertify.set("notifier", "position", "bottom-right");
+          alertify.error(r.data.message);
           console.log(e);
-
         });
-    }
-
+    };
   },
 ]);

@@ -11,8 +11,11 @@ body {
   --secondary-bg-color: #1e2125;
 }
 
-.dropdown {
-  color: white;
+.dropdown,
+.dropdown:focus {
+  color: whitesmoke;
+  background-color: transparent;
+  border-color: white;
 }
 
 .custom-btn {
