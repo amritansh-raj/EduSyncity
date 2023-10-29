@@ -3,9 +3,6 @@ myApp.controller("viewdatesheetContoller", [
   "httpService",
   function ($scope, httpService) {
     $scope.gets = [];
-    // $scope.choose = [];
-    // $scope.unique = [];
-    // $scope.unique_id=[]
     mapping = () => {
       httpService
         .get("eduexam/get_exam_mapping/")

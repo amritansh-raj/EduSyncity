@@ -24,37 +24,25 @@
           </div>
 
         </div>
-        <hr style="width: 50%" />
+       
       </div>
       <div
         class="row-7 h-75 d-flex flex-fill justify-content-center overflow-auto"
         style="background-color: #252f3e"
       >
-        <div class="col-sm-6 mt-5 p-4" ng-repeat="option in marks">
+      <div class="row my-4 mx-2 g-2 w-100"  ng-if="examId">
+        <div class="col-md-4" ng-repeat="option in marks">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title ">{{option}}</h5>
+              <h4 class="card-title">{{option.paper_id__subject_id__subject_id__subject_name}} &nbsp;({{option.paper_id__subject_id__subject_id__subject_code}})</h4>
               <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-                quia consectetur earum commodi aut vero quaerat iusto odit
-                architecto eveniet.
+              <h6> Marks : {{option.total_marks}}/{{option.paper_id__exam_type_id__marks_id__name}}</h6>
               </p>
             </div>
           </div>
-        </div>
-        <!-- <div class="col-sm-6 mt-5 p-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-                quia consectetur earum commodi aut vero quaerat iusto odit
-                architecto eveniet.
-              </p>
-            </div>
-          </div>
-        </div> -->
+        </div></div>
       </div>
     </div>
+    
   </div>
-</div>
+
