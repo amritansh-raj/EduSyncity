@@ -62,10 +62,11 @@ myApp.controller("mappingController", [
           alertify.set("notifier", "position", "bottom-right");
           console.log(e);
           alertify.error(e.data.message);
-        });
+        }); 
+       
+
     };
     $scope.openYearModal = (department) => {
-      $scope.selectedsubjects = ''
       $scope.seldepartment = department
       httpService
         .get("educore/get_years/", { dept_mapped_id: department.id })
@@ -80,6 +81,7 @@ myApp.controller("mappingController", [
         .catch((error) => {
           console.log(error);
         });
+
       $scope.selctedYear = (year) => {
 
         $scope.selectedYear = year
@@ -94,7 +96,6 @@ myApp.controller("mappingController", [
           .catch((error) => {
             console.log(error);
           });
-
       };
       $scope.Sub = (subj) => {
         var sendData = {
@@ -156,6 +157,7 @@ myApp.controller("mappingController", [
       }
       $scope.selectedyear = '';
     }
+
     httpService
       .get("educore/subjects/")
       .then((r) => {
@@ -178,5 +180,6 @@ myApp.controller("mappingController", [
       .catch((e) => {
         console.log(e);
       });
+      
   },
 ]);
