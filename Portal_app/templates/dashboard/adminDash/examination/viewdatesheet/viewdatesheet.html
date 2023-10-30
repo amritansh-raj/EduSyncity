@@ -100,7 +100,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pt-1 d-flex justify-content-center">
+              <div class="pt-1 d-flex g-4 my-4 justify-content-center">
                 <button
                   type="submit"
                   class="btn btn-dark btn-lg btn-block"
@@ -110,6 +110,35 @@
                 </button>
               </div>
             </form>
+            <div class="container" style="overflow-x: auto" >
+              <table class="table mx-auto g-4 my-4" ng-if="getCourse">
+                <thead>
+                  <tr>
+                    <th scope="col">Index</th>
+                    <th scope="col">Department</th>
+
+                    <th scope="col">Subject</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Shift</th>
+                    <th scope="col">Time</th>
+                  </tr>
+                </thead>
+                <tbody ng-model="mappedexam">
+                  <tr ng-repeat="option in mapped">
+                    <td>{{$index + 1}}</td>
+                    <td>{{option.course_department_id__department_id__name}}</td>
+
+                    <td>
+                      {{option.subject_id__subject_name}}&nbsp;({{option.subject_id__subject_code}})
+                     
+                    </td>
+                    <td>{{option.date}}</td>
+                    <td>{{option.shift_id__name}}</td>
+                    <td>{{option.start_time__name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

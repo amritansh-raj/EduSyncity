@@ -54,7 +54,24 @@ myApp.controller("viewdatesheetContoller", [
         .catch((e) => {
           console.log(e);
         });
+        
+      getDatesheet = () => {
+        httpService
+          .get("eduexam/get_datesheet/", { id: $scope.getCourse.id })
+          .then((r) => {
+            console.log(r);
+            mapped = r.data;
+            if (mapped) {
+              $scope.mapped = mapped;
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+      getDatesheet();
     };
+
 
     httpService
       .get("educore/shift")
@@ -88,6 +105,7 @@ myApp.controller("viewdatesheetContoller", [
 
     $scope.Sub = (dept_id) => {
       $scope.dept_id = dept_id.department_id;
+      console.log(dept_id.department_id);
     };
 
     $scope.datesheet = () => {
@@ -112,12 +130,14 @@ myApp.controller("viewdatesheetContoller", [
 
           alertify.set("notifier", "position", "top-right");
           alertify.success(r.data.message);
+          getDatesheet();
         })
         .catch((e) => {
           alertify.set("notifier", "position", "bottom-right");
           console.log(e);
           alertify.error(e.data.message);
         });
+
     };
   },
 ]);
