@@ -49,16 +49,16 @@ myApp.controller("viewdatesheetContoller", [
         .catch((e) => {
           console.log(e);
         });
-        
+
       getDatesheet = () => {
         httpService
           .get("eduexam/get_datesheet/", { id: $scope.getCourse.id })
           .then((r) => {
             console.log(r);
-            mapped = r.data;
-            if (mapped) {
-              $scope.mapped = mapped;
-            }
+            $scope.mapped = r.data;
+            // if (mapped) {
+            //   $scope.mapped = mapped;
+            // }
           })
           .catch((e) => {
             console.log(e);
@@ -130,5 +130,24 @@ myApp.controller("viewdatesheetContoller", [
         });
 
     };
+    $scope.submit = () => {
+      var send = {
+        id: $scope.getCourse.id,
+      }
+      console.log(send)
+      httpService
+        .post("eduexam/publish_datesheet/", send)
+        .then((r) => {
+          submission = r.data;
+          alertify.set("notifier", "position", "top-right");
+          alertify.success(r.data.message);
+        })
+        .catch((e) => {
+          alertify.set("notifier", "position", "bottom-right");
+          console.log(e);
+          alertify.error(e.data.message);
+        });
+
+    }
   },
 ]);

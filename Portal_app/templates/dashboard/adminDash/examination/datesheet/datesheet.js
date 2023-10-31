@@ -140,5 +140,18 @@ myApp.controller("datesheetController", [
           console.log(e);
         });
     };
+    $scope.delete_Exam = (selectedexam) => {
+      $scope.selectedexam = selectedexam;
+
+      httpService
+        .delete("eduexam/exam_mapping/", { id: selectedexam.id })
+        .then((r) => {
+          alertify.success(r.data.message);
+          mapping();
+        })
+        .catch((e) => {
+          console.log(e.data);
+        });
+    };
   },
 ]);
