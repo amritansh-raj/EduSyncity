@@ -33,6 +33,10 @@ myApp.controller("viewdatesheetContoller", [
             $scope.main = [];
             $scope.gets = $scope.get.flat();
           }
+          $scope.shift='';
+          $scope.time='';
+          $scope.choice='';
+
         })
         .catch((e) => {
           console.log(e);
@@ -44,7 +48,9 @@ myApp.controller("viewdatesheetContoller", [
           dates = r.data;
           if (dates) {
             $scope.dates = dates;
+            
           }
+        
         })
         .catch((e) => {
           console.log(e);
@@ -56,6 +62,7 @@ myApp.controller("viewdatesheetContoller", [
           .then((r) => {
             console.log(r);
             $scope.mapped = r.data;
+           
             // if (mapped) {
             //   $scope.mapped = mapped;
             // }
@@ -98,6 +105,9 @@ myApp.controller("viewdatesheetContoller", [
     $scope.Sub = (dept_id) => {
       $scope.dept_id = dept_id.department_id;
       console.log(dept_id.department_id);
+      $scope.date='';
+      $scope.time='';
+      $scope.shift='';
     };
 
     $scope.datesheet = () => {
