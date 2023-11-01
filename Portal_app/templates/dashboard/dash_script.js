@@ -6,7 +6,8 @@ myApp.controller("dbController", [
     httpService
       .get("educore/loggedin/")
       .then((r) => {
-        $scope.user_name = r.data.username;
+        $scope.user_name = r.data.first_name;
+        $scope.lastname= r.data.last_name;
         $scope.letter = $scope.user_name.charAt(0).toUpperCase();
       })
       .catch((e) => {

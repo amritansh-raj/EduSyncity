@@ -122,6 +122,7 @@
                 <th scope="col">Year</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th class="text-center" scope="col">Delete</th>
               </tr>
             </thead>
             <tbody ng-model="mappedexam">
@@ -135,6 +136,14 @@
                 <td>{{option.year }}</td>
                 <td>{{option.start_date }}</td>
                 <td>{{option.end_date }}</td>
+                <td class="text-center" style="width: 12%">
+                  <button
+                    class="btn btn-outline-secondary"
+                    ng-click="delete_Exam(option)"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
