@@ -28,7 +28,7 @@
                       ng-repeat="option in get_exam_mapping"
                       ng-click="getdept(option)"
                     >
-                      {{option.course_id__name}}&nbsp;({{option.exam_mapping__exam_id__name}})&nbsp;&nbsp;year&nbsp;-&nbsp;{{option.year}}
+                      {{option.course_id__name}}&nbsp;({{option.exam_mapping__exam_id__name}})&nbsp;&nbsp;year&nbsp;-&nbsp;{{option.year}}&nbsp;({{option.start_date}}&nbsp;to&nbsp;{{option.end_date}})
                     </option>
                   </select>
                 </div>
@@ -92,7 +92,7 @@
                       ng-change="getShift"
                       ng-model="time"
                     >
-                      <option value="" disabled>Select Times</option>
+                      <option value="" disabled>Select Time</option>
                       <option value="{{option.id}}" ng-repeat="option in times">
                         {{option.name}}
                       </option>
@@ -103,7 +103,7 @@
               <div class="pt-1 d-flex g-4 my-4 justify-content-center">
                 <button
                   type="submit"
-                  class="btn btn-dark btn-lg btn-block"
+                  class="btn btn-secondary align-items-center"
                   ng-if="getCourse && getShift && choice && date && time"
                 >
                   Add
@@ -138,12 +138,15 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="pt-1 d-flex g-4 my-4 justify-content-center">
               <button
-              class="btn btn-secondary align-items-center"
+              class="btn btn-secondary"
               ng-click="submit(option)"
+              ng-if="getCourse"
             >
-              Submit
+              Publish
             </button>
+              </div>
             </div>
           </div>
         </div>
