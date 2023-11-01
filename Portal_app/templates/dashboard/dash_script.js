@@ -17,10 +17,11 @@ myApp.controller("dbController", [
       });
 
     $scope.disChart = (stateName) => {
+      showLoader();
       $state.go(stateName);
 
       httpService
-        .get("eduexam/graph_course_dept/")
+        .get("eduadmin/personal_info/")
         .then((r) => {
           courses = r.data.course_name;
           deptCount = r.data.department_count;
@@ -39,7 +40,7 @@ myApp.controller("dbController", [
                 {
                   label: "Number of departments",
                   data: data.map((row) => row.department),
-                  backgroundColor: '#22d3ee',
+                  backgroundColor: "#22d3ee",
                 },
               ],
             },

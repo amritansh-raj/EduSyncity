@@ -165,12 +165,12 @@ myApp.controller("aSheetController", [
         if (question.type === "subjective") {
           answerObj.answer = question.answer;
         } else if (question.type === "multChoice") {
-          answerObj.choices = question.choices.map(function (choice) {
-            return {
+          answerObj.choices = question.choices.map((choice) => 
+             ({
               choice: choice.choice,
               isCorrect: choice.isSelected,
-            };
-          });
+            })
+          );
         }
         $scope.examAnswers.questions.push(answerObj);
       }

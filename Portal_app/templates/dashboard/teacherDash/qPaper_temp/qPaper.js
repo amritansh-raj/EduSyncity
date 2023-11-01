@@ -48,7 +48,8 @@ myApp.controller("qPaperController", [
       httpService
         .get("eduexam/subject_year/", { dept_id: course })
         .then((r) => {
-          subjects = r.data;
+          subjects = r.data.flat();
+          console.log(subjects);
 
           if (subjects) {
             $scope.subjects = subjects;

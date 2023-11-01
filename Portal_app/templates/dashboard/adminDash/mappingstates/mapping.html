@@ -35,27 +35,32 @@
             >
               <div class="card-body text-center">Department</div>
             </div>
-            <div class="card mt-3 mx-3" ng-if="selctedCourse">
-              <div class="list-group">
-                <div class="form-floating">
-                  <select
-                    class="form-select"
-                    ng-model="selecteddepartment"
-                    aria-label="Floating label select example"
+            <div
+              class="card mt-3 mx-3"
+              ng-if="selctedCourse"
+              style="background-color: #1e2125"
+            >
+              <div class="form-floating m-4">
+                <select
+                  class="form-select"
+                  ng-model="selecteddepartment"
+                  aria-label="Floating label select example"
+                >
+                  <option value="" disabled>
+                    Select Departments for mapping
+                  </option>
+                  <option
+                    ng-repeat="depart in departs"
+                    value="{{ depart.id }}"
+                    ng-click="Dept(depart)"
                   >
-                    <option value="" disabled>
-                      Select Departments for mapping
-                    </option>
-                    <option
-                      ng-repeat="depart in departs"
-                      value="{{ depart.id }}"
-                      ng-click="Dept(depart)"
-                    >
-                      {{depart.name }}
-                    </option>
-                  </select>
-                  <label for="floatingSelect">Departments</label>
-                </div>
+                    {{depart.name }}
+                  </option>
+                </select>
+                <label for="floatingSelect">All Departments</label>
+              </div>
+
+              <div class="list-group" style="background-color: #1e2125">
                 <a
                   type="button"
                   class="list-group-item list-group-item-action"
@@ -190,6 +195,7 @@
                   class="list-group-item list-group-item-action"
                   ng-model="selectedTeacher"
                   ng-repeat="teach in teachs"
+                  ng-if="teach"
                   value="{{teach}}"
                 >
                   {{teach.faculty_id__user_id__first_name}}
@@ -203,7 +209,7 @@
           <button
             type="button"
             class="btn btn-secondary"
-            data-bs-dismiss="modal"
+            ng-click="closeModal('exampleModal')"
           >
             Close
           </button>

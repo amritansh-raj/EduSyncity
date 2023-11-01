@@ -62,12 +62,12 @@ myApp.controller("mappingController", [
           alertify.set("notifier", "position", "bottom-right");
           console.log(e);
           alertify.error(e.data.message);
-        }); 
-       
-
+        });
     };
+
     $scope.openYearModal = (department) => {
-      $scope.seldepartment = department
+      $scope.seldepartment = department;
+      $scope.selectedYear = ""
       httpService
         .get("educore/get_years/", { dept_mapped_id: department.id })
         .then((response) => {
@@ -76,17 +76,20 @@ myApp.controller("mappingController", [
           if (years) {
             $scope.years = years;
           }
-
         })
         .catch((error) => {
           console.log(error);
         });
 
       $scope.selctedYear = (year) => {
-
-        $scope.selectedYear = year
+        $scope.selectedYear = year;
+        $scope.subjects = "";
+        $scope.teachs = "";
         httpService
-          .get("educore/get_subjects/", { year: year, mapped_sub: $scope.seldepartment.id })
+          .get("educore/get_subjects/", {
+            year: year,
+            mapped_sub: $scope.seldepartment.id,
+          })
           .then((response) => {
             subjects = response.data;
             if (subjects) {
@@ -97,16 +100,17 @@ myApp.controller("mappingController", [
             console.log(error);
           });
       };
+
       $scope.Sub = (subj) => {
         var sendData = {
           subject_id: subj.id,
           year: $scope.selectedYear,
           department_id: $scope.seldepartment.id,
-        }
+        };
         httpService
           .post("educore/subject_mapping/", sendData)
           .then((r) => {
-            $scope.selctedYear($scope.selectedYear)
+            $scope.selctedYear($scope.selectedYear);
             alertify.set("notifier", "position", "top-right");
             alertify.success(r.data.message);
           })
@@ -114,37 +118,36 @@ myApp.controller("mappingController", [
             alertify.set("notifier", "position", "bottom-right");
             console.log(e);
             alertify.error(e.data.message);
-
           });
-      }
+      };
+
       $scope.getTeacher = (subject) => {
-        $scope.ngsubject = subject
+        $scope.ngsubject = subject;
         httpService
           .get("educore/mapped_faculty/", { id: subject.id })
           .then((r) => {
-
             teachs = r.data;
 
             if (teachers) {
               $scope.teachs = teachs;
             }
-
           })
           .catch((e) => {
             alertify.set("notifier", "position", "bottom-right");
             console.log(e);
             alertify.error(e.data.message);
           });
-      }
+      };
+
       $scope.Tech = (teacher) => {
         var sendData = {
           faculty_id: teacher.id,
-          sub_mapping_id: $scope.ngsubject.id
-        }
+          sub_mapping_id: $scope.ngsubject.id,
+        };
         httpService
           .post("educore/subject_teacher_mapping/", sendData)
           .then((r) => {
-            $scope.getTeacher($scope.ngsubject)
+            $scope.getTeacher($scope.ngsubject);
             alertify.set("notifier", "position", "top-right");
             alertify.success(r.data.message);
           })
@@ -152,11 +155,10 @@ myApp.controller("mappingController", [
             alertify.set("notifier", "position", "bottom-right");
             console.log(e);
             alertify.error(e.data.message);
-
           });
-      }
-      $scope.selectedyear = '';
-    }
+      };
+      $scope.selectedyear = "";
+    };
 
     httpService
       .get("educore/subjects/")
@@ -169,6 +171,7 @@ myApp.controller("mappingController", [
       .catch((e) => {
         console.log(e);
       });
+
     httpService
       .get("educore/faculty/")
       .then((r) => {
@@ -180,6 +183,13 @@ myApp.controller("mappingController", [
       .catch((e) => {
         console.log(e);
       });
-      
+
+    $scope.closeModal = (modalId) => {
+      hideModal(modalId);
+      $scope.selectedyear = "";
+      $scope.subjects = "";
+      $scope.teachs = "";
+      $scope.ngsubject = "";
+    };
   },
 ]);
