@@ -4,19 +4,6 @@ myApp.controller("studentmarksController", [
   "httpService",
   function ($scope, $http, httpService) {
     httpService
-      .get("educore/loggedin/")
-      .then((r) => {
-        $scope.user_name = r.data.username;
-        $scope.letter = $scope.user_name.charAt(0).toUpperCase();
-      })
-      .catch((e) => {
-        console.log(e);
-        if ((e.status = 401)) {
-          $state.go("login");
-        }
-      });
-
-    httpService
       .get("eduexam/exam_type_for_marks/")
       .then((r) => {
         exam = r.data;

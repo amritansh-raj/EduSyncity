@@ -132,6 +132,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl:
         "/Portal_app/templates/dashboard/studentDash/studentmarks_temp/studentmarks.html",
       controller: "studentmarksController",
+    })
+    .state("dashBoard.studentdatesheet", {
+      url: "/EduSyncity/studentdatesheet",
+      templateUrl:
+        "/Portal_app/templates/dashboard/studentDash/studentdatesheet_temp/studentdatesheet.html",
+      controller: "studentdatesheetController",
     });
 });
 

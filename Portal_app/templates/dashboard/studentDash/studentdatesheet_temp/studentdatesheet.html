@@ -1,0 +1,63 @@
+<div class="container-fluid h-100">
+    <div class="container py-4 h-100">
+      <div class="col h-100 w-100 d-flex flex-column">
+        <div
+          class="row-3 d-flex flex-column justify-content-center align-items-center"
+          style="background-color: #252f3e"
+        >
+          <h1 class="text-center text-white pt-4 ">DateSheet</h1>
+  
+          <div class="d-flex justify-content-center p-3 w-100">
+            <div class="input-group p-2 w-50">
+              <label class="input-group-text" for="datesheet">Exam</label>
+              <select
+                class="form-select criteria-btn"
+                ng-change="Exam(examtype)"
+                ng-model="examtype"
+                aria-label="Floating label select example"
+              >
+                <option value="" disabled>Select Exam Type</option>
+                <option ng-repeat="option in exam" value="{{option.id}}">
+                  {{option.exam_mapping_id__exam_id__name}}&nbsp;(Marks:{{option.exam_mapping_id__marks_id__name}})&nbsp;Duration:{{option.exam_mapping_id__duration_id__name}}
+                </option>
+              </select>
+            </div>
+  
+          </div>
+         
+        </div>
+        <div
+          class="row-7 h-75 d-flex flex-fill justify-content-center overflow-auto"
+          style="background-color: #252f3e"
+        >
+        <div class="container" style="overflow-x:auto;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Exam Date</th>
+  
+                  <th scope="col">Time</th>
+                  <th scope="col">Shift</th>
+                  <th scope="col">Subjects</th>
+                 
+                </tr>
+              </thead>
+              <tbody ng-model="mappedexam">
+                <tr ng-repeat="option in datesheet">
+                  <td>{{option.date}}</td>
+  
+                  <td>
+                    {{option.start_time_id__name}}
+                  </td>
+                  <td>{{option.shift_id__name}}</td>
+                  <td>{{option.subject_id__subject_name}}&nbsp;({{option.subject_id__subject_code}})</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  
+  
